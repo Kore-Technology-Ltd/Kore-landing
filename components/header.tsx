@@ -77,6 +77,12 @@ export function Header() {
             </Link>
             
             <Link
+              href="/teams"
+              className="text-sm font-medium text-foreground/70 transition-colors duration-200 hover:text-foreground"
+            >
+              Team
+            </Link>
+            <Link
               href="#faq"
               className="text-sm font-medium text-foreground/70 transition-colors duration-200 hover:text-foreground"
             >
@@ -134,6 +140,13 @@ export function Header() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Why Korè Different
+                </Link>
+                <Link
+                  href="/teams"
+                  className="text-base font-medium text-foreground transition-colors duration-200 hover:text-primary"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Team
                 </Link>
                 <Link
                   href="#faq"

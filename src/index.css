@@ -1,0 +1,1014 @@
+/**
+ * Korè Landing Page — Companion Stylesheet (v2)
+ * -----------------------------------------------------------------------
+ * This file only covers what the JS interaction layer intentionally
+ * leaves to static CSS: base form-field skinning, responsive tuning,
+ * print rules, and color-scheme/contrast preferences. Everything
+ * interactive (reveal, ripple, carousel, FAQ, notifications, nav
+ * underline, magnetic CTAs) now lives in the single stylesheet the
+ * JS layer injects at runtime, so there is exactly one source of
+ * truth for each of those and nothing here can drift out of sync
+ * with it or double-fire the same animation.
+ *
+ * Fixes vs v1:
+ *  - Removed `:contains()` — this is jQuery syntax, not valid CSS.
+ *    Those selectors matched nothing and the rules were dead code.
+ *  - Removed the global `.text:nth-child(1/2/3) { animation: slideInUp … }`
+ *    rules. Because `.text` appears hundreds of times across the page,
+ *    this fired a load-time animation on every 1st/2nd/3rd child of
+ *    *any* container, running at the same time as (and fighting with)
+ *    the JS's scroll-triggered reveal — causing a visible double-flash
+ *    on first paint.
+ *  - Removed the `.notification` / `.notification-success` family —
+ *    dead code; the JS layer's markup and classes are `.korre-notification*`.
+ *  - Removed fragile `[style*="…"]` hover/lift rules that matched any
+ *    element sharing a border-radius or background-color value
+ *    (including plain images and non-interactive containers), which
+ *    produced hover lifts on things that weren't clickable.
+ *  - `:focus` swapped for `:focus-visible` throughout so mouse clicks
+ *    no longer leave a persistent focus ring.
+ *
+ * Fixes vs v2 (this pass):
+ *  - Form fields now set font-size: 16px. Below 16px, iOS Safari
+ *    auto-zooms the viewport on focus, which then has to be manually
+ *    pinched back out — this was happening on every waitlist field.
+ *  - Interactive elements (`button`, `[role='button']`, `.korre-clickable`,
+ *    links inside nav/footer) now get a 44px minimum touch target on
+ *    touch-sized viewports per WCAG 2.5.5 — several were sub-40px and
+ *    hard to hit precisely on a phone.
+ *  - Added a 1024px tablet breakpoint so spacing steps down in two
+ *    stages instead of jumping straight from desktop to the 768px
+ *    phone rules.
+ *  - `.korre-faq-card` gets tighter mobile padding; at the desktop
+ *    padding value the card content was cramped against a 375px
+ *    viewport edge.
+ *  - Footer link list stacks vertically below 480px instead of
+ *    wrapping into an uneven ragged grid.
+ * -----------------------------------------------------------------------
+ */
+
+/* ============================================================================
+   FORM FIELDS
+   ============================================================================ */
+
+input[type='email'],
+input[type='text'],
+input[type='tel'],
+textarea,
+select {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: Outfit, sans-serif;
+  /* Keep at 16px+ on all viewports — anything smaller triggers
+     automatic zoom-on-focus in iOS Safari. */
+  font-size: 16px;
+}
+
+#waitlist-name,
+#waitlist-phone,
+#waitlist-location,
+#waitlist-email,
+#waitlist-role {
+  background-color: #ffffff !important;
+  color: #252323 !important;
+  border-color: #ffffff !important;
+}
+
+#waitlist-name::placeholder,
+#waitlist-phone::placeholder,
+#waitlist-location::placeholder,
+#waitlist-email::placeholder {
+  color: #7b6f65;
+}
+
+#waitlist-role option {
+  color: #252323;
+}
+
+/* Focus handled here for base color; the glow + error clearing is added
+   by the JS layer on top of this so the two never fight. */
+input[type='email']:focus,
+input[type='text']:focus,
+input[type='tel']:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+*:focus-visible {
+  outline: 2px solid #d3a014;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .hero-carousel-dot.is-active {
+    border: 2px solid #d3a014;
+  }
+  .korre-clickable,
+  .korre-faq-card {
+    border: 1px solid currentColor;
+  }
+}
+
+/* Comfortable touch targets on phones/tablets (any coarse pointer,
+   not just narrow viewports — covers foldables and small tablets too). */
+@media (pointer: coarse) {
+  button,
+  [role='button'],
+  .korre-clickable,
+  .korre-carousel-arrow,
+  a.korre-footer-link {
+    min-height: 44px;
+  }
+
+  button,
+  [role='button'] {
+    min-width: 44px;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+/* Make page content responsive and fill screen */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.page-viewport {
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.page-content {
+  width: 100% !important;
+  margin: 0 !important;
+  min-height: 100vh;
+}
+
+
+/* Tablet — step spacing down before hitting the phone breakpoint */
+@media (max-width: 1024px) {
+  .korre-faq-card {
+    padding: 20px;
+  }
+
+  [role='button'],
+  button {
+    padding: 10px 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-carousel-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .korre-carousel-arrow {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  [role='button'],
+  button {
+    padding: 8px 16px;
+  }
+
+  .korre-faq-card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .korre-notification-region {
+    right: 10px;
+    left: 10px;
+    top: 12px;
+  }
+  .korre-notification {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
+  .korre-carousel-arrow {
+    display: none; /* swipe carries mobile navigation instead */
+  }
+
+  .korre-faq-card {
+    padding: 14px;
+  }
+
+  /* Stack footer links instead of letting them wrap unevenly */
+  .korre-footer-link {
+    display: block;
+    padding: 8px 0;
+  }
+}
+
+.korre-site-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #064e3b;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.korre-footer-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.korre-footer-link:hover,
+.korre-footer-link:focus-visible {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .korre-site-logo {
+    font-size: 18px;
+  }
+}
+
+/* ============================================================================
+   COLOR SCHEME
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  input[type='email'],
+  input[type='text'],
+  input[type='tel'],
+  textarea,
+  select {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-color: #3a3a3a;
+  }
+  .korre-notification {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ============================================================================
+   PRINT
+   ============================================================================ */
+
+@media print {
+  .hero-carousel-dot,
+  .korre-carousel-arrow,
+  .korre-notification-region,
+  .korre-scroll-progress,
+  [role='button'],
+  button {
+    display: none !important;
+  }
+}
+
+/* ============================================================================
+   MOBILE SIDEBAR NAVIGATION
+   ============================================================================ */
+
+/* Hamburger button — hidden on desktop, shown on mobile */
+.kore-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.kore-hamburger:hover {
+  background: rgba(6, 78, 59, 0.06);
+}
+
+/* Desktop nav groups — visible on desktop, hidden on mobile */
+.kore-desktop-nav,
+.kore-desktop-actions {
+  display: flex !important;
+}
+
+/* Mobile slide-in sidebar */
+.kore-mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100dvh;
+  background: #fff;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 32px rgba(11, 28, 48, 0.18);
+  transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.kore-mobile-sidebar.is-open {
+  right: 0;
+}
+
+.kore-mobile-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(6, 78, 59, 0.1);
+}
+
+.kore-mobile-close {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kore-mobile-close:hover {
+  background: rgba(6, 78, 59, 0.06);
+}
+
+.kore-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  flex: 1;
+}
+
+.kore-mobile-nav-link {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 300;
+  color: #064e3b;
+  cursor: pointer;
+  letter-spacing: -0.3px;
+  transition: background 0.18s, color 0.18s;
+  border-radius: 0;
+}
+
+.kore-mobile-nav-link:hover {
+  background: rgba(6, 78, 59, 0.06);
+  color: #194332;
+}
+
+.kore-mobile-sidebar-cta {
+  padding: 20px 24px 32px;
+  border-top: 1px solid rgba(6, 78, 59, 0.1);
+}
+
+.kore-mobile-join-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: #d3a014;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(211, 160, 20, 0.3);
+}
+
+.kore-mobile-join-btn:hover {
+  background: #b8880f;
+  transform: translateY(-1px);
+}
+
+/* Dim overlay behind sidebar */
+.kore-mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 1999;
+  transition: background 0.32s;
+  pointer-events: none;
+}
+
+.kore-mobile-overlay.is-open {
+  display: block;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+
+/* ============================================================================
+   MOBILE RESPONSIVE — PAGE BODY SCALING
+   The design was built at ~1205px wide with absolute pixel positioning.
+   We use CSS `zoom` to scale it down — unlike transform: scale(), zoom
+   correctly shrinks the layout box too, so absolute-positioned children,
+   min-height, and scroll all work correctly without any height overrides.
+   ============================================================================ */
+
+@media (max-width: 899px) {
+  /* Show hamburger, hide desktop nav */
+  .kore-hamburger {
+    display: flex !important;
+  }
+  .kore-desktop-nav,
+  .kore-desktop-actions {
+    display: none !important;
+  }
+
+  .page-viewport {
+    /* overflow-x:clip prevents horizontal bleed WITHOUT creating a scroll
+       context. overflow-x:hidden would force overflow-y:auto (CSS spec),
+       making .page-viewport a scroll container that clips the footer. */
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+    width: 100vw !important;
+  }
+
+  /* -----------------------------------------------------------------------
+     PAGE-CONTENT: remove overflow:hidden on mobile.
+     The inline style sets overflow:hidden which clips the features bar
+     (its absolute child bleeds upward) and the footer (its absolute
+     children extend beyond its 600px height). On mobile we let it
+     overflow visibly — the page-viewport's overflow-x:hidden handles
+     horizontal containment.
+  ----------------------------------------------------------------------- */
+  .page-content {
+    overflow: visible !important;
+  }
+
+  /* -----------------------------------------------------------------------
+     HERO FEATURES BAR — push fully below the carousel.
+     The bar's only child is position:absolute, so the container itself
+     has 0 natural height and overlaps whatever is around it.
+     We give it an explicit height matching the feature cards (150px)
+     and ensure it is not overlapping the carousel above it.
+  ----------------------------------------------------------------------- */
+  .hero-features-bar {
+    height: 150px !important;
+    min-height: 150px !important;
+    position: relative !important;
+    overflow: visible !important;
+    margin-top: 0 !important;
+    top: auto !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+  }
+
+  /* -----------------------------------------------------------------------
+     HERO CAROUSEL & SLIDE HEIGHTS — preserve full height on mobile.
+     The index.html style tag contains responsive media queries that shrink
+     the carousel/slide height on narrow screens to 480px or 380px.
+     However, because we use CSS `zoom` to scale the layout down, the layout
+     retains its 1205px coordinate space. We MUST override these and lock the
+     carousel and slide layout heights to exactly 704px (their designed height)
+     and the hero section to auto/854px min-height, so absolute children
+     (buttons, text) don't get clipped.
+  ----------------------------------------------------------------------- */
+  .hero-section {
+    height: auto !important;
+    min-height: 854px !important;
+    display: block !important;
+  }
+  .hero-carousel,
+  .hero-slide {
+    height: 704px !important;
+  }
+
+
+
+  /* -----------------------------------------------------------------------
+     SCROLL ANIMATIONS — force visible on mobile.
+     script.js uses IntersectionObserver to trigger .korre-reveal elements.
+     The observer uses layout coordinates, but CSS zoom scales the layout
+     proportionally — so a footer element at layout-top 10000px is only
+     visually at ~2500px (at zoom 0.25). The observer never fires because
+     the layout position is outside the tiny viewport rect it checks.
+     Simplest fix: skip the reveal animation on mobile and show all
+     content immediately. Desktop animations are completely unaffected.
+  ----------------------------------------------------------------------- */
+  .korre-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* -----------------------------------------------------------------------
+     CAROUSEL DOTS — shrink to sensible mobile size.
+     The script.js injects .korre-carousel-dot which gets the dot's
+     visual styling. After zoom the dots are still physically large
+     (they are button elements with browser-default sizing). We pin
+     them to a small fixed size here.
+  ----------------------------------------------------------------------- */
+  .hero-carousel-dot,
+  .korre-carousel-dot {
+    width: 10px !important;
+    height: 10px !important;
+    min-width: unset !important;
+    min-height: unset !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+  }
+}
+
+/* Graduated zoom levels — zoom scales layout AND visual output,
+   so absolute children stay visible and scroll height is correct.
+   Values are floor(min_viewport / 1205) for each range, then pulled
+   back another ~8% so content has breathing room on both edges. */
+
+@media (min-width: 801px) and (max-width: 899px) {
+  .page-content { zoom: 0.60; }
+  .hero-wrapper { top: 120px !important; }
+  #section-story { top: 1082px !important; }
+}
+
+@media (min-width: 701px) and (max-width: 800px) {
+  .page-content { zoom: 0.53; }
+  .hero-wrapper { top: 136px !important; }
+  #section-story { top: 1098px !important; }
+}
+
+@media (min-width: 601px) and (max-width: 700px) {
+  .page-content { zoom: 0.45; }
+  .hero-wrapper { top: 160px !important; }
+  #section-story { top: 1122px !important; }
+}
+
+@media (min-width: 481px) and (max-width: 600px) {
+  .page-content { zoom: 0.36; }
+  .hero-wrapper { top: 200px !important; }
+  #section-story { top: 1162px !important; }
+}
+
+@media (min-width: 421px) and (max-width: 480px) {
+  .page-content { zoom: 0.32; }
+  .hero-wrapper { top: 225px !important; }
+  #section-story { top: 1187px !important; }
+}
+
+@media (min-width: 376px) and (max-width: 420px) {
+  .page-content { zoom: 0.28; }
+  .hero-wrapper { top: 257px !important; }
+  #section-story { top: 1219px !important; }
+}
+
+@media (min-width: 321px) and (max-width: 375px) {
+  .page-content { zoom: 0.25; }
+  .hero-wrapper { top: 288px !important; }
+  #section-story { top: 1250px !important; }
+}
+
+@media (max-width: 320px) {
+  .page-content { zoom: 0.23; }
+  .hero-wrapper { top: 313px !important; }
+  #section-story { top: 1275px !important; }
+}
+
+/* Misc mobile niceties */
+@media (max-width: 899px) {
+  .korre-notification-region {
+    max-width: calc(100vw - 20px) !important;
+    right: 10px !important;
+    left: 10px !important;
+  }
+}
+
+/* ============================================================================
+   LEGAL PAGES STYLE SYSTEM (Terms & Privacy)
+   ============================================================================ */
+
+.legal-page-wrapper {
+  background-color: #f9fdfc;
+  color: #252323;
+  font-family: 'Outfit', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.legal-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(25, 67, 50, 0.08);
+  box-shadow: 0 4px 20px rgba(11, 28, 48, 0.04);
+}
+
+.legal-header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.legal-logo-link {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.legal-logo-img {
+  height: 38px;
+  object-fit: contain;
+}
+
+.legal-back-btn {
+  background-color: #d3a014;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 8px rgba(211, 160, 20, 0.25);
+}
+
+.legal-back-btn:hover {
+  background-color: #b78a0f;
+  transform: translateY(-1px);
+}
+
+.legal-hero {
+  background: linear-gradient(135deg, #194332 0%, #064e3b 100%);
+  color: #ffffff;
+  padding: 64px 24px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.legal-hero-decorations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+.legal-hero-tag {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #3fa97e;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.legal-hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.legal-hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.legal-hero-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legal-body-container {
+  max-width: 1280px;
+  margin: 48px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+}
+
+.legal-sidebar-sticky {
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  padding-right: 16px;
+}
+
+.legal-sidebar-sticky::-webkit-scrollbar {
+  width: 4px;
+}
+
+.legal-sidebar-sticky::-webkit-scrollbar-thumb {
+  background-color: rgba(25, 67, 50, 0.15);
+  border-radius: 4px;
+}
+
+.legal-nav-title {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #194332;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(25, 67, 50, 0.1);
+}
+
+.legal-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legal-nav-link {
+  display: block;
+  padding: 8px 12px;
+  color: #4a5568;
+  text-decoration: none;
+  font-size: 15px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  line-height: 1.3;
+}
+
+.legal-nav-link:hover {
+  background-color: rgba(63, 169, 126, 0.08);
+  color: #194332;
+  padding-left: 16px;
+}
+
+.legal-nav-link.active {
+  background-color: #194332;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.legal-content-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(25, 67, 50, 0.08);
+  box-shadow: 0 4px 24px rgba(11, 28, 48, 0.03);
+  padding: 48px;
+}
+
+.legal-intro-box {
+  background-color: rgba(63, 169, 126, 0.05);
+  border-left: 4px solid #3fa97e;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 40px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.legal-intro-box strong {
+  color: #194332;
+}
+
+.legal-section-block {
+  margin-bottom: 48px;
+  scroll-margin-top: 100px;
+}
+
+.legal-section-block:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section-title {
+  font-size: 24px;
+  color: #194332;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(25, 67, 50, 0.1);
+}
+
+.legal-section-block p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a5568;
+  margin: 0 0 16px 0;
+}
+
+.legal-section-block p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section-block ul, 
+.legal-section-block ol {
+  margin: 0 0 20px 0;
+  padding-left: 24px;
+}
+
+.legal-section-block li {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+
+.legal-section-block li:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section-block strong {
+  color: #194332;
+}
+
+.legal-section-block a {
+  color: #d3a014;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.legal-section-block a:hover {
+  text-decoration: underline;
+}
+
+.legal-sub-section {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.legal-sub-title {
+  font-size: 18px;
+  color: #194332;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.legal-info-card {
+  background-color: rgba(211, 160, 20, 0.05);
+  border: 1px solid rgba(211, 160, 20, 0.15);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.legal-info-card-title {
+  font-weight: 700;
+  color: #194332;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.legal-info-card-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4a5568;
+  margin: 0;
+}
+
+.legal-table-wrapper {
+  overflow-x: auto;
+  margin: 24px 0;
+  border: 1px solid rgba(25, 67, 50, 0.08);
+  border-radius: 8px;
+}
+
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.legal-table th {
+  background-color: rgba(25, 67, 50, 0.05);
+  color: #194332;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(25, 67, 50, 0.1);
+}
+
+.legal-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(25, 67, 50, 0.05);
+  color: #4a5568;
+}
+
+.legal-table tr:last-child td {
+  border-bottom: none;
+}
+
+.legal-footer {
+  margin-top: auto;
+  background-color: #194332;
+  color: #ffffff;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.legal-footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.legal-footer-link {
+  color: #d3a014;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.legal-footer-link:hover {
+  color: #ffffff;
+}
+
+/* RESPONSIVE DESIGN FOR LEGAL PAGES */
+@media (max-width: 960px) {
+  .legal-body-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin: 24px auto;
+  }
+  
+  .legal-sidebar-sticky {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
+  }
+  
+  .legal-nav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .legal-nav-link {
+    background-color: rgba(25, 67, 50, 0.05);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+  }
+  
+  .legal-nav-link:hover {
+    padding-left: 16px;
+  }
+  
+  .legal-content-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .legal-hero-title {
+    font-size: 32px;
+  }
+  
+  .legal-hero-meta {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+

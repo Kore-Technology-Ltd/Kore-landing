@@ -1,32 +1,124 @@
-# React + TypeScript + Vite
+# Korè — Nigeria's Agricultural Marketplace (Landing Page)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This repository contains the single-page application (SPA) landing page for **Korè**, a direct farm-to-buyer digital marketplace connecting Nigerian farmers, wholesalers, and traders with buyers. It features identity verification, escrow-secured payments, freshness labelling, and logistics coordination.
 
-Currently, two official plugins are available:
+Operated by **IKORE LABS LTD** (RC 9614851).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🛠️ Tech Stack & Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend Framework**: [React 19](https://react.dev/)
+- **Build Tooling**: [Vite 8](https://vite.dev/) (with fast React HMR)
+- **Language**: [TypeScript](https://www.typescript.org/)
+- **Routing**: [React Router DOM 7](https://reactrouter.com/)
+- **Styles**: Vanilla CSS for flexibility and low performance overhead.
+- **Micro-interactions & Motion**: Powered by a custom vanilla JS layer ([src/script.js](file:///home/sam__ayo/dev/kore/Kore-landing/src/script.js)) driving scroll reveals, hero carousels, accordion animation, parallax, and custom notifications.
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 📂 Project Structure
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```text
+├── .husky/              # Git hooks (pre-commit, commit-msg)
+├── lib/
+│   └── waitlist.ts      # Waitlist API Client (submits to Google Apps Script Web App)
+├── public/
+│   ├── images/          # Image assets & illustrations (single source of truth)
+│   ├── favicon.ico
+│   └── site.webmanifest
+├── src/
+│   ├── App.css
+│   ├── App.tsx          # App Router & Routes
+│   ├── KoreLandingPage.tsx # Main Waitlist Landing Page
+│   ├── privacy-page.tsx # NDPA 2023 Compliant Privacy Policy
+│   ├── terms-page.tsx   # Platform Terms and Conditions
+│   ├── index.css        # Static companion stylesheet (forms, touch targets)
+│   ├── main.tsx         # Main react entry point
+│   ├── script.js        # Native JS interaction layer (animations, carousel)
+│   └── script.d.ts      # TypeScript interfaces for script.js
+├── tsconfig.json        # TypeScript configuration referencing app and node profiles
+└── vite.config.ts       # Vite config (maps path aliases & injects environment vars)
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+## 🚀 Getting Started
+
+### 1. Clone & Install Dependencies
+
+Ensure you have Node.js installed, then run:
+
+```bash
+npm install
+```
+
+### 2. Configure Environment Variables
+
+Copy the environment variables template:
+
+```bash
+cp .env.example .env.local
+```
+
+Open `.env.local` and configure your Google Apps Script deployment URL:
+
+```env
+NEXT_PUBLIC_WAITLIST_ENDPOINT=https://script.google.com/macros/s/YOUR-ID/exec
+```
+
+### 3. Run Locally
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open **[http://localhost:5173/](http://localhost:5173/)** in your browser.
+
+### 4. Build for Production
+
+Verify typescript compiles and build the client bundle:
+
+```bash
+npm run build
+```
+
+The compiled output will be generated inside the `/dist` directory.
+
+---
+
+## 🛡️ Linting, Code Quality & Git Hooks
+
+To maintain a clean codebase and collaborative environment, the following quality checks are configured:
+
+1. **Conventional Commits**:
+   Commit messages are validated using **Commitlint**. You must prefix commit messages with standard types:
+   - `feat:` (New feature)
+   - `fix:` (Bug fix)
+   - `chore:` (Build/tooling/deps config)
+   - `docs:` (Documentation updates)
+   - `refactor:` (Code restructuring)
+
+   _Example:_ `feat: add custom phone validation to waitlist submission`
+
+2. **Pre-commit Formatting & Linting**:
+   On running a commit, **Husky** triggers **Lint-staged**, running:
+   - **Oxlint**: Quick linting of TypeScript/JavaScript code for errors and hook rules.
+   - **Prettier**: Autoshapes files to conform to project style rules defined in [.prettierrc](file:///home/sam__ayo/dev/kore/Kore-landing/.prettierrc).
+   - Any linting errors will block the commit from being completed until resolved.
+
+3. **EditorConfig**:
+   Enforces consistent line endings (`LF`), trim trailing whitespace, and indentation (2 spaces) across various editors using the [.editorconfig](file:///home/sam__ayo/dev/kore/Kore-landing/.editorconfig) file.
+
+---
+
+## ☁️ Deployment
+
+The project is configured for deployment on **Vercel** with the following build configurations:
+
+- **Framework Preset**: `Vite`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Environment Variables**: Add `NEXT_PUBLIC_WAITLIST_ENDPOINT` inside the Vercel dashboard settings.

@@ -7,44 +7,44 @@
  * Drop this file in: apps/landing/lib/waitlist.ts
  */
 
-export type WaitlistRole = 
-  | "farmer" 
-  | "wholesaler" 
-  | "restaurant" 
-  | "hotel" 
-  | "retailer" 
-  | "consumer" 
-  | "household" 
-  | "investor" 
-  | "partner";
+export type WaitlistRole =
+  | 'farmer'
+  | 'wholesaler'
+  | 'restaurant'
+  | 'hotel'
+  | 'retailer'
+  | 'consumer'
+  | 'household'
+  | 'investor'
+  | 'partner'
 
 export interface WaitlistSubmission {
-  name: string;
-  email: string;
-  phone: string;
-  location: string;
-  role: WaitlistRole;
+  name: string
+  email: string
+  phone: string
+  location: string
+  role: WaitlistRole
 }
 
 export interface WaitlistStats {
-  farmer: number;
-  wholesaler: number;
-  restaurant: number;
-  hotel: number;
-  retailer: number;
-  consumer: number;
-  household: number;
-  investor: number;
-  partner: number;
-  total: number;
+  farmer: number
+  wholesaler: number
+  restaurant: number
+  hotel: number
+  retailer: number
+  consumer: number
+  household: number
+  investor: number
+  partner: number
+  total: number
 }
 
 interface ApiResponse<T = null> {
-  success: boolean;
-  message?: string;
-  code?: string;
-  data?: T;
-  cached_at?: string;
+  success: boolean
+  message?: string
+  code?: string
+  data?: T
+  cached_at?: string
 }
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
@@ -56,10 +56,10 @@ interface ApiResponse<T = null> {
  *
  * Get this URL from: Apps Script > Deploy > Manage Deployments > Copy URL
  */
-const ENDPOINT = process.env.NEXT_PUBLIC_WAITLIST_ENDPOINT;
+const ENDPOINT = process.env.NEXT_PUBLIC_WAITLIST_ENDPOINT
 
-if (!ENDPOINT && typeof window !== "undefined") {
-  console.warn("[Waitlist] NEXT_PUBLIC_WAITLIST_ENDPOINT is not set.");
+if (!ENDPOINT && typeof window !== 'undefined') {
+  console.warn('[Waitlist] NEXT_PUBLIC_WAITLIST_ENDPOINT is not set.')
 }
 
 // ─── SUBMIT ──────────────────────────────────────────────────────────────────
@@ -76,12 +76,12 @@ export async function submitWaitlist(
   submission: WaitlistSubmission
 ): Promise<ApiResponse> {
   if (!ENDPOINT) {
-    throw new Error("Waitlist endpoint not configured.");
+    throw new Error('Waitlist endpoint not configured.')
   }
 
   const response = await fetch(ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "text/plain" },
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify({
       name: submission.name.trim(),
       email: submission.email.trim().toLowerCase(),
@@ -89,15 +89,15 @@ export async function submitWaitlist(
       location: submission.location.trim(),
       role: submission.role,
       // Apps Script reads origin from the request for CORS
-      origin: typeof window !== "undefined" ? window.location.origin : "",
-    }),
-  });
+      origin: typeof window !== 'undefined' ? window.location.origin : ''
+    })
+  })
 
   if (!response.ok) {
-    throw new Error(`Network error: ${response.status}`);
+    throw new Error(`Network error: ${response.status}`)
   }
 
-  return response.json();
+  return response.json()
 }
 
 // ─── STATS ───────────────────────────────────────────────────────────────────
@@ -114,24 +114,24 @@ export async function submitWaitlist(
  * useEffect(() => { fetchWaitlistStats().then(setStats); }, []);
  */
 export async function fetchWaitlistStats(): Promise<WaitlistStats | null> {
-  if (!ENDPOINT) return null;
+  if (!ENDPOINT) return null
 
   try {
     const response = await fetch(`${ENDPOINT}?action=stats`, {
       // Next.js cache: revalidate every 5 minutes
       // Remove this if using outside of Next.js
-      next: { revalidate: 300 },
-    } as RequestInit);
+      next: { revalidate: 300 }
+    } as RequestInit)
 
-    if (!response.ok) return null;
+    if (!response.ok) return null
 
-    const json: ApiResponse<WaitlistStats> = await response.json();
-    return json.success && json.data ? json.data : null;
+    const json: ApiResponse<WaitlistStats> = await response.json()
+    return json.success && json.data ? json.data : null
   } catch {
     // Stats are non-critical — fail silently
     // The landing page will just not show the numbers
-    console.warn("[Waitlist] Could not fetch stats.");
-    return null;
+    console.warn('[Waitlist] Could not fetch stats.')
+    return null
   }
 }
 
@@ -143,9 +143,9 @@ export async function fetchWaitlistStats(): Promise<WaitlistStats | null> {
  * 1234567 → "1.2M"
  */
 export function formatStatNumber(n: number): string {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000)     return n.toLocaleString("en-NG");
-  return String(n);
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
+  if (n >= 1_000) return n.toLocaleString('en-NG')
+  return String(n)
 }
 
 /**
@@ -153,8 +153,8 @@ export function formatStatNumber(n: number): string {
  * The Apps Script also normalizes, but cleaner to do it on the client too.
  */
 export function normalizeNigerianPhone(input: string): string {
-  const digits = input.replace(/\D/g, "");
-  if (digits.startsWith("234")) return "+" + digits;
-  if (digits.startsWith("0"))   return "+234" + digits.slice(1);
-  return "+" + digits;
+  const digits = input.replace(/\D/g, '')
+  if (digits.startsWith('234')) return '+' + digits
+  if (digits.startsWith('0')) return '+234' + digits.slice(1)
+  return '+' + digits
 }

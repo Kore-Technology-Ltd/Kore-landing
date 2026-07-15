@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+out/
+next-env.d.ts
+
+# Local env files
+.env
+.env.local
+.env.*
+

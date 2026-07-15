@@ -56,7 +56,9 @@ input[type='text'],
 input[type='tel'],
 textarea,
 select {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 12px 16px;
@@ -149,7 +151,8 @@ select:focus {
    ============================================================================ */
 
 /* Make page content responsive and fill screen */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -157,7 +160,9 @@ html, body {
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -171,7 +176,6 @@ html, body {
   margin: 0 !important;
   min-height: 100vh;
 }
-
 
 /* Tablet — step spacing down before hitting the phone breakpoint */
 @media (max-width: 1024px) {
@@ -383,7 +387,9 @@ html, body {
   color: #064e3b;
   cursor: pointer;
   letter-spacing: -0.3px;
-  transition: background 0.18s, color 0.18s;
+  transition:
+    background 0.18s,
+    color 0.18s;
   border-radius: 0;
 }
 
@@ -408,7 +414,9 @@ html, body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  transition:
+    background 0.2s,
+    transform 0.15s;
   box-shadow: 0 2px 8px rgba(211, 160, 20, 0.3);
 }
 
@@ -511,8 +519,6 @@ html, body {
     height: 704px !important;
   }
 
-
-
   /* -----------------------------------------------------------------------
      SCROLL ANIMATIONS — force visible on mobile.
      script.js uses IntersectionObserver to trigger .korre-reveal elements.
@@ -553,51 +559,99 @@ html, body {
    back another ~8% so content has breathing room on both edges. */
 
 @media (min-width: 801px) and (max-width: 899px) {
-  .page-content { zoom: 0.60; }
-  .hero-wrapper { top: 120px !important; }
-  #section-story { top: 1082px !important; }
+  .page-content {
+    zoom: 0.6;
+  }
+  .hero-wrapper {
+    top: 120px !important;
+  }
+  #section-story {
+    top: 1082px !important;
+  }
 }
 
 @media (min-width: 701px) and (max-width: 800px) {
-  .page-content { zoom: 0.53; }
-  .hero-wrapper { top: 136px !important; }
-  #section-story { top: 1098px !important; }
+  .page-content {
+    zoom: 0.53;
+  }
+  .hero-wrapper {
+    top: 136px !important;
+  }
+  #section-story {
+    top: 1098px !important;
+  }
 }
 
 @media (min-width: 601px) and (max-width: 700px) {
-  .page-content { zoom: 0.45; }
-  .hero-wrapper { top: 160px !important; }
-  #section-story { top: 1122px !important; }
+  .page-content {
+    zoom: 0.45;
+  }
+  .hero-wrapper {
+    top: 160px !important;
+  }
+  #section-story {
+    top: 1122px !important;
+  }
 }
 
 @media (min-width: 481px) and (max-width: 600px) {
-  .page-content { zoom: 0.36; }
-  .hero-wrapper { top: 200px !important; }
-  #section-story { top: 1162px !important; }
+  .page-content {
+    zoom: 0.36;
+  }
+  .hero-wrapper {
+    top: 200px !important;
+  }
+  #section-story {
+    top: 1162px !important;
+  }
 }
 
 @media (min-width: 421px) and (max-width: 480px) {
-  .page-content { zoom: 0.32; }
-  .hero-wrapper { top: 225px !important; }
-  #section-story { top: 1187px !important; }
+  .page-content {
+    zoom: 0.32;
+  }
+  .hero-wrapper {
+    top: 225px !important;
+  }
+  #section-story {
+    top: 1187px !important;
+  }
 }
 
 @media (min-width: 376px) and (max-width: 420px) {
-  .page-content { zoom: 0.28; }
-  .hero-wrapper { top: 257px !important; }
-  #section-story { top: 1219px !important; }
+  .page-content {
+    zoom: 0.28;
+  }
+  .hero-wrapper {
+    top: 257px !important;
+  }
+  #section-story {
+    top: 1219px !important;
+  }
 }
 
 @media (min-width: 321px) and (max-width: 375px) {
-  .page-content { zoom: 0.25; }
-  .hero-wrapper { top: 288px !important; }
-  #section-story { top: 1250px !important; }
+  .page-content {
+    zoom: 0.25;
+  }
+  .hero-wrapper {
+    top: 288px !important;
+  }
+  #section-story {
+    top: 1250px !important;
+  }
 }
 
 @media (max-width: 320px) {
-  .page-content { zoom: 0.23; }
-  .hero-wrapper { top: 313px !important; }
-  #section-story { top: 1275px !important; }
+  .page-content {
+    zoom: 0.23;
+  }
+  .hero-wrapper {
+    top: 313px !important;
+  }
+  #section-story {
+    top: 1275px !important;
+  }
 }
 
 /* Misc mobile niceties */
@@ -661,7 +715,9 @@ html, body {
   font-size: 14px;
   text-decoration: none;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
   box-shadow: 0 2px 8px rgba(211, 160, 20, 0.25);
 }
 
@@ -840,7 +896,7 @@ html, body {
   margin-bottom: 0;
 }
 
-.legal-section-block ul, 
+.legal-section-block ul,
 .legal-section-block ol {
   margin: 0 0 20px 0;
   padding-left: 24px;
@@ -971,31 +1027,31 @@ html, body {
     gap: 32px;
     margin: 24px auto;
   }
-  
+
   .legal-sidebar-sticky {
     position: static;
     max-height: none;
     overflow-y: visible;
     padding-right: 0;
   }
-  
+
   .legal-nav-list {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 8px;
   }
-  
+
   .legal-nav-link {
     background-color: rgba(25, 67, 50, 0.05);
     border-radius: 20px;
     padding: 6px 16px;
     font-size: 13px;
   }
-  
+
   .legal-nav-link:hover {
     padding-left: 16px;
   }
-  
+
   .legal-content-card {
     padding: 24px;
   }
@@ -1005,10 +1061,9 @@ html, body {
   .legal-hero-title {
     font-size: 32px;
   }
-  
+
   .legal-hero-meta {
     flex-direction: column;
     gap: 12px;
   }
 }
-

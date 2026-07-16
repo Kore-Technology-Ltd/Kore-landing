@@ -135,8 +135,7 @@ select:focus {
   button,
   [role='button'],
   .korre-clickable,
-  .korre-carousel-arrow,
-  a.korre-footer-link {
+  .korre-carousel-arrow {
     min-height: 44px;
   }
 
@@ -158,6 +157,16 @@ body {
   width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+}
+
+/* Hide scrollbar Chrome/Safari/Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.page-viewport::-webkit-scrollbar,
+.page-content::-webkit-scrollbar {
+  display: none;
 }
 
 *,
@@ -169,12 +178,16 @@ body {
 .page-viewport {
   width: 100% !important;
   overflow-x: hidden !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .page-content {
   width: 100% !important;
   margin: 0 !important;
   min-height: 100vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Tablet — step spacing down before hitting the phone breakpoint */
@@ -227,12 +240,6 @@ body {
 
   .korre-faq-card {
     padding: 14px;
-  }
-
-  /* Stack footer links instead of letting them wrap unevenly */
-  .korre-footer-link {
-    display: block;
-    padding: 8px 0;
   }
 }
 
@@ -1065,5 +1072,32 @@ body {
   .legal-hero-meta {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+/* RESPONSIVE DESIGN FOR MAIN NAVBAR & SCROLLING (MOBILE VIEW) */
+@media (max-width: 899px) {
+  .page-content {
+    transform: translate3d(0, 0, 0) !important;
+    will-change: transform !important;
+  }
+
+  .kore-navbar-inner {
+    padding: 6px 12px !important;
+  }
+
+  .kore-navbar-logo {
+    height: 32px !important;
+    left: 12px !important;
+    top: calc(-16px + 50%) !important;
+    aspect-ratio: 2.51 !important;
+  }
+
+  .kore-navbar-logo img {
+    transform: translate(0px, 3px) scale(1, 2.51) !important;
+  }
+
+  .kore-hamburger {
+    padding: 6px !important;
   }
 }

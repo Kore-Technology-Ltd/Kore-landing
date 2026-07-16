@@ -189,7 +189,7 @@ export default function KoreLandingPage() {
               position: 'relative'
             }}
           >
-            <a href="index.html">
+            <a href="/">
               <img
                 src="/images/035b322f53fa89191732a6b2a468167880c6b99b.png"
                 alt="Korè logo"
@@ -266,6 +266,7 @@ export default function KoreLandingPage() {
         </div>
       </div>
       <div
+        className="kore-navbar-container"
         style={{
           backgroundColor: '#fff',
           display: 'flex',
@@ -285,6 +286,7 @@ export default function KoreLandingPage() {
         }}
       >
         <div
+          className="kore-navbar-inner"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -650,6 +652,7 @@ export default function KoreLandingPage() {
           </button>
         </div>
         <div
+          className="kore-navbar-logo"
           style={{
             overflow: 'hidden',
             left: '43px',
@@ -660,7 +663,7 @@ export default function KoreLandingPage() {
             position: 'absolute'
           }}
         >
-          <a href="index.html">
+          <a href="/">
             <img
               src="/images/035b322f53fa89191732a6b2a468167880c6b99b.png"
               alt="Korè logo"
@@ -803,6 +806,8 @@ export default function KoreLandingPage() {
                       >
                         <div
                           onClick={() => scrollToSection('section-waitlist')}
+                          role="button"
+                          tabIndex={0}
                           style={{
                             borderRadius: '10px',
                             backgroundColor: '#d3a014',
@@ -852,6 +857,8 @@ export default function KoreLandingPage() {
                         </div>
                         <div
                           onClick={() => scrollToSection('section-story')}
+                          role="button"
+                          tabIndex={0}
                           style={{
                             borderRadius: '10px',
                             backgroundColor: 'rgba(255,255,255,0.1)',
@@ -3325,9 +3332,9 @@ export default function KoreLandingPage() {
                   display: 'flex',
                   flexDirection: 'column',
                   rowGap: '12px',
-                  alignItems: 'start',
-                  justifyContent: 'flex-start',
-                  left: 'calc(-422.5px + 50%)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  left: 'calc(-409.5px + 50%)',
                   top: '0px',
                   width: '819px',
                   position: 'absolute'
@@ -3337,7 +3344,7 @@ export default function KoreLandingPage() {
                   className="text"
                   style={{
                     display: 'inline',
-                    textAlign: 'left',
+                    textAlign: 'center',
                     fontSize: '48px',
                     fontFamily: 'Montserrat, system-ui, sans-serif',
                     fontWeight: 700,
@@ -4144,61 +4151,20 @@ export default function KoreLandingPage() {
                   <div
                     style={{
                       overflow: 'hidden',
-                      left: 'calc(-234px + 50%)',
-                      top: '0px',
-                      width: '468px',
-                      height: '411px',
-                      position: 'absolute'
-                    }}
-                  >
-                    <div
-                      style={{
-                        overflow: 'hidden',
-                        left: 'calc(-226px + 50%)',
-                        top: '-42px',
-                        aspectRatio: 1,
-                        width: 'auto',
-                        height: '453px',
-                        position: 'absolute',
-                        maskImage: 'url("data:image/svg+xml',
-                        maskRepeat: 'no-repeat',
-                        maskType: 'alpha',
-                        maskPosition: '-8px 42px'
-                      }}
-                    >
-                      <img
-                        src="images/e2a3114370f4082bb8328a241dbb9ce4ad67dff2.png"
-                        alt="Red Question Mark Symbol, Punctuation Marks, Interrogative Word, Confuse PNG Transparent Clipart Image and PSD File for Free Download.jfif 1"
-                        style={{
-                          inset: 0,
-                          width: '100%',
-                          height: '100%',
-                          position: 'absolute',
-                          objectFit: 'cover'
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      overflow: 'hidden',
                       left: 'calc(-226px + 50%)',
                       top: '-42px',
-                      aspectRatio: '1.56',
-                      width: 'auto',
-                      height: '290px',
+                      width: '453px',
+                      height: '453px',
                       position: 'absolute'
                     }}
                   >
                     <img
                       src="images/e2a3114370f4082bb8328a241dbb9ce4ad67dff2.png"
-                      alt="Red Question Mark Symbol, Punctuation Marks, Interrogative Word, Confuse PNG Transparent Clipart Image and PSD File for Free Download.jfif 2"
+                      alt="Red Question Mark"
                       style={{
-                        inset: 0,
                         width: '100%',
                         height: '100%',
-                        position: 'absolute',
-                        transform: 'translate(0px,81.5px) scale(1,1.56)'
+                        objectFit: 'contain'
                       }}
                     />
                   </div>
@@ -6249,42 +6215,26 @@ export default function KoreLandingPage() {
                         position: 'absolute'
                       }}
                     >
-                      <div
+                      <img
+                        src="images/d0e9c9b1a4b44ccf5e7ecd4cfc97ab74d2cabc1c.png"
+                        alt="download (13).jfif 1"
                         style={{
-                          overflow: 'hidden',
-                          left: 'calc(-262px + 50%)',
-                          top: '-273px',
-                          aspectRatio: '0.8',
-                          width: 'auto',
-                          height: '624px',
+                          width: '502px',
+                          height: '465px',
                           position: 'absolute',
-                          maskImage: 'url("data:image/svg+xml',
-                          maskRepeat: 'no-repeat',
-                          maskType: 'alpha',
-                          maskPosition: '62px 273px'
+                          left: '-60px',
+                          top: '-273px',
+                          transform: 'translate(0px,79.8px) scale(1,1.34)'
                         }}
-                      >
-                        <img
-                          src="images/d0e9c9b1a4b44ccf5e7ecd4cfc97ab74d2cabc1c.png"
-                          alt="download (13).jfif 1"
-                          style={{
-                            inset: 0,
-                            width: '100%',
-                            height: '100%',
-                            position: 'absolute',
-                            objectFit: 'cover'
-                          }}
-                        />
-                      </div>
+                      />
                     </div>
                     <div
                       style={{
                         overflow: 'hidden',
                         left: '0px',
                         top: '0px',
-                        aspectRatio: '1.08',
-                        width: 'auto',
-                        height: '465px',
+                        width: '502px',
+                        height: '273px',
                         position: 'absolute'
                       }}
                     >
@@ -6292,10 +6242,11 @@ export default function KoreLandingPage() {
                         src="images/d0e9c9b1a4b44ccf5e7ecd4cfc97ab74d2cabc1c.png"
                         alt="download (13).jfif 2"
                         style={{
-                          inset: 0,
-                          width: '100%',
-                          height: '100%',
+                          width: '502px',
+                          height: '465px',
                           position: 'absolute',
+                          left: '0px',
+                          top: '0px',
                           transform: 'translate(0px,79.8px) scale(1,1.34)'
                         }}
                       />
@@ -8080,7 +8031,7 @@ export default function KoreLandingPage() {
                   backgroundPosition: '0% 0%, center',
                   backgroundSize: 'auto auto, cover',
                   overflow: 'hidden',
-                  left: '0px',
+                  left: '36px',
                   top: '0px',
                   width: '561px',
                   height: '626px',
@@ -10418,7 +10369,7 @@ export default function KoreLandingPage() {
                       position: 'absolute'
                     }}
                   >
-                    <a href="index.html">
+                    <a href="/">
                       <img
                         src="images/2bce644656d560355e95869c9cc42d15ec927be5.png"
                         alt="Version 1.1Artboard 27@4x 4"

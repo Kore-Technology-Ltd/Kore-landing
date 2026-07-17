@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
 import FAQItem from './components/FAQItem'
-import StatCounter from './components/StatCounter'
 import {
   fetchWaitlistStats,
   formatStatNumber,

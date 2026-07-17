@@ -1,4 +1,5 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
+import FAQItem from './components/FAQItem'
 import {
   fetchWaitlistStats,
   formatStatNumber,
@@ -26,6 +27,102 @@ export default function KoreLandingPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // ─── Carousel state (React-controlled, replaces script.js HeroCarousel) ───
+  const SLIDE_COUNT = 2
+  const AUTOPLAY_DELAY = 5000
+  const [carouselSlide, setCarouselSlide] = useState(0)
+  const [progressKey, setProgressKey] = useState(0) // increment to restart CSS progress animation
+  const carouselTrackRef = useRef<HTMLDivElement>(null)
+  const carouselSlideRef = useRef(0) // mirror of carouselSlide for use in callbacks
+  const carouselAutoplayRef = useRef<ReturnType<typeof setInterval> | null>(
+    null
+  )
+  const carouselIsPausedRef = useRef(false)
+  const carouselDrag = useRef({ startX: 0, currentDelta: 0, isDragging: false })
+
+  const carouselGoTo = useCallback(
+    (index: number) => {
+      const normalized = ((index % SLIDE_COUNT) + SLIDE_COUNT) % SLIDE_COUNT
+      carouselSlideRef.current = normalized
+      setCarouselSlide(normalized)
+      setProgressKey((k) => k + 1)
+      if (carouselTrackRef.current) {
+        carouselTrackRef.current.style.transition =
+          'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)'
+        carouselTrackRef.current.style.transform = `translateX(${-normalized * 100}%)`
+      }
+    },
+    [] // SLIDE_COUNT is constant
+  )
+
+  const carouselStartAutoplay = useCallback(() => {
+    if (carouselAutoplayRef.current) clearInterval(carouselAutoplayRef.current)
+    carouselAutoplayRef.current = setInterval(() => {
+      if (!carouselIsPausedRef.current) {
+        const next = (carouselSlideRef.current + 1) % SLIDE_COUNT
+        carouselSlideRef.current = next
+        setCarouselSlide(next)
+        setProgressKey((k) => k + 1)
+        if (carouselTrackRef.current) {
+          carouselTrackRef.current.style.transition =
+            'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)'
+          carouselTrackRef.current.style.transform = `translateX(${-next * 100}%)`
+        }
+      }
+    }, AUTOPLAY_DELAY)
+  }, [])
+
+  const carouselStopAutoplay = useCallback(() => {
+    if (carouselAutoplayRef.current) {
+      clearInterval(carouselAutoplayRef.current)
+      carouselAutoplayRef.current = null
+    }
+  }, [])
+
+  // Touch handlers — manipulate DOM directly during drag (zero React re-renders)
+  const handleCarouselTouchStart = useCallback((e: React.TouchEvent) => {
+    carouselDrag.current = {
+      startX: e.touches[0].clientX,
+      currentDelta: 0,
+      isDragging: true
+    }
+    carouselIsPausedRef.current = true
+    if (carouselTrackRef.current)
+      carouselTrackRef.current.style.transition = 'none'
+  }, [])
+
+  const handleCarouselTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!carouselDrag.current.isDragging || !carouselTrackRef.current) return
+    const delta = e.touches[0].clientX - carouselDrag.current.startX
+    carouselDrag.current.currentDelta = delta
+    const containerW =
+      carouselTrackRef.current.parentElement?.clientWidth ?? window.innerWidth
+    const base = -carouselSlideRef.current * 100
+    const pct = (delta / containerW) * 100
+    carouselTrackRef.current.style.transform = `translateX(${base + pct}%)`
+  }, [])
+
+  const handleCarouselTouchEnd = useCallback(() => {
+    if (!carouselDrag.current.isDragging || !carouselTrackRef.current) return
+    carouselDrag.current.isDragging = false
+    carouselIsPausedRef.current = false
+    const containerW =
+      carouselTrackRef.current.parentElement?.clientWidth ?? window.innerWidth
+    const threshold = containerW * 0.15
+    const delta = carouselDrag.current.currentDelta
+    if (delta > threshold) {
+      carouselGoTo(carouselSlideRef.current - 1)
+    } else if (delta < -threshold) {
+      carouselGoTo(carouselSlideRef.current + 1)
+    } else {
+      // snap back
+      carouselTrackRef.current.style.transition =
+        'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)'
+      carouselTrackRef.current.style.transform = `translateX(${-carouselSlideRef.current * 100}%)`
+    }
+    carouselStartAutoplay()
+  }, [carouselGoTo, carouselStartAutoplay])
 
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), [])
 
@@ -146,25 +243,43 @@ export default function KoreLandingPage() {
     }
   }
 
+  // ─── Carousel autoplay + visibility pause (React-controlled) ───────────────
   useEffect(() => {
-    // Prevent auto-init from script.js since we'll init manually after React renders
-    ;(window as any).KORRE_DISABLE_AUTO_INIT = true
+    carouselStartAutoplay()
+    const handleVisibility = () => {
+      if (document.hidden) carouselStopAutoplay()
+      else carouselStartAutoplay()
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => {
+      carouselStopAutoplay()
+      document.removeEventListener('visibilitychange', handleVisibility)
+    }
+  }, [carouselStartAutoplay, carouselStopAutoplay])
 
-    // Dynamically import and initialize the script
-    const initScript = async () => {
+  // ─── Keyboard navigation for carousel ───────────────────────────────────────
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      const tag = (document.activeElement as HTMLElement)?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
+      if (e.key === 'ArrowLeft') carouselGoTo(carouselSlideRef.current - 1)
+      else if (e.key === 'ArrowRight')
+        carouselGoTo(carouselSlideRef.current + 1)
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [carouselGoTo])
+
+  // ─── script.js: init only button/nav/form interactions (carousel stripped) ──
+  useEffect(() => {
+    ;(window as any).KORRE_DISABLE_AUTO_INIT = true
+    const timer = setTimeout(async () => {
       await import('./script.js')
-      // Call init after script loads and DOM is ready
       if ((window as any).Korre?.init) {
         ;(window as any).Korre.init()
       }
-    }
-
-    // Small delay to ensure React has finished rendering
-    const timer = setTimeout(initScript, 100)
-
-    return () => {
-      clearTimeout(timer)
-    }
+    }, 200)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -655,7 +770,7 @@ export default function KoreLandingPage() {
           className="kore-navbar-logo"
           style={{
             overflow: 'hidden',
-            left: '43px',
+            left: '0px',
             top: 'calc(-33px + 50%)',
             aspectRatio: '2.51',
             width: 'auto',
@@ -712,8 +827,27 @@ export default function KoreLandingPage() {
             }}
           >
             <div className="hero-section">
-              <div className="hero-carousel">
-                <div className="hero-carousel-track">
+              <div
+                className="hero-carousel"
+                onMouseEnter={() => {
+                  carouselIsPausedRef.current = true
+                }}
+                onMouseLeave={() => {
+                  carouselIsPausedRef.current = false
+                }}
+              >
+                <div
+                  ref={carouselTrackRef}
+                  className="hero-carousel-track"
+                  style={{
+                    display: 'flex',
+                    transform: 'translateX(0%)',
+                    transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)'
+                  }}
+                  onTouchStart={handleCarouselTouchStart}
+                  onTouchMove={handleCarouselTouchMove}
+                  onTouchEnd={handleCarouselTouchEnd}
+                >
                   <div
                     className="hero-slide"
                     style={{
@@ -991,6 +1125,8 @@ export default function KoreLandingPage() {
                         <img
                           src="/images/73f252fc8c00803e69670f219f3532bfb1a94257.png"
                           alt="Free_Iphone_15_Mockup_41 3"
+                          loading="eager"
+                          fetchPriority="high"
                           style={{
                             inset: 0,
                             width: '100%',
@@ -1276,6 +1412,8 @@ export default function KoreLandingPage() {
                       >
                         <div
                           onClick={() => scrollToSection('section-waitlist')}
+                          role="button"
+                          tabIndex={0}
                           style={{
                             borderRadius: '10px',
                             backgroundColor: '#d3a014',
@@ -1325,6 +1463,8 @@ export default function KoreLandingPage() {
                         </div>
                         <div
                           onClick={() => scrollToSection('section-story')}
+                          role="button"
+                          tabIndex={0}
                           style={{
                             borderRadius: '10px',
                             backgroundColor: 'rgba(255,255,255,0.1)',
@@ -2089,22 +2229,31 @@ export default function KoreLandingPage() {
                     </div>
                   </div>
                 </div>
+                {/* CSS progress bar — restarted by changing key when slide changes */}
+                <div className="korre-progress-track">
+                  <div
+                    key={progressKey}
+                    className="korre-progress-fill korre-progress-animated"
+                  />
+                </div>
                 <div
                   className="hero-carousel-dots"
                   aria-label="Hero carousel navigation"
                 >
-                  <button
-                    type="button"
-                    className="hero-carousel-dot is-active"
-                    aria-label="Show slide 1"
-                    data-slide={0}
-                  />
-                  <button
-                    type="button"
-                    className="hero-carousel-dot"
-                    aria-label="Show slide 2"
-                    data-slide={1}
-                  />
+                  {[0, 1].map((i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className={`hero-carousel-dot korre-carousel-dot${carouselSlide === i ? ' is-active' : ''}`}
+                      aria-label={`Show slide ${i + 1}`}
+                      aria-current={carouselSlide === i ? 'true' : 'false'}
+                      data-slide={i}
+                      onClick={() => {
+                        carouselGoTo(i)
+                        carouselStartAutoplay()
+                      }}
+                    />
+                  ))}
                 </div>
               </div>
               {/* @component:end name="HeroCarousel" */}
@@ -2852,6 +3001,8 @@ export default function KoreLandingPage() {
                     <img
                       src="/images/e7b44d4b74bbf6e8c6c3a899ca87c5a93455ab2f.jpeg"
                       alt="story-farmer 1"
+                      loading="lazy"
+                      decoding="async"
                       style={{
                         inset: 0,
                         width: '100%',
@@ -2904,6 +3055,8 @@ export default function KoreLandingPage() {
                     <img
                       src="/images/62f222ff25842e9a5d5bc2273bd122fde71d7162.jpeg"
                       alt="story-restaurant 1"
+                      loading="lazy"
+                      decoding="async"
                       style={{
                         inset: 0,
                         width: '100%',
@@ -4161,6 +4314,8 @@ export default function KoreLandingPage() {
                     <img
                       src="images/e2a3114370f4082bb8328a241dbb9ce4ad67dff2.png"
                       alt="Red Question Mark"
+                      loading="lazy"
+                      decoding="async"
                       style={{
                         width: '100%',
                         height: '100%',
@@ -4406,6 +4561,8 @@ export default function KoreLandingPage() {
                   <img
                     src="/images/3fc691240247da0bb59aa6a6603fbbf8fefd0ef4.png"
                     alt="Free_Iphone_15_Mockup_4 4"
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       inset: 0,
                       width: '100%',
@@ -6218,6 +6375,8 @@ export default function KoreLandingPage() {
                       <img
                         src="images/d0e9c9b1a4b44ccf5e7ecd4cfc97ab74d2cabc1c.png"
                         alt="download (13).jfif 1"
+                        loading="lazy"
+                        decoding="async"
                         style={{
                           width: '502px',
                           height: '465px',
@@ -6241,6 +6400,8 @@ export default function KoreLandingPage() {
                       <img
                         src="images/d0e9c9b1a4b44ccf5e7ecd4cfc97ab74d2cabc1c.png"
                         alt="download (13).jfif 2"
+                        loading="lazy"
+                        decoding="async"
                         style={{
                           width: '502px',
                           height: '465px',
@@ -8920,7 +9081,7 @@ export default function KoreLandingPage() {
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  rowGap: '24px',
+                  rowGap: '16px',
                   alignItems: 'start',
                   justifyContent: 'flex-start',
                   width: '906px',
@@ -8929,584 +9090,40 @@ export default function KoreLandingPage() {
                   padding: '0px 4px'
                 }}
               >
-                <div
-                  style={{
-                    overflow: 'hidden',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    rowGap: '0px',
-                    alignItems: 'start',
-                    justifyContent: 'flex-start',
-                    width: '898px',
-                    position: 'relative',
-                    flexShrink: 0
-                  }}
-                >
-                  <div
-                    style={{
-                      borderWidth: '0.5px',
-                      borderStyle: 'solid',
-                      borderColor: '#d3a014',
-                      borderRadius: '10px',
-                      backgroundColor: '#fff',
-                      overflow: 'hidden',
-                      width: '100%',
-                      height: '65px',
-                      position: 'relative',
-                      flexShrink: 0
-                    }}
-                  >
-                    <span
-                      className="text"
-                      style={{
-                        display: 'inline',
-                        textAlign: 'left',
-                        lineHeight: '20px',
-                        fontSize: '20px',
-                        fontFamily:
-                          '"Plus Jakarta Sans", system-ui, sans-serif',
-                        fontWeight: 400,
-                        fontStretch: '100%',
-                        color: '#252323',
-                        left: '32px',
-                        top: 'calc(-9.5px + 50%)',
-                        width: 'max-content',
-                        position: 'absolute'
-                      }}
-                    >
-                      When is Korè launching?{' '}
-                    </span>
-                    <div
-                      style={{
-                        overflow: 'hidden',
-                        top: 'calc(-15.5px + 50%)',
-                        right: '32px',
-                        aspectRatio: 1,
-                        width: 'auto',
-                        height: '32px',
-                        position: 'absolute'
-                      }}
-                    >
-                      <svg
-                        width="15.416000366210938"
-                        height="9.121999740600586"
-                        viewBox="0 0 15.416000366210938 9.121999740600586"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                        preserveAspectRatio="none"
-                        style={{
-                          left: '25.9%',
-                          top: '35.3%',
-                          right: '25.9%',
-                          bottom: '36.2%',
-                          width: '48.2%',
-                          height: '28.5%',
-                          position: 'absolute'
-                        }}
-                      >
-                        {' '}
-                        <path
-                          d="M7.708 9.122L15.416 1.416 14.002 0 7.708 6.294 1.416 0 0 1.416 7.708 9.122Z"
-                          style={{ fillRule: 'evenodd', fill: '#d3a014' }}
-                        />{' '}
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    borderWidth: '0.5px',
-                    borderStyle: 'solid',
-                    borderColor: '#d3a014',
-                    borderRadius: '10px',
-                    backgroundColor: '#fff',
-                    overflow: 'hidden',
-                    width: '100%',
-                    height: '65px',
-                    position: 'relative',
-                    flexShrink: 0
-                  }}
-                >
-                  <span
-                    className="text"
-                    style={{
-                      display: 'inline',
-                      textAlign: 'left',
-                      lineHeight: '20px',
-                      fontSize: '20px',
-                      fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
-                      fontWeight: 400,
-                      fontStretch: '100%',
-                      color: '#252323',
-                      left: '32px',
-                      top: 'calc(-9.5px + 50%)',
-                      width: 'max-content',
-                      position: 'absolute'
-                    }}
-                  >
-                    How much does it cost to use Korè?{' '}
-                  </span>
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      top: 'calc(-15.5px + 50%)',
-                      right: '32px',
-                      aspectRatio: 1,
-                      width: 'auto',
-                      height: '32px',
-                      position: 'absolute'
-                    }}
-                  >
-                    <svg
-                      width="15.416000366210938"
-                      height="9.121999740600586"
-                      viewBox="0 0 15.416000366210938 9.121999740600586"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      preserveAspectRatio="none"
-                      style={{
-                        left: '25.9%',
-                        top: '35.3%',
-                        right: '25.9%',
-                        bottom: '36.2%',
-                        width: '48.2%',
-                        height: '28.5%',
-                        position: 'absolute'
-                      }}
-                    >
-                      {' '}
-                      <path
-                        d="M7.708 9.122L15.416 1.416 14.002 0 7.708 6.294 1.416 0 0 1.416 7.708 9.122Z"
-                        style={{ fillRule: 'evenodd', fill: '#d3a014' }}
-                      />{' '}
-                    </svg>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    borderWidth: '0.5px',
-                    borderStyle: 'solid',
-                    borderColor: '#d3a014',
-                    borderRadius: '10px',
-                    backgroundColor: '#fff',
-                    overflow: 'hidden',
-                    width: '100%',
-                    height: '65px',
-                    position: 'relative',
-                    flexShrink: 0
-                  }}
-                >
-                  <span
-                    className="text"
-                    style={{
-                      display: 'inline',
-                      textAlign: 'left',
-                      lineHeight: '20px',
-                      fontSize: '20px',
-                      fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
-                      fontWeight: 400,
-                      fontStretch: '100%',
-                      color: '#252323',
-                      left: '32px',
-                      top: 'calc(-9.5px + 50%)',
-                      width: 'max-content',
-                      position: 'absolute'
-                    }}
-                  >
-                    How do i know the produce is actually fresh?
-                  </span>
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      top: 'calc(-15.5px + 50%)',
-                      right: '32px',
-                      aspectRatio: 1,
-                      width: 'auto',
-                      height: '32px',
-                      position: 'absolute'
-                    }}
-                  >
-                    <svg
-                      width="15.416000366210938"
-                      height="9.121999740600586"
-                      viewBox="0 0 15.416000366210938 9.121999740600586"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      preserveAspectRatio="none"
-                      style={{
-                        left: '25.9%',
-                        top: '35.3%',
-                        right: '25.9%',
-                        bottom: '36.2%',
-                        width: '48.2%',
-                        height: '28.5%',
-                        position: 'absolute'
-                      }}
-                    >
-                      {' '}
-                      <path
-                        d="M7.708 9.122L15.416 1.416 14.002 0 7.708 6.294 1.416 0 0 1.416 7.708 9.122Z"
-                        style={{ fillRule: 'evenodd', fill: '#d3a014' }}
-                      />{' '}
-                    </svg>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    borderWidth: '0.5px',
-                    borderStyle: 'solid',
-                    borderColor: '#d3a014',
-                    borderRadius: '10px',
-                    backgroundColor: '#fff',
-                    overflow: 'hidden',
-                    width: '100%',
-                    height: '65px',
-                    position: 'relative',
-                    flexShrink: 0
-                  }}
-                >
-                  <span
-                    className="text"
-                    style={{
-                      display: 'inline',
-                      textAlign: 'left',
-                      lineHeight: '20px',
-                      fontSize: '20px',
-                      fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
-                      fontWeight: 400,
-                      fontStretch: '100%',
-                      color: '#252323',
-                      left: '32px',
-                      top: 'calc(-9.5px + 50%)',
-                      width: 'max-content',
-                      position: 'absolute'
-                    }}
-                  >
-                    What if i want to buy small quantities?
-                  </span>
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      top: 'calc(-15.5px + 50%)',
-                      right: '32px',
-                      aspectRatio: 1,
-                      width: 'auto',
-                      height: '32px',
-                      position: 'absolute'
-                    }}
-                  >
-                    <svg
-                      width="15.416000366210938"
-                      height="9.121999740600586"
-                      viewBox="0 0 15.416000366210938 9.121999740600586"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      preserveAspectRatio="none"
-                      style={{
-                        left: '25.9%',
-                        top: '35.3%',
-                        right: '25.9%',
-                        bottom: '36.2%',
-                        width: '48.2%',
-                        height: '28.5%',
-                        position: 'absolute'
-                      }}
-                    >
-                      {' '}
-                      <path
-                        d="M7.708 9.122L15.416 1.416 14.002 0 7.708 6.294 1.416 0 0 1.416 7.708 9.122Z"
-                        style={{ fillRule: 'evenodd', fill: '#d3a014' }}
-                      />{' '}
-                    </svg>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    borderWidth: '0.5px',
-                    borderStyle: 'solid',
-                    borderColor: '#d3a014',
-                    borderRadius: '10px',
-                    backgroundColor: '#fff',
-                    overflow: 'hidden',
-                    width: '100%',
-                    height: '65px',
-                    position: 'relative',
-                    flexShrink: 0
-                  }}
-                >
-                  <span
-                    className="text"
-                    style={{
-                      display: 'inline',
-                      textAlign: 'left',
-                      lineHeight: '20px',
-                      fontSize: '20px',
-                      fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
-                      fontWeight: 400,
-                      fontStretch: '100%',
-                      color: '#252323',
-                      left: '32px',
-                      top: 'calc(-9.5px + 50%)',
-                      width: 'max-content',
-                      position: 'absolute'
-                    }}
-                  >
-                    Is my payment protected?
-                  </span>
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      top: 'calc(-15.5px + 50%)',
-                      right: '32px',
-                      aspectRatio: 1,
-                      width: 'auto',
-                      height: '32px',
-                      position: 'absolute'
-                    }}
-                  >
-                    <svg
-                      width="15.416000366210938"
-                      height="9.121999740600586"
-                      viewBox="0 0 15.416000366210938 9.121999740600586"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      preserveAspectRatio="none"
-                      style={{
-                        left: '25.9%',
-                        top: '35.3%',
-                        right: '25.9%',
-                        bottom: '36.2%',
-                        width: '48.2%',
-                        height: '28.5%',
-                        position: 'absolute'
-                      }}
-                    >
-                      {' '}
-                      <path
-                        d="M7.708 9.122L15.416 1.416 14.002 0 7.708 6.294 1.416 0 0 1.416 7.708 9.122Z"
-                        style={{ fillRule: 'evenodd', fill: '#d3a014' }}
-                      />{' '}
-                    </svg>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    borderWidth: '0.5px',
-                    borderStyle: 'solid',
-                    borderColor: '#d3a014',
-                    borderRadius: '10px',
-                    backgroundColor: '#fff',
-                    overflow: 'hidden',
-                    width: '100%',
-                    height: '65px',
-                    position: 'relative',
-                    flexShrink: 0
-                  }}
-                >
-                  <span
-                    className="text"
-                    style={{
-                      display: 'inline',
-                      textAlign: 'left',
-                      lineHeight: '20px',
-                      fontSize: '20px',
-                      fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
-                      fontWeight: 400,
-                      fontStretch: '100%',
-                      color: '#252323',
-                      left: '32px',
-                      top: 'calc(-9.5px + 50%)',
-                      width: 'max-content',
-                      position: 'absolute'
-                    }}
-                  >
-                    How does the location first discovery work?
-                  </span>
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      top: 'calc(-15.5px + 50%)',
-                      right: '32px',
-                      aspectRatio: 1,
-                      width: 'auto',
-                      height: '32px',
-                      position: 'absolute'
-                    }}
-                  >
-                    <svg
-                      width="15.416000366210938"
-                      height="9.121999740600586"
-                      viewBox="0 0 15.416000366210938 9.121999740600586"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      preserveAspectRatio="none"
-                      style={{
-                        left: '25.9%',
-                        top: '35.3%',
-                        right: '25.9%',
-                        bottom: '36.2%',
-                        width: '48.2%',
-                        height: '28.5%',
-                        position: 'absolute'
-                      }}
-                    >
-                      {' '}
-                      <path
-                        d="M7.708 9.122L15.416 1.416 14.002 0 7.708 6.294 1.416 0 0 1.416 7.708 9.122Z"
-                        style={{ fillRule: 'evenodd', fill: '#d3a014' }}
-                      />{' '}
-                    </svg>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    borderWidth: '0.5px',
-                    borderStyle: 'solid',
-                    borderColor: '#d3a014',
-                    borderRadius: '10px',
-                    backgroundColor: '#fff',
-                    overflow: 'hidden',
-                    width: '100%',
-                    height: '65px',
-                    position: 'relative',
-                    flexShrink: 0
-                  }}
-                >
-                  <span
-                    className="text"
-                    style={{
-                      display: 'inline',
-                      textAlign: 'left',
-                      lineHeight: '20px',
-                      fontSize: '20px',
-                      fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
-                      fontWeight: 400,
-                      fontStretch: '100%',
-                      color: '#252323',
-                      left: '32px',
-                      top: 'calc(-9.5px + 50%)',
-                      width: 'max-content',
-                      position: 'absolute'
-                    }}
-                  >
-                    Can i sell to both restaurants and households?{' '}
-                  </span>
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      top: 'calc(-15.5px + 50%)',
-                      right: '32px',
-                      aspectRatio: 1,
-                      width: 'auto',
-                      height: '32px',
-                      position: 'absolute'
-                    }}
-                  >
-                    <svg
-                      width="15.416000366210938"
-                      height="9.121999740600586"
-                      viewBox="0 0 15.416000366210938 9.121999740600586"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      preserveAspectRatio="none"
-                      style={{
-                        left: '25.9%',
-                        top: '35.3%',
-                        right: '25.9%',
-                        bottom: '36.2%',
-                        width: '48.2%',
-                        height: '28.5%',
-                        position: 'absolute'
-                      }}
-                    >
-                      {' '}
-                      <path
-                        d="M7.708 9.122L15.416 1.416 14.002 0 7.708 6.294 1.416 0 0 1.416 7.708 9.122Z"
-                        style={{ fillRule: 'evenodd', fill: '#d3a014' }}
-                      />{' '}
-                    </svg>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    borderWidth: '0.5px',
-                    borderStyle: 'solid',
-                    borderColor: '#d3a014',
-                    borderRadius: '10px',
-                    backgroundColor: '#fff',
-                    overflow: 'hidden',
-                    width: '100%',
-                    height: '65px',
-                    position: 'relative',
-                    flexShrink: 0
-                  }}
-                >
-                  <span
-                    className="text"
-                    style={{
-                      display: 'inline',
-                      textAlign: 'left',
-                      lineHeight: '20px',
-                      fontSize: '20px',
-                      fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif',
-                      fontWeight: 400,
-                      fontStretch: '100%',
-                      color: '#252323',
-                      left: '32px',
-                      top: 'calc(-9.5px + 50%)',
-                      width: 'max-content',
-                      position: 'absolute'
-                    }}
-                  >
-                    What if there's a dispute?
-                  </span>
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      top: 'calc(-15.5px + 50%)',
-                      right: '32px',
-                      aspectRatio: 1,
-                      width: 'auto',
-                      height: '32px',
-                      position: 'absolute'
-                    }}
-                  >
-                    <svg
-                      width="15.416000366210938"
-                      height="9.121999740600586"
-                      viewBox="0 0 15.416000366210938 9.121999740600586"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      preserveAspectRatio="none"
-                      style={{
-                        left: '25.9%',
-                        top: '35.3%',
-                        right: '25.9%',
-                        bottom: '36.2%',
-                        width: '48.2%',
-                        height: '28.5%',
-                        position: 'absolute'
-                      }}
-                    >
-                      {' '}
-                      <path
-                        d="M7.708 9.122L15.416 1.416 14.002 0 7.708 6.294 1.416 0 0 1.416 7.708 9.122Z"
-                        style={{ fillRule: 'evenodd', fill: '#d3a014' }}
-                      />{' '}
-                    </svg>
-                  </div>
-                </div>
+                <FAQItem
+                  question="When is Korè launching?"
+                  answer="Korè is launching soon with a rolling pilot across key West African markets. Join the waitlist for priority access and launch updates."
+                />
+                <FAQItem
+                  question="How much does it cost to use Korè?"
+                  answer="Early access is free. Korè uses transparent transaction fees instead of hidden subscriptions, so you only pay when you transact."
+                />
+                <FAQItem
+                  question="How do I know the produce is actually fresh?"
+                  answer="Every listing includes freshness information, timestamps, and supplier ratings to help you make informed purchasing decisions."
+                />
+                <FAQItem
+                  question="What if I want to buy small quantities?"
+                  answer="Korè supports both bulk and small-quantity purchases by matching buyers with nearby sellers who can fulfill orders efficiently."
+                />
+                <FAQItem
+                  question="Is my payment protected?"
+                  answer="Yes. Payments are secured through our escrow system and released only after successful delivery confirmation."
+                />
+                <FAQItem
+                  question="How does the location-first discovery work?"
+                  answer="Korè prioritizes nearby suppliers first, helping buyers receive fresher produce with faster and cheaper deliveries."
+                />
+                <FAQItem
+                  question="Can I sell to both restaurants and households?"
+                  answer="Absolutely. Sellers can serve restaurants, households, retailers, and other buyers through the same marketplace."
+                />
+                <FAQItem
+                  question="What if there's a dispute?"
+                  answer="Our support team reviews disputes fairly using transaction records and marketplace policies to protect both buyers and sellers."
+                />
               </div>
             </div>
-            {/* @component:end name="FAQSection" */}
             {/* @component:start name="StillHaveQuestionsSection" */}
             <div
               style={{
@@ -10373,6 +9990,8 @@ export default function KoreLandingPage() {
                       <img
                         src="images/2bce644656d560355e95869c9cc42d15ec927be5.png"
                         alt="Version 1.1Artboard 27@4x 4"
+                        loading="lazy"
+                        decoding="async"
                         style={{
                           inset: 0,
                           width: '100%',

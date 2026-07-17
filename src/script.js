@@ -735,6 +735,7 @@
 
     /** Highlights the nav link whose section is currently in view. */
     setupActiveNavTracking(navMap) {
+      if (window.innerWidth < 900) return // skip on mobile to prevent scroll freezes
       const entries = Object.entries(navMap).filter(
         ([, marker]) => marker !== 'bottom'
       )
@@ -838,136 +839,12 @@
     }
   }
 
-  // ==========================================================================
-  // SCROLL REVEAL ANIMATIONS (staggered, one-shot)
-  // ==========================================================================
+  // ScrollAnimations removed — React now handles reveal via CSS and
+  // IntersectionObserver per-component. The global .korre-reveal class
+  // is kept for backward CSS compatibility but no longer applied in bulk.
 
-  class ScrollAnimations {
-    constructor() {
-      if (prefersReducedMotion) return // respect user preference — skip entirely
-      this.init()
-    }
-
-    init() {
-      const candidates = document.querySelectorAll(
-        '.text, [style*="display: flex"], [style*="display:flex"]'
-      )
-
-      // Group elements by their parent so siblings stagger together rather
-      // than every single text node animating independently (which reads
-      // as noisy rather than orchestrated).
-      const groups = new Map()
-      candidates.forEach((el) => {
-        if (
-          !el.parentElement ||
-          el.parentElement.classList.contains('page-content')
-        )
-          return
-        const parent = el.parentElement
-        if (!groups.has(parent)) groups.set(parent, [])
-        groups.get(parent).push(el)
-      })
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return
-            entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
-          })
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-      )
-
-      groups.forEach((elements) => {
-        elements.forEach((el, i) => {
-          el.classList.add('korre-reveal')
-          el.style.transitionDelay = `${Math.min(i * 60, 240)}ms`
-          observer.observe(el)
-        })
-      })
-    }
-  }
-
-  // ==========================================================================
-  // STAT COUNTERS (count up from 0 the first time a stat scrolls into view)
-  // ==========================================================================
-
-  class StatCounters {
-    constructor() {
-      if (prefersReducedMotion) return
-      this.stats = this.collectStats()
-      if (!this.stats.length) return
-      this.observe()
-    }
-
-    /** A "stat" is short text that's essentially a number — optionally with
-     *  a leading sign or trailing unit, e.g. "10,000+", "98%", "4.9★" — set
-     *  in a large display size (the classic hero-metric pattern). */
-    collectStats() {
-      const NUMERIC_PATTERN = /^([+-]?)([\d.,]+)\s*([^\d\s]*)$/
-      return Array.from(document.querySelectorAll('.text'))
-        .map((el) => {
-          const raw = el.textContent.trim()
-          const match = raw.match(NUMERIC_PATTERN)
-          if (!match) return null
-
-          const fontSize = parseFloat(window.getComputedStyle(el).fontSize)
-          if (!fontSize || fontSize < 32) return null // only hero-scale numerals
-
-          const [, sign, numberPart, suffix] = match
-          const target = parseFloat(numberPart.replace(/,/g, ''))
-          if (Number.isNaN(target)) return null
-
-          const decimals = (numberPart.split('.')[1] || '').length
-          return { el, target, sign, suffix, decimals }
-        })
-        .filter(Boolean)
-    }
-
-    observe() {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return
-            const stat = this.stats.find((s) => s.el === entry.target)
-            if (stat) this.animate(stat)
-            observer.unobserve(entry.target)
-          })
-        },
-        { threshold: 0.6 }
-      )
-
-      this.stats.forEach((s) => {
-        s.el.classList.add('korre-stat')
-        observer.observe(s.el)
-      })
-    }
-
-    animate(stat, duration = 1400) {
-      const { el, target, sign, suffix, decimals } = stat
-      const start = performance.now()
-      el.classList.add('is-counting')
-
-      const format = (value) =>
-        `${sign}${value.toLocaleString(undefined, {
-          minimumFractionDigits: decimals,
-          maximumFractionDigits: decimals
-        })}${suffix}`
-
-      const tick = (now) => {
-        const progress = clamp((now - start) / duration, 0, 1)
-        const eased = 1 - Math.pow(1 - progress, 3) // ease-out cubic
-        el.textContent = format(target * eased)
-        if (progress < 1) {
-          requestAnimationFrame(tick)
-        } else {
-          el.textContent = format(target) // land exactly on the real value
-        }
-      }
-      requestAnimationFrame(tick)
-    }
-  }
+  // StatCounters removed — replaced by useCountUp React hook which fires
+  // a single clean rAF loop only when each stat element enters the viewport.
 
   // ==========================================================================
   // FORM INTERACTIONS
@@ -1248,78 +1125,10 @@
     }
   }
 
-  // ==========================================================================
-  // PARALLAX (rAF-throttled, reduced-motion + touch/narrow-viewport aware)
-  // ==========================================================================
-
-  class ParallaxEffect {
-    constructor() {
-      if (prefersReducedMotion) return
-      this.elements = Array.from(
-        document.querySelectorAll('[style*="background-image"]')
-      )
-      if (!this.elements.length) return
-
-      this.elements.forEach((el) => {
-        el.style.willChange = 'background-position'
-      })
-
-      // A subtle desktop flourish that's barely perceptible while
-      // swipe-scrolling on a phone, but still costs a scroll listener and
-      // reflow there — so it's switched off on coarse-pointer devices and
-      // narrow/tablet-and-below viewports, and re-checked on resize so it
-      // reacts correctly to rotation or a resized window.
-      this.coarseQuery = window.matchMedia('(pointer: coarse)')
-      this.onScroll = rafThrottle(() => this.update())
-
-      const recheck = () => this.bind()
-      if (this.coarseQuery.addEventListener) {
-        this.coarseQuery.addEventListener('change', recheck)
-      } else {
-        this.coarseQuery.addListener(recheck) // older Safari fallback
-      }
-      window.addEventListener('resize', debounce(recheck, 200))
-
-      this.bind()
-    }
-
-    shouldRun() {
-      return !this.coarseQuery.matches && window.innerWidth > 768
-    }
-
-    bind() {
-      window.removeEventListener('scroll', this.onScroll)
-      if (this.shouldRun()) {
-        window.addEventListener('scroll', this.onScroll, { passive: true })
-        this.update()
-      } else {
-        // Reset to the natural position rather than leaving elements
-        // parked at whatever offset they had when parallax switched off.
-        this.elements.forEach((element) => {
-          element.style.backgroundPosition = ''
-        })
-      }
-    }
-
-    update() {
-      const scrollTop = window.pageYOffset
-      const viewportHeight = window.innerHeight
-
-      this.elements.forEach((element) => {
-        const rect = element.getBoundingClientRect()
-        const elementTop = rect.top + scrollTop
-        const elementHeight = rect.height
-
-        if (
-          scrollTop + viewportHeight > elementTop &&
-          scrollTop < elementTop + elementHeight
-        ) {
-          const yOffset = (scrollTop - elementTop) * 0.35
-          element.style.backgroundPosition = `center ${yOffset}px`
-        }
-      })
-    }
-  }
+  // ParallaxEffect removed — getBoundingClientRect() on every scroll tick
+  // caused layout thrashing and scroll jank especially on mobile. The visual
+  // effect was minimal (barely perceptible during swipe scrolling) and was
+  // already disabled on coarse-pointer devices anyway.
 
   // ==========================================================================
   // KEYBOARD NAVIGATION (guarded — no more throwing on missing instance)
@@ -1356,15 +1165,15 @@
   // ==========================================================================
 
   function init() {
-    const carouselRoot = document.querySelector('.hero-carousel')
-    const carousel = carouselRoot ? new HeroCarousel(carouselRoot) : null
+    // HeroCarousel: React now owns it — skip script.js carousel init.
+    const carousel = null
 
     new ButtonInteractions()
-    new ScrollAnimations()
-    new StatCounters()
+    // ScrollAnimations: removed (replaced by CSS + per-component React hooks)
+    // StatCounters: removed (replaced by useCountUp React hook)
     new FormInteractions()
-    new FAQInteractions()
-    new ParallaxEffect()
+    // FAQInteractions: React now owns the FAQ accordion — skip.
+    // ParallaxEffect: removed (caused scroll layout thrashing)
     setupKeyboardNavigation(() => carousel)
 
     // Exposed for debugging and React integration

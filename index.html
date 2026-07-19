@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -49,7 +50,7 @@
          ─────────────────────────────────────────────────────────────────── -->
 
     <title>
-      Korè — Nigeria's Agricultural Marketplace | Farm to Buyer, No Middlemen
+      Korè - Nigeria's Agricultural Marketplace | Farm to Buyer
     </title>
 
     <meta
@@ -65,7 +66,7 @@
 
     <!-- Author and ownership -->
     <meta name="author" content="IKORE LABS LTD" />
-    <meta name="copyright" content="IKORE LABS LTD — RC 9614851" />
+    <meta name="copyright" content="IKORE LABS LTD (RC 9614851)" />
 
     <!-- Robots — tells search engines how to index this page -->
     <meta
@@ -92,11 +93,11 @@
 
     <meta
       property="og:title"
-      content="Korè — Nigeria's Agricultural Marketplace"
+      content="Korè - Nigeria's Agricultural Marketplace"
     />
     <meta
       property="og:description"
-      content="Farm to buyer. No middlemen. Korè connects Nigerian farmers, wholesalers, and traders directly with buyers — with verified sellers, escrow payments, and real-time freshness labelling."
+      content="Farm to buyer. No middlemen. Korè connects Nigerian farmers, wholesalers, and traders directly with buyers, featuring verified sellers, escrow payments, and real-time freshness labelling."
     />
 
     <!--
@@ -110,7 +111,7 @@
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Korè — Nigeria's Agricultural Marketplace. Farm to buyer, no middlemen."
+      content="Korè - Nigeria's Agricultural Marketplace. Farm to buyer, no middlemen."
     />
     <meta property="og:image:type" content="image/jpeg" />
 
@@ -124,7 +125,7 @@
     <meta name="twitter:creator" content="@korenig" />
     <meta
       name="twitter:title"
-      content="Korè — Nigeria's Agricultural Marketplace"
+      content="Korè - Nigeria's Agricultural Marketplace"
     />
     <meta
       name="twitter:description"
@@ -134,7 +135,7 @@
     <meta name="twitter:image" content="https://kore.ng/og-image.jpg" />
     <meta
       name="twitter:image:alt"
-      content="Korè — Nigeria's Agricultural Marketplace"
+      content="Korè - Nigeria's Agricultural Marketplace"
     />
 
     <!-- ═══════════════════════════════════════════════════════════════════
@@ -204,7 +205,7 @@
             "@id": "https://kore.ng/#website",
             "url": "https://kore.ng",
             "name": "Korè",
-            "description": "Nigeria's agricultural marketplace — farm to buyer, no middlemen",
+            "description": "Nigeria's agricultural marketplace: farm to buyer, no middlemen",
             "publisher": {
               "@id": "https://kore.ng/#organization"
             },
@@ -222,7 +223,7 @@
             "@type": "WebPage",
             "@id": "https://kore.ng/#webpage",
             "url": "https://kore.ng",
-            "name": "Korè — Nigeria's Agricultural Marketplace | Farm to Buyer, No Middlemen",
+            "name": "Korè - Nigeria's Agricultural Marketplace | Farm to Buyer, No Middlemen",
             "isPartOf": {
               "@id": "https://kore.ng/#website"
             },
@@ -252,7 +253,7 @@
             "@id": "https://kore.ng/#business",
             "name": "Korè",
             "url": "https://kore.ng",
-            "description": "Nigeria's agricultural marketplace connecting farmers, wholesalers, traders, and buyers directly — no middlemen.",
+            "description": "Nigeria's agricultural marketplace connecting farmers, wholesalers, traders, and buyers directly with no middlemen.",
             "areaServed": {
               "@type": "Country",
               "name": "Nigeria"
@@ -318,6 +319,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════
          FONTS
          ─────────────────────────────────────────────────────────────────── -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
       /* cyrillic-ext */
       @font-face {
@@ -542,142 +544,6 @@
 
       .page-content {
         transform-origin: top left;
-      }
-
-      /* ─────────────────────────────────────────────────────────────────
-   HERO SECTION — fluid sizing so it scales down instead of
-   overflowing horizontally on small screens
-   ───────────────────────────────────────────────────────────────── */
-
-      .hero-section {
-        width: 100%;
-        height: 870px;
-        position: relative;
-        flex-shrink: 0;
-      }
-
-      .hero-carousel {
-        width: 100%;
-        height: 704px;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .hero-carousel-track {
-        display: flex;
-        height: 100%;
-        transition: transform 0.6s ease;
-        will-change: transform;
-      }
-
-      .hero-slide {
-        width: 100%;
-        min-width: 100%;
-        height: 704px;
-        flex-shrink: 0;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero-features-bar {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 166px;
-        background-color: #194332;
-        overflow: hidden;
-        z-index: 10;
-      }
-
-      .hero-carousel-dots {
-        position: absolute;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 10px;
-        z-index: 20;
-      }
-
-      .hero-carousel-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        background-color: rgba(255, 255, 255, 0.4);
-        transition:
-          background-color 0.3s ease,
-          transform 0.3s ease;
-      }
-
-      .hero-carousel-dot.is-active {
-        background-color: #d3a014;
-        transform: scale(1.15);
-      }
-
-      /* ─────────────────────────────────────────────────────────────────
-   RESPONSIVE BREAKPOINTS
-   Tablet: ≤1024px · Mobile: ≤768px · Small phones: ≤480px
-   The features bar switches from a horizontal row to a scrollable
-   / stacked layout on small screens since 166px isn't enough height
-   for wrapped 3–4 column content at narrow widths — adjust the
-   height values below to match your actual feature-bar content.
-   ───────────────────────────────────────────────────────────────── */
-
-      @media (max-width: 1024px) {
-        .hero-section {
-          height: 760px;
-        }
-        .hero-carousel,
-        .hero-slide {
-          height: 600px;
-        }
-        .hero-features-bar {
-          height: 150px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .hero-section {
-          height: auto;
-          min-height: 620px;
-        }
-        .hero-carousel,
-        .hero-slide {
-          height: 480px;
-        }
-        .hero-features-bar {
-          position: static;
-          height: auto;
-          min-height: 166px;
-          padding: 16px 12px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 12px;
-        }
-        .hero-carousel-dots {
-          bottom: 16px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .hero-carousel,
-        .hero-slide {
-          height: 380px;
-        }
-        .hero-features-bar {
-          flex-direction: column;
-          align-items: center;
-          padding: 14px 10px;
-        }
-        .hero-carousel-dot {
-          width: 8px;
-          height: 8px;
-        }
       }
     </style>
   </head>

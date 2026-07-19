@@ -1,0 +1,218 @@
+/* ═══ STORY SECTION STYLES ═════════════════════════════════════ */
+.story {
+  background: var(--bg);
+}
+
+.story__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 95px;
+}
+
+.story__pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 77px;
+  align-items: center;
+}
+
+.story__pair--reverse {
+  direction: rtl;
+}
+
+.story__pair--reverse > * {
+  direction: ltr;
+}
+
+.story__image {
+  -webkit-font-smoothing: auto;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 30px;
+  background-image: url('/images/story-card1.jpeg');
+  background-blend-mode: normal;
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+  width: 468px;
+  height: 529px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.story__image--kofi {
+  background-image: url('/images/story-card2.jpeg');
+}
+
+.story__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  align-items: start;
+  justify-content: flex-start;
+  width: 659px;
+  max-width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.story__text-group {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  align-items: start;
+  justify-content: flex-start;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.story__title {
+  display: inline;
+  text-align: left;
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 700;
+  font-stretch: 100%;
+  color: rgb(37, 35, 35);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  line-height: 1.23;
+}
+
+.story__body {
+  display: inline;
+  text-align: left;
+  font-size: 24px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 300;
+  font-stretch: 100%;
+  color: rgb(123, 111, 101);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+
+.story__stat {
+  display: flex;
+  flex-direction: row;
+  column-gap: 24px;
+  align-items: center;
+  justify-content: flex-start;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.story__stat-number {
+  display: inline;
+  text-align: left;
+  font-size: 64px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 300;
+  font-stretch: 100%;
+  color: rgb(211, 160, 20);
+  width: max-content;
+  position: relative;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.story__stat-labels {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+  align-items: start;
+  justify-content: flex-start;
+  width: 240px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.story__stat-label-bold {
+  display: inline;
+  text-align: left;
+  font-size: 24px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 600;
+  font-stretch: 100%;
+  color: rgb(37, 35, 35);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.story__stat-label-light {
+  display: inline;
+  text-align: left;
+  font-size: 20px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 300;
+  font-stretch: 100%;
+  color: rgb(123, 111, 101);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.story__stat-labels--kofi {
+  width: max-content;
+}
+
+.story__stat-label-bold--kofi {
+  width: max-content;
+  white-space: nowrap;
+}
+
+.story__stat-label-light--kofi {
+  width: max-content;
+  white-space: nowrap;
+}
+
+/* Responsive Story overrides */
+@media (max-width: 1240px) {
+  .story__pair {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .story__content {
+    width: 100%;
+  }
+  .story__pair--reverse {
+    direction: ltr;
+  }
+  .story__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 468 / 529;
+  }
+  .story__body {
+    font-size: 18px;
+  }
+  .story__stat-number {
+    font-size: 48px;
+  }
+  .story__stat-label-bold {
+    font-size: 18px;
+  }
+  .story__stat-label-light {
+    font-size: 16px;
+  }
+  .story__stat-labels {
+    width: auto;
+  }
+  .story__stat-labels--kofi {
+    width: auto;
+  }
+  .story__stat-label-bold--kofi {
+    width: 100%;
+    white-space: normal;
+  }
+  .story__stat-label-light--kofi {
+    width: 100%;
+    white-space: normal;
+  }
+}

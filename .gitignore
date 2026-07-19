@@ -31,3 +31,7 @@ next-env.d.ts
 .env.local
 .env.*
 
+# Repository Summary Documentation
+repo_summary.md
+
+

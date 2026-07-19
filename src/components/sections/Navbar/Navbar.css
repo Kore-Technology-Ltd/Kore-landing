@@ -1,0 +1,360 @@
+/* ============================================================================
+   KORÈ NAVBAR COMPANION STYLES
+   ============================================================================ */
+
+/* Mobile overlay background */
+.kore-mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  z-index: 1999;
+  transition: background 0.32s;
+  pointer-events: none;
+}
+
+.kore-mobile-overlay.is-open {
+  display: block;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+
+/* Mobile sidebar drawer */
+.kore-mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100dvh;
+  background: #fff;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 32px rgba(11, 28, 48, 0.18);
+  transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.kore-mobile-sidebar.is-open {
+  right: 0;
+}
+
+.kore-mobile-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(25, 67, 50, 0.1);
+}
+
+.kore-mobile-close {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kore-mobile-close:hover {
+  background: rgba(25, 67, 50, 0.06);
+}
+
+.kore-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  flex: 1;
+}
+
+.kore-mobile-nav-link {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  color: #064e3b;
+  cursor: pointer;
+  letter-spacing: -0.3px;
+  transition:
+    background 0.18s,
+    color 0.18s;
+  border-radius: 0;
+  width: 100%;
+}
+
+.kore-mobile-nav-link:hover {
+  background: rgba(25, 67, 50, 0.06);
+  color: #194332;
+}
+
+.kore-mobile-sidebar-cta {
+  padding: 20px 24px 32px;
+  border-top: 1px solid rgba(25, 67, 50, 0.1);
+}
+
+.kore-mobile-join-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: #d3a014;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+  box-shadow: 0 2px 8px rgba(211, 160, 20, 0.3);
+}
+
+.kore-mobile-join-btn:hover {
+  background: #b8880f;
+  transform: translateY(-1px);
+}
+
+/* Hamburger button — shown only on mobile via CSS rules */
+.kore-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover/Active Underline Animation on span text element */
+.korre-nav-link {
+  position: relative;
+  display: inline-flex;
+  text-align: left;
+  line-height: 20px;
+  font-size: 16px;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 300;
+  font-stretch: 100%;
+  letter-spacing: -0.3px;
+  color: rgb(6, 78, 59);
+  width: max-content;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.korre-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; /* Sits exactly 2px below text baseline */
+  left: 0;
+  width: 100%;
+  height: 1px; /* Thinner (1px) */
+  background-color: #064e3b; /* Matches text color (#064e3b) */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.korre-nav-link:hover::after,
+.korre-nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Mobile responsive drawer overrides when media queries trigger */
+@media (max-width: 899px) {
+  .kore-desktop-nav,
+  .kore-desktop-actions {
+    display: none !important;
+  }
+  .kore-hamburger {
+    display: flex !important;
+  }
+}
+
+/* Desktop Navbar & Container Layouts */
+.kore-navbar-container {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  row-gap: 0px;
+  align-items: start;
+  justify-content: flex-start;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: rgba(11, 28, 48, 0.08) 0px 4px 24px;
+}
+
+.kore-navbar-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  padding: 16px 32px;
+}
+
+.kore-navbar-logo-placeholder {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0px;
+  align-items: start;
+  justify-content: flex-start;
+  width: 141.9px;
+  height: 28px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.kore-desktop-nav {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.kore-desktop-nav-item {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.kore-desktop-actions {
+  display: flex;
+  flex-direction: row;
+  column-gap: 19.4px;
+  align-items: center;
+  justify-content: flex-start;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+  padding: 0px 3.4px 0px 0px;
+}
+
+.kore-search-wrapper {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+  padding: 0px 8px 0px 0px;
+}
+
+.kore-search-icon-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0px;
+  align-items: center;
+  justify-content: flex-start;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.kore-desktop-join-btn {
+  border-radius: 8px;
+  background-color: rgb(211, 160, 20);
+  border: 1px solid rgb(211, 160, 20);
+  display: flex;
+  flex-direction: column;
+  row-gap: 0px;
+  align-items: center;
+  justify-content: center;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+  padding: 9px 32px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px;
+  transition:
+    background-color 0.25s,
+    border-color 0.25s,
+    transform 0.15s;
+}
+
+.kore-desktop-join-btn:hover {
+  background-color: rgb(25, 67, 50);
+  border-color: rgb(25, 67, 50);
+  transform: translateY(-1px);
+}
+
+.kore-desktop-join-btn:active {
+  transform: translateY(0);
+}
+
+.kore-desktop-join-btn-text {
+  display: inline;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 600;
+  font-stretch: 100%;
+  color: rgb(255, 255, 255);
+  width: max-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Mobile Sidebar Logo styling */
+.kore-mobile-logo-wrapper {
+  overflow: hidden;
+  aspect-ratio: 2.51;
+  width: auto;
+  height: 150px;
+  position: relative;
+}
+
+.kore-mobile-logo-wrapper img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: contain;
+}
+
+/* Logo placement on desktop */
+.kore-navbar-logo {
+  overflow: hidden;
+  left: 0px;
+  top: calc(50% - 33px);
+  aspect-ratio: 2.51 / 1;
+  width: auto;
+  height: 66px;
+  position: absolute;
+}
+
+.kore-navbar-logo img {
+  inset: 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform: translate(0px, 6px) scale(1, 2.51);
+}

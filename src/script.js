@@ -790,12 +790,12 @@
       }
 
       if (marker === 'privacy') {
-        window.location.href = 'privacy.html'
+        window.location.href = '/privacy'
         return
       }
 
       if (marker === 'terms') {
-        window.location.href = 'terms.html'
+        window.location.href = '/terms'
         return
       }
 
@@ -856,13 +856,6 @@
     }
 
     init() {
-      // document.querySelectorAll('form').forEach((form) => {
-      //   form.addEventListener('submit', (e) => {
-      //     e.preventDefault();
-      //     this.handleFormSubmit(form);
-      //   });
-      // });
-
       document
         .querySelectorAll('input[type="email"], input[type="text"], select')
         .forEach((input) => {
@@ -963,172 +956,6 @@
       }, 500)
     }
   }
-
-  // ==========================================================================
-  // FAQ INTERACTIONS
-  // ==========================================================================
-
-  class FAQInteractions {
-    constructor() {
-      this.openPanels = new Set()
-      this.init()
-
-      window.addEventListener(
-        'resize',
-        debounce(() => this.recomputeOpenPanels(), 150)
-      )
-    }
-
-    init() {
-      const heading = findByText('.text', 'Frequently Asked Questions')[0]
-      if (!heading) return
-
-      const faqSection = heading.closest('div')?.nextElementSibling
-      if (!faqSection) return
-
-      const cards = Array.from(
-        faqSection.querySelectorAll(
-          'div[style*="height: 65px"][style*="border-style: solid"]'
-        )
-      ).filter(
-        (card) => card.querySelector('.text') && card.querySelector('svg')
-      )
-
-      cards.forEach((card, index) => {
-        if (card.dataset.faqBound) return
-
-        card.dataset.faqBound = 'true'
-        card.classList.add('korre-faq-card')
-        card.style.position = 'relative'
-        card.style.height = 'auto'
-        card.style.minHeight = '65px'
-
-        const header = document.createElement('div')
-        header.className = 'korre-faq-header'
-        header.style.position = 'relative'
-        header.style.cursor = 'pointer'
-        header.setAttribute('role', 'button')
-        header.setAttribute('tabindex', '0')
-        header.setAttribute('aria-expanded', 'false')
-
-        while (card.firstChild) {
-          header.appendChild(card.firstChild)
-        }
-        card.appendChild(header)
-
-        const question = header.querySelector('.text')?.textContent.trim() ?? ''
-
-        const answer = document.createElement('div')
-        answer.className = 'korre-faq-answer'
-        answer.id = `faq-answer-${index}`
-        answer.setAttribute('role', 'region')
-        answer.setAttribute('aria-hidden', 'true')
-        answer.innerHTML = `${this.answerFor(question)}`
-
-        card.appendChild(answer)
-        header.setAttribute('aria-controls', answer.id)
-        card.setAttribute('aria-expanded', 'false')
-
-        const arrow = header.querySelector('svg')
-        arrow?.classList.add('korre-faq-arrow')
-
-        answer.addEventListener('click', (e) => e.stopPropagation())
-
-        const toggle = () => {
-          const opening = !card.classList.contains('is-open')
-
-          card.classList.toggle('is-open', opening)
-          header.setAttribute('aria-expanded', opening)
-          card.setAttribute('aria-expanded', opening)
-          answer.setAttribute('aria-hidden', !opening)
-
-          this.animate(answer, opening)
-
-          if (opening) {
-            this.openPanels.add(answer)
-
-            setTimeout(() => {
-              card.scrollIntoView({
-                behavior: prefersReducedMotion ? 'auto' : 'smooth',
-                block: 'nearest'
-              })
-            }, 180)
-          } else {
-            this.openPanels.delete(answer)
-          }
-        }
-
-        header.addEventListener('click', toggle)
-        header.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault()
-            toggle()
-          }
-        })
-      })
-    }
-
-    animate(answer, open) {
-      if (open) {
-        answer.style.display = 'block'
-        answer.style.maxHeight = '0px'
-
-        requestAnimationFrame(() => {
-          answer.style.maxHeight = `${answer.scrollHeight}px`
-        })
-      } else {
-        answer.style.maxHeight = `${answer.scrollHeight}px`
-
-        requestAnimationFrame(() => {
-          answer.style.maxHeight = '0px'
-        })
-      }
-    }
-
-    recomputeOpenPanels() {
-      this.openPanels.forEach((answer) => {
-        answer.style.maxHeight = `${answer.scrollHeight}px`
-      })
-    }
-
-    answerFor(question) {
-      const answers = {
-        'when is korè launching?':
-          'Korè is launching soon with a rolling pilot across key West African markets. Join the waitlist for priority access and launch updates.',
-
-        'how much does it cost to use korè?':
-          'Early access is free. Korè uses transparent transaction fees instead of hidden subscriptions, so you only pay when you transact.',
-
-        'how do i know the produce is actually fresh?':
-          'Every listing includes freshness information, timestamps, and supplier ratings to help you make informed purchasing decisions.',
-
-        'what if i want to buy small quantities?':
-          'Korè supports both bulk and small-quantity purchases by matching buyers with nearby sellers who can fulfill orders efficiently.',
-
-        'is my payment protected?':
-          'Yes. Payments are secured through our escrow system and released only after successful delivery confirmation.',
-
-        'how does the location first discovery work?':
-          'Korè prioritizes nearby suppliers first, helping buyers receive fresher produce with faster and cheaper deliveries.',
-
-        'can i sell to both restaurants and households?':
-          'Absolutely. Sellers can serve restaurants, households, retailers, and other buyers through the same marketplace.',
-
-        "what if there's a dispute?":
-          'Our support team reviews disputes fairly using transaction records and marketplace policies to protect both buyers and sellers.'
-      }
-
-      return (
-        answers[normalizeText(question)] ??
-        "We're still preparing the answer for this question. Please check back soon."
-      )
-    }
-  }
-
-  // ParallaxEffect removed — getBoundingClientRect() on every scroll tick
-  // caused layout thrashing and scroll jank especially on mobile. The visual
-  // effect was minimal (barely perceptible during swipe scrolling) and was
-  // already disabled on coarse-pointer devices anyway.
 
   // ==========================================================================
   // KEYBOARD NAVIGATION (guarded — no more throwing on missing instance)

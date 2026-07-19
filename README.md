@@ -11,9 +11,9 @@ Operated by **IKORE LABS LTD** (RC 9614851).
 - **Frontend Framework**: [React 19](https://react.dev/)
 - **Build Tooling**: [Vite 8](https://vite.dev/) (with fast React HMR)
 - **Language**: [TypeScript](https://www.typescript.org/)
-- **Routing**: [React Router DOM 7](https://reactrouter.com/)
+- **Routing**: [React Router DOM 7](https://reactrouter.com/) (using client-side SPA routing and navigation)
 - **Styles**: Vanilla CSS for flexibility and low performance overhead.
-- **Micro-interactions & Motion**: Powered by a custom vanilla JS layer ([src/script.js](file:///home/sam__ayo/dev/kore/Kore-landing/src/script.js)) driving scroll reveals, hero carousels, accordion animation, parallax, and custom notifications.
+- **Micro-interactions**: Powered by a custom vanilla JS layer ([src/script.js](file:///home/sam__ayo/dev/kore/Kore-landing/src/script.js)) driving button ripples, hover scaling, and toast alerts. FAQ accordion and scroll-triggers are handled natively via React states.
 
 ---
 
@@ -28,14 +28,38 @@ Operated by **IKORE LABS LTD** (RC 9614851).
 │   ├── favicon.ico
 │   └── site.webmanifest
 ├── src/
-│   ├── App.css
-│   ├── App.tsx          # App Router & Routes
-│   ├── KoreLandingPage.tsx # Main Waitlist Landing Page
-│   ├── privacy-page.tsx # NDPA 2023 Compliant Privacy Policy
-│   ├── terms-page.tsx   # Platform Terms and Conditions
-│   ├── index.css        # Static companion stylesheet (forms, touch targets)
-│   ├── main.tsx         # Main react entry point
-│   ├── script.js        # Native JS interaction layer (animations, carousel)
+│   ├── assets/
+│   │   └── icons/       # Extracted React SVG component items
+│   ├── components/
+│   │   ├── FAQItem.tsx  # React FAQ Accordion unit
+│   │   ├── StatCounter.tsx # React count-up animation component
+│   │   ├── Layout.tsx   # Top-level route Layout orchestrator (manages scaling contexts)
+│   │   ├── legal/       # Modular terms & privacy contents & stylesheet
+│   │   │   ├── legal.css
+│   │   │   ├── TermsContent.tsx
+│   │   │   └── PrivacyContent.tsx
+│   │   └── sections/    # Modular page layout sections
+│   │       ├── BetterWay/
+│   │       ├── CoreProblem/
+│   │       ├── FAQ/
+│   │       ├── FlowAndWhy/
+│   │       ├── Footer/
+│   │       ├── Hero/
+│   │       ├── HowItWorks/
+│   │       ├── Navbar/
+│   │       ├── Story/
+│   │       ├── Waitlist/
+│   │       ├── WasteCrisis/
+│   │       ├── WhyDifferent/
+│   │       └── WhyKore/
+│   ├── pages/           # Route entry page views
+│   │   ├── Home.tsx     # Homepage entry wrapper
+│   │   ├── Terms.tsx    # Terms and Conditions view (with scrollspy outline)
+│   │   └── Privacy.tsx  # Privacy Policy view (with scrollspy outline)
+│   ├── App.tsx          # Client-side router path setup
+│   ├── index.css        # Global static companion stylesheet (resets, Figma viewports)
+│   ├── main.tsx         # React root mounting node
+│   ├── script.js        # Native JS interaction layer (ripple, hover, alerts)
 │   └── script.d.ts      # TypeScript interfaces for script.js
 ├── tsconfig.json        # TypeScript configuration referencing app and node profiles
 └── vite.config.ts       # Vite config (maps path aliases & injects environment vars)

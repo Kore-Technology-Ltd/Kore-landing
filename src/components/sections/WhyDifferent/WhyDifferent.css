@@ -1,0 +1,342 @@
+.why-different {
+  display: flex;
+  flex-direction: column;
+  row-gap: 95px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  margin: 95px auto 0 auto;
+  box-sizing: border-box;
+}
+
+.why-different__header {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.why-different__title {
+  display: inline;
+  text-align: center;
+  font-size: 48px;
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 700;
+  font-stretch: 100%;
+  color: rgb(37, 35, 35);
+  width: max-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.why-different__subtitle {
+  display: inline;
+  text-align: center;
+  font-size: 24px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 300;
+  font-stretch: 100%;
+  color: rgb(123, 111, 101);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.why-different__grid {
+  width: 1146px;
+  height: 536px;
+  position: relative;
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+.why-different__mockup-wrapper {
+  overflow: hidden;
+  left: 433px;
+  top: 0px;
+  aspect-ratio: 0.52 / 1;
+  width: auto;
+  height: 536px;
+  position: absolute;
+}
+
+.why-different__mockup {
+  inset: 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform: translate(0px, -12.6px) scale(3.39, 1.33);
+}
+
+.why-different__card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  align-items: start;
+  justify-content: flex-start;
+  width: 392px;
+  position: absolute;
+}
+
+.why-different__card--instant {
+  left: calc(50% - 573px);
+  top: calc(50% - 227px);
+  height: 179px;
+}
+
+.why-different__card--escrow {
+  left: calc(50% - 573px);
+  top: calc(50% + 48px);
+  height: 151px;
+}
+
+.why-different__card--pricing {
+  left: calc(50% + 181px);
+  top: calc(50% - 227px);
+  height: 151px;
+}
+
+.why-different__card--flexibility {
+  left: calc(50% + 181px);
+  top: calc(50% + 48px);
+  height: 151px;
+}
+
+.why-different__card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: flex-start;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.why-different__card-header--mirrored {
+  transform: scale(-1, 1);
+}
+
+.why-different__card-header--instant {
+  column-gap: 126px;
+}
+
+.why-different__card-header--escrow {
+  column-gap: 191px;
+}
+
+.why-different__card-header--pricing {
+  column-gap: 205px;
+}
+
+.why-different__card-header--flexibility {
+  column-gap: 61px;
+}
+
+.why-different__icon-container {
+  border-radius: 4000px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 0.98 / 1;
+  width: auto;
+  height: 62px;
+  position: relative;
+  flex-shrink: 0;
+  padding: 5px 5px 4px 4px;
+  overflow: visible;
+}
+
+.why-different__icon-container--mirrored {
+  transform: scale(-1, 1);
+}
+
+.why-different__icon-wrapper {
+  aspect-ratio: 1 / 1;
+  width: auto;
+  height: 32px;
+  position: relative;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.why-different__icon-wrapper--flexibility {
+  height: 40px;
+}
+
+.why-different__svg-instant {
+  inset: 0px 15.6%;
+  width: 68.8%;
+  height: 100%;
+  position: absolute;
+  overflow: visible;
+}
+.why-different__path-instant {
+  fill-rule: nonzero;
+  fill: rgb(211, 160, 20);
+}
+
+.why-different__svg-escrow {
+  inset: 8.3% 16.7%;
+  width: 66.7%;
+  height: 83.3%;
+  position: absolute;
+}
+.why-different__path-escrow {
+  fill-rule: nonzero;
+  fill: rgb(211, 160, 20);
+}
+
+.why-different__svg-pricing {
+  inset: 26% 5.2% 22% 5.3%;
+  width: 89.5%;
+  height: 52%;
+  position: absolute;
+}
+.why-different__path-pricing {
+  fill-rule: evenodd;
+  fill: rgb(211, 160, 20);
+}
+
+.why-different__svg-flexibility {
+  inset: 25% 15.6% 29.2%;
+  width: 68.8%;
+  height: 45.8%;
+  position: absolute;
+}
+.why-different__path-flexibility {
+  fill-rule: evenodd;
+  fill: rgb(211, 160, 20);
+}
+
+.why-different__card-titles {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+  align-items: start;
+  justify-content: flex-start;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.why-different__card-titles--mirrored {
+  transform: scale(-1, 1);
+}
+
+.why-different__card-titles--flexibility {
+  align-items: end;
+}
+
+.why-different__card-title {
+  display: inline;
+  text-align: left;
+  font-size: 24px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 600;
+  font-stretch: 100%;
+  color: rgb(37, 35, 35);
+  width: max-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.why-different__card-subtitle {
+  display: inline;
+  text-align: left;
+  font-size: 20px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 300;
+  font-stretch: 100%;
+  color: rgb(123, 111, 101);
+  width: max-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.why-different__card-body {
+  display: inline;
+  text-align: left;
+  font-size: 20px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 300;
+  font-stretch: 100%;
+  color: rgb(123, 111, 101);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.why-different__card-body--right {
+  text-align: right;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1240px) {
+  .why-different {
+    padding: 60px 24px;
+  }
+
+  .why-different__title {
+    font-size: clamp(32px, 5vw, 48px);
+  }
+
+  .why-different__subtitle {
+    font-size: clamp(18px, 3vw, 24px);
+  }
+
+  .why-different__grid {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    align-items: center;
+  }
+
+  .why-different__card {
+    position: static !important;
+    width: 100%;
+    max-width: 500px;
+    height: auto !important;
+    align-items: center !important;
+  }
+
+  .why-different__card-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px;
+    transform: none !important;
+  }
+
+  .why-different__icon-container {
+    transform: none !important;
+  }
+
+  .why-different__card-titles {
+    align-items: center !important;
+    transform: none !important;
+  }
+
+  .why-different__card-title,
+  .why-different__card-subtitle,
+  .why-different__card-body {
+    text-align: center !important;
+  }
+
+  .why-different__mockup-wrapper {
+    position: static !important;
+    margin: 20px 0;
+    width: 280px;
+    height: 536px;
+  }
+}

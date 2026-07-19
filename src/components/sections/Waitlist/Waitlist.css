@@ -1,0 +1,600 @@
+.waitlist,
+.waitlist * {
+  box-sizing: border-box;
+}
+
+.waitlist {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  width: 100%;
+  margin: 95px auto;
+  padding: 0 24px;
+}
+
+.waitlist__badge-wrapper {
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(211, 160, 20);
+  border-radius: 300px;
+  background-color: rgba(211, 160, 20, 0.1);
+  overflow: hidden;
+  width: 335px;
+  height: 65px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__badge-text {
+  display: inline;
+  text-align: left;
+  line-height: 20px;
+  font-size: 20px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-stretch: 100%;
+  color: rgb(211, 160, 20);
+  left: calc(50% - 92.5px);
+  top: calc(50% - 9.5px);
+  width: max-content;
+  position: absolute;
+}
+
+.waitlist__header {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 819px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__title {
+  display: inline;
+  text-align: center;
+  font-size: 48px;
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 700;
+  font-stretch: 100%;
+  color: rgb(37, 35, 35);
+  width: max-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__subtitle {
+  display: inline;
+  text-align: center;
+  font-size: 24px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 300;
+  font-stretch: 100%;
+  color: rgb(123, 111, 101);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.waitlist__card {
+  border-radius: 20px;
+  background-color: rgb(25, 67, 50);
+  overflow: hidden;
+  width: 906px;
+  height: 732px;
+  position: relative;
+  flex-shrink: 0;
+  border: none;
+}
+
+.waitlist__card-bg {
+  width: calc(100% - 150px);
+  height: 828px;
+  position: absolute;
+  left: 18px;
+  top: -16px;
+  right: 132px;
+  transform-origin: 0px 0px;
+  transform: rotate(-90deg) scale(-1, 1);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.waitlist__form-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  align-items: center;
+  justify-content: flex-start;
+  left: 85px;
+  top: calc(50% - 327px);
+  width: 736px;
+  position: absolute;
+  z-index: 5;
+}
+
+.waitlist__form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  align-items: start;
+  justify-content: flex-start;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  margin: 0px;
+}
+
+.waitlist__row {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 736px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  align-items: start;
+  justify-content: flex-start;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.waitlist__field--half {
+  width: 358px;
+  margin: 0px auto 0px 0px;
+}
+
+.waitlist__field--half + .waitlist__field--half {
+  margin: 0px;
+}
+
+.waitlist__label {
+  display: inline;
+  text-align: left;
+  line-height: 20px;
+  font-size: 24px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 400;
+  font-stretch: 100%;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__input {
+  display: block;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  width: 100%;
+  height: 65px;
+  position: relative;
+  flex-shrink: 0;
+  padding: 0px 32px;
+  line-height: 63px;
+  font-size: 20px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 400;
+  color: rgb(37, 35, 35);
+  outline: none;
+}
+
+.waitlist__select-wrapper {
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  width: 736px;
+  height: 65px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 65px;
+  padding: 0 32px;
+  line-height: 63px;
+  font-size: 20px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 400;
+  color: rgb(123, 111, 101);
+  cursor: pointer;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+.waitlist__select-trigger--selected {
+  color: rgb(37, 35, 35);
+}
+
+.waitlist__select-arrow-container {
+  overflow: hidden;
+  position: absolute;
+  top: calc(50% - 15.5px);
+  right: 32px;
+  aspect-ratio: 1 / 1;
+  width: auto;
+  height: 32px;
+  pointer-events: none;
+  transition: transform 0.25s ease-in-out;
+}
+
+.waitlist__select-arrow-container--open {
+  transform: rotate(180deg);
+}
+
+.waitlist__select-arrow {
+  width: 15.416px;
+  height: 9.122px;
+  inset: 35.3% 25.9% 36.2%;
+  width: 48.2%;
+  height: 28.5%;
+  position: absolute;
+}
+
+/* Modal Popup Dropdown styling */
+.waitlist__dropdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(25, 67, 50, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: waitlistFadeIn 0.2s ease-out;
+}
+
+.waitlist__dropdown-modal {
+  background-color: #ffffff;
+  border-radius: 20px;
+  width: calc(100% - 48px);
+  max-width: 480px;
+  box-shadow: 0px 20px 50px rgba(25, 67, 50, 0.25);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  animation: waitlistSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.waitlist__dropdown-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(25, 67, 50, 0.1);
+  padding-bottom: 16px;
+}
+
+.waitlist__dropdown-modal-title {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #194332;
+}
+
+.waitlist__dropdown-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: rgb(123, 111, 101);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.waitlist__dropdown-modal-close:hover {
+  color: #194332;
+}
+
+.waitlist__dropdown-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 320px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.waitlist__dropdown-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.waitlist__dropdown-options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.waitlist__dropdown-options::-webkit-scrollbar-thumb {
+  background: rgba(25, 67, 50, 0.2);
+  border-radius: 3px;
+}
+
+.waitlist__dropdown-option {
+  padding: 14px 24px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 18px;
+  color: rgb(37, 35, 35);
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+  text-align: left;
+}
+
+.waitlist__dropdown-option:hover {
+  background-color: #eff4ff;
+  color: #194332;
+}
+
+.waitlist__dropdown-option--selected {
+  background-color: #194332;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Animations */
+@keyframes waitlistFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes waitlistSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.waitlist__submit {
+  border-radius: 10px;
+  background-color: rgb(211, 160, 20);
+  border: 1px solid rgb(211, 160, 20);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 736px;
+  min-height: 65px;
+  position: relative;
+  flex-shrink: 0;
+  padding: 9px 32px;
+  cursor: pointer;
+  opacity: 1;
+  transition:
+    background-color 0.25s,
+    border-color 0.25s,
+    opacity 0.2s,
+    transform 0.15s;
+}
+
+.waitlist__submit:hover {
+  background-color: rgb(25, 67, 50);
+  border-color: rgb(25, 67, 50);
+  transform: translateY(-1px);
+}
+
+.waitlist__submit:active {
+  transform: translateY(0);
+}
+
+.waitlist__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.waitlist__submit-text {
+  display: inline;
+  text-align: center;
+  font-size: 20px;
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 400;
+  font-stretch: 100%;
+  color: rgb(255, 255, 255);
+  width: max-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__privacy {
+  display: inline;
+  text-align: center;
+  line-height: 20px;
+  font-size: 20px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 400;
+  font-stretch: 100%;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__social-proof {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 642px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__social-proof-title {
+  display: inline;
+  text-align: center;
+  line-height: 20px;
+  font-size: 20px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-stretch: 100%;
+  color: rgb(123, 111, 101);
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__pills {
+  display: flex;
+  flex-direction: row;
+  column-gap: 24px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__pill {
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(37, 35, 35);
+  border-radius: 300px;
+  background-color: rgb(239, 244, 255);
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: min-content;
+  position: relative;
+  flex-shrink: 0;
+  padding: 10px 24px;
+}
+
+.waitlist__pill-text {
+  display: inline;
+  text-align: left;
+  line-height: 20px;
+  font-size: 20px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-stretch: 100%;
+  color: rgb(37, 35, 35);
+  width: max-content;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.waitlist__input--error::placeholder {
+  color: #ff8882 !important;
+  opacity: 1 !important;
+}
+
+.waitlist__select-trigger--error {
+  color: #ff8882 !important;
+}
+
+/* ─── RESPONSIVE OVERRIDES ─────────────────────────────────── */
+
+@media (max-width: 992px) {
+  .waitlist {
+    gap: 32px;
+  }
+
+  .waitlist__header {
+    width: 100%;
+  }
+
+  .waitlist__title {
+    font-size: clamp(32px, 5vw, 48px);
+  }
+
+  .waitlist__subtitle {
+    font-size: 18px;
+  }
+
+  .waitlist__card {
+    width: 100%;
+    height: auto;
+    padding: 40px 24px;
+  }
+
+  .waitlist__card-bg {
+    display: none;
+  }
+
+  .waitlist__form-wrapper {
+    position: relative;
+    left: auto;
+    top: auto;
+    translate: none;
+    width: 100%;
+    padding: 0;
+  }
+
+  .waitlist__row {
+    flex-direction: column;
+    width: 100%;
+    gap: 32px;
+  }
+
+  .waitlist__field--half {
+    width: 100%;
+    margin: 0;
+  }
+
+  .waitlist__select-wrapper {
+    width: 100%;
+  }
+
+  .waitlist__submit {
+    width: 100%;
+  }
+
+  .waitlist__privacy {
+    font-size: 16px;
+  }
+
+  .waitlist__social-proof {
+    width: 100%;
+  }
+
+  .waitlist__pills {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .waitlist__pill {
+    width: auto;
+  }
+}

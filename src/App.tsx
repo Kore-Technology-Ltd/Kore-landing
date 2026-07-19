@@ -1,15 +1,37 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import KoreLandingPage from './KoreLandingPage'
-import PrivacyPage from './privacy-page'
-import TermsPage from './terms-page'
+import Layout from '@/components/Layout'
+import Home from '@/pages/Home'
+import Privacy from '@/pages/Privacy.tsx'
+import Terms from '@/pages/Terms.tsx'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<KoreLandingPage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        />
+        <Route
+          path="/privacy"
+          element={
+            <Layout>
+              <Privacy />
+            </Layout>
+          }
+        />
+        <Route
+          path="/terms"
+          element={
+            <Layout>
+              <Terms />
+            </Layout>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )

@@ -1,0 +1,175 @@
+.how-kore-works {
+  display: flex;
+  flex-direction: column;
+  row-gap: 48px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  margin: 95px auto 0 auto;
+  width: 100%;
+  max-width: 1440px;
+  box-sizing: border-box;
+}
+
+.how-kore-works__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.how-kore-works__title {
+  color: #252323;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  position: relative;
+  margin: 0;
+}
+
+.how-kore-works__subtitle {
+  color: #7b6f65;
+  text-align: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  position: relative;
+  align-self: stretch;
+  margin: 0;
+}
+
+.how-kore-works__image {
+  flex-shrink: 0;
+  width: 1280px;
+  height: 688px;
+  position: relative;
+  object-fit: cover;
+  aspect-ratio: 1280/688;
+  max-width: 100%;
+}
+
+/* Three Cards Grid Styles */
+.how-kore-works__cards-grid {
+  display: flex;
+  flex-direction: row;
+  column-gap: 94px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  margin-top: 95px;
+  width: 100%;
+}
+
+.how-kore-works__card {
+  border-radius: 30px;
+  flex-shrink: 0;
+  width: 361px;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.25);
+}
+
+.how-kore-works__card--farmers {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(37, 35, 35, 1) 80%),
+    url('/images/how-it-works-step1.jpeg') center / cover no-repeat;
+}
+
+.how-kore-works__card--buyers {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(37, 35, 35, 1) 80%),
+    url('/images/how-it-works-step2.jpeg') center / cover no-repeat;
+}
+
+.how-kore-works__card--society {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(37, 35, 35, 1) 80%),
+    url('/images/how-it-works-step3.jpeg') center / cover no-repeat;
+}
+
+.how-kore-works__card-content {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 32px;
+  box-sizing: border-box;
+  padding: 0 16px;
+}
+
+.how-kore-works__card-text-box {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100%;
+  position: relative;
+}
+
+.how-kore-works__card-title {
+  color: #d3a014;
+  text-align: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 48px;
+  font-weight: 300;
+  position: relative;
+}
+
+.how-kore-works__card-desc {
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  position: relative;
+  align-self: stretch;
+  line-height: 1.4;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1280px) {
+  .how-kore-works {
+    padding: 60px 24px;
+    row-gap: 48px;
+  }
+
+  .how-kore-works__title {
+    font-size: clamp(32px, 5vw, 48px);
+  }
+
+  .how-kore-works__subtitle {
+    font-size: clamp(18px, 3vw, 24px);
+  }
+
+  .how-kore-works__image {
+    width: 100%;
+    height: auto;
+  }
+
+  .how-kore-works__cards-grid {
+    flex-direction: column;
+    row-gap: 40px;
+    margin-top: 60px;
+  }
+
+  .how-kore-works__card {
+    width: 100%;
+    max-width: 361px;
+  }
+}

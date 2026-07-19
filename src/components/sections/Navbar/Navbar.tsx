@@ -276,7 +276,16 @@ export default function Navbar() {
         {/* Responsive, distortion-free logo centered vertically with increased height */}
         <div className="kore-navbar-logo">
           <Link to="/">
-            <img alt="Korè logo" src="/images/kore-logo-dark.png" />
+            <img
+              className="logo-dark"
+              alt="Korè logo"
+              src="/images/kore-logo-dark.png"
+            />
+            <img
+              className="logo-light"
+              alt="Korè logo"
+              src="/images/kore-logo-light.png"
+            />
           </Link>
         </div>
       </header>

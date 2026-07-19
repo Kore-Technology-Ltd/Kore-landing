@@ -1,10 +1,14 @@
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import './BetterWay.css'
 
 export default function BetterWay() {
+  const reveal = useScrollReveal()
+
   return (
     <section
+      ref={reveal.ref}
       id="section-better-way"
-      className="better-way"
+      className={`better-way ${reveal.className}`}
       aria-label="A Better Way"
     >
       <div className="better-way__header">
@@ -12,7 +16,7 @@ export default function BetterWay() {
           What if there was a better way?
         </span>
         <span className="better-way__subtitle">
-          Korè connects Adeyemi directly to Kofi. No middlemen. No spoilage. No
+          Korè connects Ama directly to Kofi. No middlemen. No spoilage. No
           guessing. Real-time discovery based on location. Transparent
           freshness. Escrow-backed trust.
         </span>

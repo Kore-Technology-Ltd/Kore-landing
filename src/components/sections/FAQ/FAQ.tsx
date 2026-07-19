@@ -1,9 +1,11 @@
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import './FAQ.css'
 import FAQItem from '@/components/FAQItem'
 import { useState, useCallback } from 'react'
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const reveal = useScrollReveal()
 
   const handleToggle = useCallback((index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index))
@@ -11,7 +13,8 @@ export default function FAQ() {
 
   return (
     <section
-      className="faq"
+      ref={reveal.ref}
+      className={`faq ${reveal.className}`}
       id="section-faq"
       aria-label="Frequently asked questions"
     >

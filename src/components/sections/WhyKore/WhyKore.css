@@ -232,18 +232,14 @@
 /* Responsive comparison overrides */
 @media (max-width: 1240px) {
   .comparison-section {
-    width: 100%;
-    padding: 0 24px;
-    box-sizing: border-box;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .comparison-section::-webkit-scrollbar {
-    display: none;
+    width: 100% !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    margin-top: 20px !important;
   }
   .comparison-grid {
-    margin: 40px auto 0 auto;
-    width: 1205px;
+    width: 1205px !important;
+    height: 476px !important;
   }
 }

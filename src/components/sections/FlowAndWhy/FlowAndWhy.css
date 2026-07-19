@@ -318,32 +318,36 @@
   .kore-flow__banner {
     height: auto;
     overflow: visible;
-    background: transparent;
+    background-color: rgb(25, 67, 50);
+    padding: 48px 24px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .kore-flow__banner-inner {
-    padding: 0 24px;
+    padding: 0;
+    max-width: 100%;
   }
 
   .kore-flow__steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
     position: relative;
     left: auto;
     transform: none;
     translate: none;
-    flex-direction: column;
-    gap: 24px;
     width: 100%;
-    max-width: 480px;
     margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .kore-flow__step {
     width: 100%;
     height: auto;
-    padding: 24px 20px;
-    border-radius: 16px;
-    background-color: rgb(25, 67, 50);
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   .kore-flow__step-content {
@@ -353,17 +357,33 @@
     transform: none;
     translate: none;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+  }
+
+  .kore-flow__step-number {
+    font-size: 32px;
+    line-height: 1;
+    width: auto;
+    height: auto;
+  }
+
+  .kore-flow__step-title {
+    font-size: 18px;
+    width: auto;
   }
 
   .kore-flow__step-desc {
     width: 100%;
+    font-size: 13px;
   }
 
   /* Responsive Why Choose Korè */
   .kore-features {
     height: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     overflow: visible;
   }
 
@@ -401,5 +421,83 @@
 
   .kore-features__item-desc {
     font-size: 16px;
+  }
+}
+
+/* ─── MOBILE ≤ 768px ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .flow-why-container {
+    row-gap: 48px;
+    margin-top: 0;
+    padding: 0 !important;
+    box-sizing: border-box;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .kore-flow {
+    row-gap: 28px;
+  }
+
+  .kore-flow__header {
+    padding: 0 20px !important;
+  }
+
+  .kore-flow__title {
+    font-size: clamp(22px, 6vw, 32px);
+    text-align: center;
+    width: 100%;
+  }
+
+  .kore-flow__subtitle {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .kore-flow__banner {
+    padding: 40px 20px !important;
+  }
+
+  .kore-flow__steps {
+    gap: 24px !important;
+  }
+
+  .kore-flow__step-number {
+    font-size: 28px !important;
+  }
+
+  .kore-flow__step-title {
+    font-size: 16px !important;
+  }
+
+  .kore-flow__step-desc {
+    font-size: 12px !important;
+  }
+
+  .kore-features {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0px !important;
+    margin: 0 !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column-reverse !important;
+  }
+
+  .kore-features__cover {
+    height: 220px;
+    border-radius: 0px !important;
+  }
+
+  .kore-features__title {
+    font-size: clamp(22px, 6vw, 32px);
+  }
+
+  .kore-features__content {
+    padding: 28px 20px;
+  }
+
+  .kore-features__item-desc {
+    font-size: 14px;
   }
 }

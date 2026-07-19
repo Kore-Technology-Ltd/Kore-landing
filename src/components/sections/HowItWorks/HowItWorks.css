@@ -142,7 +142,7 @@
   line-height: 1.4;
 }
 
-/* Responsive Overrides */
+/* Responsive Overrides (dynamic scale is handled in JS/React) */
 @media (max-width: 1280px) {
   .how-kore-works {
     padding: 60px 24px;
@@ -161,15 +161,27 @@
     width: 100%;
     height: auto;
   }
+}
 
-  .how-kore-works__cards-grid {
-    flex-direction: column;
-    row-gap: 40px;
-    margin-top: 60px;
+@media (max-width: 768px) {
+  .how-kore-works {
+    padding: 48px 16px !important;
+    row-gap: 32px;
+    margin-top: 0;
   }
 
-  .how-kore-works__card {
-    width: 100%;
-    max-width: 361px;
+  .how-kore-works__title {
+    font-size: clamp(22px, 6vw, 32px);
+  }
+
+  .how-kore-works__subtitle {
+    font-size: 15px;
+  }
+
+  .how-kore-works__image {
+    width: 100% !important;
+    margin: 0 !important;
+    height: auto;
+    border-radius: 12px;
   }
 }

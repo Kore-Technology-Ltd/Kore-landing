@@ -1,8 +1,15 @@
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import './FlowAndWhy.css'
 
 export default function FlowAndWhy() {
+  const reveal = useScrollReveal()
+
   return (
-    <section id="section-flow-why" className="flow-why-container">
+    <section
+      ref={reveal.ref}
+      id="section-flow-why"
+      className={`flow-why-container ${reveal.className}`}
+    >
       {/* 1. The Korè Flow Section */}
       <div className="kore-flow">
         <div className="kore-flow__header">

@@ -1,9 +1,13 @@
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import './Story.css'
 
 export default function Story() {
+  const reveal = useScrollReveal()
+
   return (
     <section
-      className="story section"
+      ref={reveal.ref}
+      className={`story section ${reveal.className}`}
       id="section-story"
       aria-label="Our story"
     >
@@ -55,7 +59,7 @@ export default function Story() {
                   Meet Kofi: A Chef Searching for Freshness
                 </span>
                 <span className="story__body">
-                  Kofi runs a popular restaurant in Lagos. He sources produce
+                  Kofi runs a popular restaurant in Ghana. He sources produce
                   from three different middlemen because he can{"'"}t find
                   consistent, fresh suppliers. His tomatoes come 3 days old. His
                   lettuce wilts by dinner service.

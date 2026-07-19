@@ -351,10 +351,56 @@
   position: absolute;
 }
 
-.kore-navbar-logo img {
+.kore-navbar-logo .logo-light {
+  display: none !important;
+}
+
+.kore-navbar-logo .logo-dark {
+  display: block !important;
   inset: 0px;
   width: 100%;
   height: 100%;
   position: absolute;
   transform: translate(0px, 6px) scale(1, 2.51);
+}
+
+/* ─── MOBILE NAVBAR LOGO ≤ 768px ──────────────────────────────── */
+@media (max-width: 768px) {
+  .kore-navbar-container {
+    background: linear-gradient(
+      -89.93deg,
+      rgba(63, 169, 126, 1) 0%,
+      rgba(25, 66, 50, 1) 100%
+    ) !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .kore-hamburger svg path {
+    stroke: #ffffff !important;
+  }
+
+  .kore-navbar-logo {
+    height: 48px !important;
+    top: calc(50% - 24px) !important;
+    left: 16px !important;
+  }
+
+  .kore-navbar-logo .logo-dark {
+    display: none !important;
+  }
+
+  .kore-navbar-logo .logo-light {
+    display: block !important;
+    transform: none !important;
+    object-fit: contain;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  .kore-navbar-inner {
+    padding: 10px 16px !important;
+  }
 }

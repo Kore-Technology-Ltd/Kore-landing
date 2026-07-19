@@ -1,10 +1,14 @@
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import './WasteCrisis.css'
 
 export default function WasteCrisis() {
+  const reveal = useScrollReveal()
+
   return (
     <section
+      ref={reveal.ref}
       id="section-waste-crisis"
-      className="waste-crisis"
+      className={`waste-crisis ${reveal.className}`}
       aria-label="The Invisible Waste Crisis"
     >
       <div className="waste-crisis__content">

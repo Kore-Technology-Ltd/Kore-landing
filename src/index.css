@@ -123,6 +123,11 @@ ul {
   :root {
     --section-gap: 56px;
   }
+
+  /* Offset for fixed navbar on mobile */
+  main {
+    padding-top: 0px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -134,45 +139,11 @@ ul {
   }
 }
 
-/* ─── GRADUATED ZOOM SCALING FOR FIGMA LAYOUTS ─── */
-@media (min-width: 801px) and (max-width: 899px) {
+/* ─── MOBILE: NO ZOOM — use real responsive CSS per component ─── */
+@media (max-width: 899px) {
   .page-content {
-    zoom: 0.6;
-  }
-}
-@media (min-width: 701px) and (max-width: 800px) {
-  .page-content {
-    zoom: 0.53;
-  }
-}
-@media (min-width: 601px) and (max-width: 700px) {
-  .page-content {
-    zoom: 0.45;
-  }
-}
-@media (min-width: 481px) and (max-width: 600px) {
-  .page-content {
-    zoom: 0.36;
-  }
-}
-@media (min-width: 421px) and (max-width: 480px) {
-  .page-content {
-    zoom: 0.32;
-  }
-}
-@media (min-width: 376px) and (max-width: 420px) {
-  .page-content {
-    zoom: 0.28;
-  }
-}
-@media (min-width: 321px) and (max-width: 375px) {
-  .page-content {
-    zoom: 0.25;
-  }
-}
-@media (max-width: 320px) {
-  .page-content {
-    zoom: 0.23;
+    zoom: 1 !important;
+    transform: none !important;
   }
 }
 
@@ -180,28 +151,29 @@ ul {
 @media (min-width: 1600px) and (max-width: 1919px) {
   .page-content {
     zoom: 1.1;
-    -moz-transform: scale(1.1);
-    -moz-transform-origin: top left;
   }
 }
 @media (min-width: 1920px) and (max-width: 2559px) {
   .page-content {
     zoom: 1.33;
-    -moz-transform: scale(1.33);
-    -moz-transform-origin: top left;
   }
 }
 @media (min-width: 2560px) and (max-width: 3839px) {
   .page-content {
     zoom: 1.77;
-    -moz-transform: scale(1.77);
-    -moz-transform-origin: top left;
   }
 }
 @media (min-width: 3840px) {
   .page-content {
     zoom: 2.66;
-    -moz-transform: scale(2.66);
-    -moz-transform-origin: top left;
+  }
+}
+
+/* ─── DESKTOP VIEWPORT LAYOUT FIX ─── */
+@media (min-width: 900px) {
+  .page-viewport {
+    width: 100vw !important;
+    overflow-x: hidden !important;
+    position: relative !important;
   }
 }

@@ -264,6 +264,7 @@
     flex-direction: row !important;
     align-items: center !important;
     column-gap: 20px !important;
+    width: auto !important;
   }
 
   .story__stat-number {
@@ -272,20 +273,20 @@
 
   .story__stat-labels,
   .story__stat-labels--kofi {
-    width: 100%;
+    width: auto !important;
   }
 
   .story__stat-label-bold,
   .story__stat-label-bold--kofi {
     font-size: 16px;
-    white-space: normal;
-    width: 100%;
+    white-space: nowrap !important;
+    width: auto !important;
   }
 
   .story__stat-label-light,
   .story__stat-label-light--kofi {
     font-size: 14px;
-    white-space: normal;
-    width: 100%;
+    white-space: nowrap !important;
+    width: auto !important;
   }
 }

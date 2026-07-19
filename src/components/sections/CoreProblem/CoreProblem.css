@@ -230,8 +230,25 @@
   }
 
   .core-problem__stat-row {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 16px;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 16px !important;
+    justify-content: flex-start !important;
+  }
+
+  .core-problem__stat-labels {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    width: auto !important;
+  }
+
+  .core-problem__stat-title,
+  .core-problem__stat-sub {
+    text-align: left !important;
+    width: auto !important;
   }
 }

@@ -166,13 +166,15 @@
   }
 
   .waste-crisis__stats {
-    flex-direction: column;
-    row-gap: 32px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+    width: 100% !important;
   }
 
   .waste-crisis__stat-col {
-    width: 100%;
-    justify-content: center;
+    width: 100% !important;
+    justify-content: center !important;
   }
 
   .waste-crisis__stat-item {
@@ -198,9 +200,14 @@
 @media (max-width: 768px) {
   .waste-crisis {
     height: auto;
-    padding: 48px 20px;
+    padding: 40px 16px 48px 16px !important;
     margin-top: 0;
     width: 100%;
+  }
+
+  .waste-crisis__content {
+    padding: 0 !important;
+    width: 100% !important;
   }
 
   .waste-crisis__title {
@@ -214,15 +221,15 @@
   }
 
   .waste-crisis__stats {
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    width: 100% !important;
+    align-items: flex-start !important;
   }
 
   .waste-crisis__stat-col {
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
+    width: 100% !important;
   }
 
   .waste-crisis__stat-item {

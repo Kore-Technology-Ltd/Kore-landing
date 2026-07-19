@@ -17,12 +17,12 @@ export default function WasteCrisis() {
           <p className="waste-crisis__body">
             West Africa loses{' '}
             <span className="waste-crisis__highlight">38 million tonnes</span>{' '}
-            of produce annually. Most never reaches willing buyers because the{' '}
-            <br /> structure is broken.
-            <br />
-            <br />
+            of produce annually. Most never reaches willing buyers because the
+            structure is broken.
+          </p>
+          <p className="waste-crisis__body">
             Farmers can{"'"}t reach buyers. Buyers can{"'"}t find farmers.
-            Middlemen extract all value. Consumers pay 300% <br /> markups.{' '}
+            Middlemen extract all value. Consumers pay 300% markups.{' '}
             <span className="waste-crisis__bold">Everyone loses.</span>
           </p>
         </div>

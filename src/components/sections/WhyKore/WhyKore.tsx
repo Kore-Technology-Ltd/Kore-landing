@@ -28,6 +28,7 @@ export default function WhyKore() {
       aria-label="Why Choose Korè"
     >
       <div
+        className="comparison-grid-wrapper"
         style={{
           height: `${476 * scale}px`,
           width: '100%',

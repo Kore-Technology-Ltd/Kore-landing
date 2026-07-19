@@ -4,6 +4,7 @@ import './Hero.css'
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [animKey, setAnimKey] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
   const prevSlide = useRef(0)
 
   const goToSlide = (index: number) => {
@@ -13,13 +14,27 @@ export default function Hero() {
     setAnimKey((k) => k + 1)
   }
 
-  // Autoplay logic - switch slide every 5 seconds
+  // Detect mobile viewports
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Autoplay logic - switch slide every 5 seconds (disabled on mobile)
+  useEffect(() => {
+    if (isMobile) {
+      setCurrentSlide(0)
+      return
+    }
     const timer = setInterval(() => {
       goToSlide(currentSlide === 0 ? 1 : 0)
     }, 5000)
     return () => clearInterval(timer)
-  }, [currentSlide])
+  }, [currentSlide, isMobile])
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id)
@@ -78,6 +93,12 @@ export default function Hero() {
                         <span className="see-our-story">See Our Story</span>
                       </div>
                     </button>
+                  </div>
+                  <div className="hero-features-mobile-stat-in-card">
+                    <span className="hero-features-mobile-stat-num">38M</span>
+                    <span className="hero-features-mobile-stat-label">
+                      Tonnes wasted annually
+                    </span>
                   </div>
                 </div>
 

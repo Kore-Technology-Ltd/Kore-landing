@@ -300,3 +300,9 @@
     height: 536px !important;
   }
 }
+
+@media (max-width: 768px) {
+  .why-different {
+    margin-top: 0 !important;
+  }
+}

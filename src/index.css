@@ -177,3 +177,57 @@ ul {
     position: relative !important;
   }
 }
+
+/* ─── BACK TO TOP BUTTON ─────────────────────────────────────────── */
+.kore-scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background-color: var(--forest-mid);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition:
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background-color 0.25s,
+    box-shadow 0.25s;
+  animation: kore-fade-in 0.35s ease-out;
+}
+
+.kore-scroll-top:hover {
+  background-color: var(--gold);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.kore-scroll-top:active {
+  transform: translateY(-2px) scale(0.95);
+}
+
+@keyframes kore-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .kore-scroll-top {
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -343,40 +343,46 @@
   }
 
   .kore-flow__step {
-    width: 100%;
-    height: auto;
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
+    width: 100% !important;
+    height: auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    position: relative !important;
+    overflow: visible !important;
   }
 
   .kore-flow__step-content {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
-    translate: none;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 8px;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    translate: none !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    row-gap: 8px !important;
   }
 
   .kore-flow__step-number {
-    font-size: 32px;
-    line-height: 1;
-    width: auto;
-    height: auto;
+    font-size: 32px !important;
+    line-height: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    position: relative !important;
+    color: rgb(211, 160, 20) !important;
   }
 
   .kore-flow__step-title {
-    font-size: 18px;
-    width: auto;
+    font-size: 18px !important;
+    width: auto !important;
+    position: relative !important;
   }
 
   .kore-flow__step-desc {
-    width: 100%;
-    font-size: 13px;
+    width: 100% !important;
+    font-size: 13px !important;
+    position: relative !important;
   }
 
   /* Responsive Why Choose Korè */

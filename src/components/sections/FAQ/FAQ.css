@@ -306,12 +306,13 @@
   }
 
   .faq__cta-content {
-    position: relative;
-    left: auto;
-    top: auto;
-    translate: none;
-    width: 100%;
-    gap: 24px;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    translate: none !important;
+    transform: none !important;
+    width: 100% !important;
+    gap: 24px !important;
   }
 
   .faq__cta-title {
@@ -384,12 +385,13 @@
   }
 
   .faq__cta-content {
-    position: relative;
-    left: auto;
-    top: auto;
-    translate: none;
-    width: 100%;
-    gap: 20px;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    translate: none !important;
+    transform: none !important;
+    width: 100% !important;
+    gap: 20px !important;
   }
 
   .faq__cta-title {

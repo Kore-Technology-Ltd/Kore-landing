@@ -558,12 +558,13 @@
   }
 
   .waitlist__form-wrapper {
-    position: relative;
-    left: auto;
-    top: auto;
-    translate: none;
-    width: 100%;
-    padding: 0;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    translate: none !important;
+    transform: none !important;
+    width: 100% !important;
+    padding: 0 !important;
   }
 
   .waitlist__row {

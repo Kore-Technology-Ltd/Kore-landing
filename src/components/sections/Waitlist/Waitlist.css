@@ -561,8 +561,12 @@
     position: relative !important;
     left: auto !important;
     top: auto !important;
-    translate: none !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
     transform: none !important;
+    -webkit-translate: none !important;
+    translate: none !important;
     width: 100% !important;
     padding: 0 !important;
   }

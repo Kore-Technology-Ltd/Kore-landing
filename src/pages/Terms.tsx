@@ -83,14 +83,16 @@ export default function TermsPage() {
 
   // Scroll the active navigation link into view inside the sticky sidebar container
   useEffect(() => {
-    const activeLink = document.querySelector(
-      '.legal-sidebar .legal-nav-link.active'
-    )
-    if (activeLink) {
-      activeLink.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest'
-      })
+    if (window.innerWidth > 991) {
+      const activeLink = document.querySelector(
+        '.legal-sidebar .legal-nav-link.active'
+      )
+      if (activeLink) {
+        activeLink.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest'
+        })
+      }
     }
   }, [activeSection])
 

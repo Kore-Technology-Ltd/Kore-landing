@@ -113,7 +113,7 @@ export default function Hero() {
 
             {/* Slide 2: Step Flow Diagram */}
             <div
-              className={`hero-slide-item${currentSlide === 1 ? ' is-entering' : ''}`}
+              className={`hero-slide-item hero-slide-item--flow${currentSlide === 1 ? ' is-entering' : ''}`}
               key={currentSlide === 1 ? animKey : undefined}
             >
               <div className="hero-slide-content">

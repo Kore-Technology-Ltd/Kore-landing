@@ -373,8 +373,7 @@ export default function Footer() {
               <div className="footer__bottom-inner">
                 <div className="footer__copyright-wrapper">
                   <span className="footer__copyright">
-                    &copy; 2026 Korè. Kore Technology Limited | All rights
-                    reserved.
+                    &copy; 2026 Korè. Ikore Labs Limited | All rights reserved.
                   </span>
                 </div>
               </div>
@@ -385,8 +384,7 @@ export default function Footer() {
               <div className="footer__bottom-inner">
                 <div className="footer__copyright-wrapper">
                   <span className="footer__copyright">
-                    &copy; 2026 Korè. Kore Tecnology Limited | All rights
-                    reserved.
+                    &copy; 2026 Korè. Ikore Labs Limited | All rights reserved.
                   </span>
                 </div>
                 {renderSocials()}

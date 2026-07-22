@@ -326,9 +326,9 @@ export default function Footer() {
 
             <div className="footer__col">
               <span className="footer__col-title">Company</span>
-              <a href="about.html" className="footer__col-link">
+              <Link to="/team#origin-story" className="footer__col-link">
                 About Us
-              </a>
+              </Link>
               <span className="footer__col-link" role="link" tabIndex={0}>
                 Blog
               </span>

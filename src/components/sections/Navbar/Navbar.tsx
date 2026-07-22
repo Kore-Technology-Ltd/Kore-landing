@@ -1,12 +1,14 @@
 import './Navbar.css'
 import { useState, useEffect, useCallback } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import CloseIcon from '@/assets/icons/CloseIcon'
 import HamburgerIcon from '@/assets/icons/HamburgerIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 
 export default function Navbar() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const isTeamPage = location.pathname === '/team'
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string>('')
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), [])
@@ -131,8 +133,11 @@ export default function Navbar() {
             How it Works?
           </button>
           <button
-            className="kore-mobile-nav-link"
-            onClick={() => handleMobileNavClick('section-team')}
+            className={`kore-mobile-nav-link${isTeamPage ? ' active' : ''}`}
+            onClick={() => {
+              closeMobileMenu()
+              navigate('/team')
+            }}
           >
             Team
           </button>
@@ -212,11 +217,11 @@ export default function Navbar() {
               </span>
             </div>
             <div
-              onClick={() => scrollToSection('section-team')}
-              className={`kore-desktop-nav-item${activeSection === 'section-team' ? ' active' : ''}`}
+              onClick={() => navigate('/team')}
+              className={`kore-desktop-nav-item${isTeamPage ? ' active' : ''}`}
             >
               <span
-                className={`text korre-nav-link${activeSection === 'section-team' ? ' is-active' : ''}`}
+                className={`text korre-nav-link${isTeamPage ? ' is-active' : ''}`}
                 data-korre-nav-bound="true"
                 role="link"
                 tabIndex={0}

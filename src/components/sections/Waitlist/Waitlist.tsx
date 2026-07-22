@@ -509,8 +509,10 @@ export default function Waitlist() {
           </div>
           <div className="waitlist__pill">
             <span className="waitlist__pill-text">
-              {stats && stats.partner ? formatStatNumber(stats.partner) : '2'}{' '}
-              partners
+              {stats && stats.household
+                ? formatStatNumber(stats.household)
+                : '2'}{' '}
+              households
             </span>
           </div>
         </div>

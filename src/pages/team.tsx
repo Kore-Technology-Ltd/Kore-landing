@@ -831,11 +831,14 @@ export default function Team() {
                             ))}
                           </div>
                           <div
+                            className="kore-founder-social-btns"
                             style={{
                               display: 'flex',
                               flexDirection: 'row',
-                              gridColumnGap: '16px',
-                              alignItems: 'center'
+                              flexWrap: 'wrap',
+                              gap: '10px',
+                              alignItems: 'center',
+                              maxWidth: '100%'
                             }}
                           >
                             <a
@@ -1335,11 +1338,14 @@ export default function Team() {
                             ))}
                           </div>
                           <div
+                            className="kore-founder-social-btns"
                             style={{
                               display: 'flex',
                               flexDirection: 'row',
-                              gridColumnGap: '16px',
-                              alignItems: 'center'
+                              flexWrap: 'wrap',
+                              gap: '10px',
+                              alignItems: 'center',
+                              maxWidth: '100%'
                             }}
                           >
                             <a
@@ -1625,11 +1631,14 @@ export default function Team() {
                             ))}
                           </div>
                           <div
+                            className="kore-founder-social-btns"
                             style={{
                               display: 'flex',
                               flexDirection: 'row',
-                              gridColumnGap: '16px',
-                              alignItems: 'center'
+                              flexWrap: 'wrap',
+                              gap: '10px',
+                              alignItems: 'center',
+                              maxWidth: '100%'
                             }}
                           >
                             <a

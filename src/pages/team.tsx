@@ -1642,7 +1642,7 @@ export default function Team() {
                             }}
                           >
                             <a
-                              href="mailto:opeyemi@kore.ng"
+                              href="mailto:opeyemiadebayosk@gmail.com"
                               className="card-contact-btn"
                               style={{
                                 borderWidth: '1.5px',
@@ -1681,7 +1681,7 @@ export default function Team() {
                               </span>
                             </a>
                             <a
-                              href="https://linkedin.com/in/opeyemiadebayo"
+                              href="https://linkedin.com/in/opeyemi-ososanya-9088a01a6/"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="card-contact-btn"
@@ -1722,7 +1722,7 @@ export default function Team() {
                               </span>
                             </a>
                             <a
-                              href="https://www.behance.net"
+                              href="https://www.behance.net/opeyemiososanya"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="card-contact-btn"
@@ -2307,12 +2307,14 @@ export default function Team() {
             </span>
           </div>
           <div
+            className="kore-timeline-header"
             style={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               rowGap: '12px',
-              marginTop: '96px'
+              marginTop: '16px',
+              marginBottom: '12px'
             }}
           >
             <span
@@ -2330,6 +2332,7 @@ export default function Team() {
               COMPANY TIMELINE
             </span>
             <div
+              className="kore-timeline-header-dot"
               style={{
                 width: '12px',
                 height: '12px',
@@ -2345,7 +2348,7 @@ export default function Team() {
               width: '100%',
               height: '1341px',
               position: 'relative',
-              margin: '32px auto 0 auto'
+              margin: '0 auto'
             }}
           >
             <div

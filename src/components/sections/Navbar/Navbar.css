@@ -7,117 +7,88 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 1999;
-  transition: background 0.32s;
+  transition: opacity 0.25s ease;
   pointer-events: none;
+  opacity: 0;
 }
 
 .kore-mobile-overlay.is-open {
   display: block;
-  background: rgba(0, 0, 0, 0.45);
+  opacity: 1;
   pointer-events: auto;
 }
 
-/* Mobile sidebar drawer */
-.kore-mobile-sidebar {
+/* Mobile Menu Card Popup Container */
+.kore-mobile-menu-card-wrapper {
   position: fixed;
-  top: 0;
-  right: -320px;
-  width: 300px;
-  height: 100dvh;
-  background: #fff;
+  top: 54px;
+  right: 16px;
   z-index: 2000;
-  display: flex;
-  flex-direction: column;
-  box-shadow: -4px 0 32px rgba(11, 28, 48, 0.18);
-  transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow-y: auto;
-}
-
-.kore-mobile-sidebar.is-open {
-  right: 0;
-}
-
-.kore-mobile-sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 20px 16px;
-  border-bottom: 1px solid rgba(25, 67, 50, 0.1);
-}
-
-.kore-mobile-close {
-  background: none;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.kore-mobile-close:hover {
-  background: rgba(25, 67, 50, 0.06);
-}
-
-.kore-mobile-nav {
-  display: flex;
-  flex-direction: column;
-  padding: 16px 0;
-  flex: 1;
-}
-
-.kore-mobile-nav-link {
-  background: none;
-  border: none;
-  text-align: left;
-  padding: 14px 24px;
-  font-size: 18px;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 300;
-  color: #064e3b;
-  cursor: pointer;
-  letter-spacing: -0.3px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.96);
   transition:
-    background 0.18s,
-    color 0.18s;
-  border-radius: 0;
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s ease,
+    visibility 0.2s;
+  pointer-events: none;
+  width: min(220px, calc(100vw - 32px));
+}
+
+.kore-mobile-menu-card-wrapper.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.kore-mobile-menu-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   width: 100%;
 }
 
-.kore-mobile-nav-link:hover {
-  background: rgba(25, 67, 50, 0.06);
-  color: #194332;
-}
-
-.kore-mobile-sidebar-cta {
-  padding: 20px 24px 32px;
-  border-top: 1px solid rgba(25, 67, 50, 0.1);
-}
-
-.kore-mobile-join-btn {
-  width: 100%;
-  padding: 14px 24px;
-  background: #d3a014;
-  color: #fff;
+.kore-mobile-menu-item {
+  background: transparent;
   border: none;
-  border-radius: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 13px 16px;
   font-size: 16px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 600;
+  font-family:
+    'Outfit',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 400;
+  color: #194332;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 100%;
   cursor: pointer;
   transition:
-    background 0.2s,
-    transform 0.15s;
-  box-shadow: 0 2px 8px rgba(211, 160, 20, 0.3);
+    background-color 0.15s ease,
+    color 0.15s ease;
+  box-sizing: border-box;
 }
 
-.kore-mobile-join-btn:hover {
-  background: #b8880f;
-  transform: translateY(-1px);
+.kore-mobile-menu-item:last-child {
+  border-bottom: none;
+}
+
+.kore-mobile-menu-item:hover,
+.kore-mobile-menu-item:active,
+.kore-mobile-menu-item.active {
+  background-color: #f6f4e5;
+  color: #164d37;
 }
 
 /* Hamburger button — shown only on mobile via CSS rules */

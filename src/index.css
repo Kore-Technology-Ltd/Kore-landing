@@ -119,6 +119,15 @@ ul {
   pointer-events: auto !important;
 }
 
+.kore-timeline-header {
+  margin-top: 16px !important;
+  margin-bottom: 12px !important;
+}
+
+.kore-timeline-container {
+  margin-top: 0px !important;
+}
+
 .card-contact-btn {
   border: 1.5px solid #6b5f55 !important;
   transition: all 0.2s ease-in-out !important;
@@ -782,13 +791,30 @@ ul {
     height: auto !important;
   }
 
+  .kore-story-box {
+    padding: 32px 20px !important;
+    border-radius: 20px !important;
+    min-height: auto !important;
+    margin-bottom: 0px !important;
+  }
+
+  .kore-timeline-header {
+    margin-top: -40px !important;
+    margin-bottom: -40px !important;
+    row-gap: 0px !important;
+  }
+
+  .kore-timeline-header-dot {
+    display: none !important;
+  }
+
   .kore-timeline-container {
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 32px !important;
-    margin-top: 24px !important;
+    gap: 48px !important;
+    margin-top: 0px !important;
     padding: 0 16px !important;
     position: relative !important;
     box-sizing: border-box !important;
@@ -796,16 +822,16 @@ ul {
 
   /* Vertical connecting line down center of timeline on mobile */
   .kore-timeline-container::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    bottom: 20px;
-    left: 50%;
-    width: 2px;
-    background-color: #7b6f65;
-    transform: translateX(-50%);
-    z-index: 1;
-    opacity: 0.4;
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 30px !important;
+    left: 50% !important;
+    width: 2px !important;
+    background-color: #d3a014 !important;
+    transform: translateX(-50%) !important;
+    z-index: 1 !important;
+    opacity: 0.35 !important;
   }
 
   .kore-timeline-card {
@@ -814,12 +840,13 @@ ul {
     top: auto !important;
     width: 100% !important;
     height: auto !important;
-    padding: 24px 20px !important;
+    padding: 32px 24px 28px 24px !important;
     box-sizing: border-box !important;
     background-color: #f6f4e5 !important;
-    border-radius: 16px !important;
+    border-radius: 24px !important;
     z-index: 2 !important;
-    border: 1px solid #e5e0d0 !important;
+    border: none !important;
+    overflow: visible !important;
   }
 
   .kore-timeline-card-1 {
@@ -835,16 +862,20 @@ ul {
     order: 4 !important;
   }
 
-  /* Gold dot above each timeline card on mobile */
+  /* Gold dot sitting right on top edge border of each card on mobile */
   .kore-timeline-card::before {
-    content: '';
-    display: block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #d3a014;
-    margin: 0 auto 16px auto;
-    box-shadow: 0 0 0 4px #fbfaf4;
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    background-color: #c8930c !important;
+    margin: 0 !important;
+    z-index: 10 !important;
+    box-shadow: 0 0 0 4px #ffffff !important;
   }
 
   .kore-timeline-card > div {
@@ -856,6 +887,8 @@ ul {
     display: flex !important;
     flex-direction: column !important;
     row-gap: 8px !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
   }
 
   .kore-timeline-card span {

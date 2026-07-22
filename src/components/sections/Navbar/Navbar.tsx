@@ -84,56 +84,50 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Mobile sidebar overlay */}
+      {/* Mobile overlay */}
       <div
         className={`kore-mobile-overlay${mobileMenuOpen ? ' is-open' : ''}`}
         onClick={closeMobileMenu}
         aria-hidden="true"
       />
 
-      {/* Mobile sidebar */}
-      <div className={`kore-mobile-sidebar${mobileMenuOpen ? ' is-open' : ''}`}>
-        <div className="kore-mobile-sidebar-header">
-          <div className="kore-mobile-logo-wrapper">
-            <Link to="/">
-              <img src="/images/kore-logo-dark.png" alt="Korè logo" />
-            </Link>
-          </div>
+      {/* Mobile menu card */}
+      <div
+        className={`kore-mobile-menu-card-wrapper${mobileMenuOpen ? ' is-open' : ''}`}
+      >
+        <div className="kore-mobile-menu-card">
           <button
-            className="kore-mobile-close"
-            onClick={closeMobileMenu}
-            aria-label="Close menu"
+            className="kore-mobile-menu-item"
+            onClick={() => handleMobileNavClick('section-waitlist')}
           >
-            <CloseIcon />
+            Join Waitlist
           </button>
-        </div>
-        <nav className="kore-mobile-nav">
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-story')}
           >
             Story
           </button>
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-waste-crisis')}
           >
             Waste Crisis
           </button>
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-why-kore')}
           >
             Why Korè
           </button>
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-how-it-works')}
           >
             How it Works?
           </button>
           <button
-            className={`kore-mobile-nav-link${isTeamPage ? ' active' : ''}`}
+            className={`kore-mobile-menu-item${isTeamPage ? ' active' : ''}`}
             onClick={() => {
               closeMobileMenu()
               navigate('/team')
@@ -142,18 +136,10 @@ export default function Navbar() {
             Team
           </button>
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-faq')}
           >
             FAQ
-          </button>
-        </nav>
-        <div className="kore-mobile-sidebar-cta">
-          <button
-            className="kore-mobile-join-btn"
-            onClick={() => handleMobileNavClick('section-waitlist')}
-          >
-            Join Waitlist
           </button>
         </div>
       </div>
@@ -270,11 +256,11 @@ export default function Navbar() {
           {/* Mobile hamburger button — shown only on mobile via CSS */}
           <button
             className="kore-hamburger"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
-            <HamburgerIcon />
+            {mobileMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
           </button>
         </div>
 

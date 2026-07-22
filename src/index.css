@@ -114,6 +114,7 @@ ul {
 }
 
 .card-contact-btn {
+  border: 1.5px solid #6b5f55 !important;
   transition: all 0.2s ease-in-out !important;
   cursor: pointer !important;
   text-decoration: none !important;
@@ -123,7 +124,7 @@ ul {
   background-color: #f6f4e5 !important;
   border-color: #d3a014 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(211, 160, 20, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(211, 160, 20, 0.15) !important;
 }
 
 .cta-email-btn {

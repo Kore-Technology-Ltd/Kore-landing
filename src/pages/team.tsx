@@ -842,9 +842,9 @@ export default function Team() {
                               href="mailto:tolui@kore.ng"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -855,13 +855,23 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm19.586 2H2.414L12 14.086 21.586 6ZM1 7.414V19h22V7.414l-10.293 9.293a1 1 0 0 1-1.414 0L1 7.414Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
                                 Email
@@ -873,9 +883,9 @@ export default function Team() {
                               rel="noopener noreferrer"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -886,13 +896,23 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.114 20.452H3.56V9h3.554v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
                                 LinkedIn
@@ -904,9 +924,9 @@ export default function Team() {
                               rel="noopener noreferrer"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -917,13 +937,23 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
                                 GitHub
@@ -1316,9 +1346,9 @@ export default function Team() {
                               href="mailto:samuel@kore.ng"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -1329,16 +1359,26 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm19.586 2H2.414L12 14.086 21.586 6ZM1 7.414V19h22V7.414l-10.293 9.293a1 1 0 0 1-1.414 0L1 7.414Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
-                                ✉ Email
+                                Email
                               </span>
                             </a>
                             <a
@@ -1347,9 +1387,9 @@ export default function Team() {
                               rel="noopener noreferrer"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -1360,13 +1400,23 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.114 20.452H3.56V9h3.554v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
                                 LinkedIn
@@ -1378,9 +1428,9 @@ export default function Team() {
                               rel="noopener noreferrer"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -1391,13 +1441,23 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
                                 GitHub
@@ -1576,9 +1636,9 @@ export default function Team() {
                               href="mailto:opeyemi@kore.ng"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -1589,16 +1649,26 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm19.586 2H2.414L12 14.086 21.586 6ZM1 7.414V19h22V7.414l-10.293 9.293a1 1 0 0 1-1.414 0L1 7.414Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
-                                ✉ Email
+                                Email
                               </span>
                             </a>
                             <a
@@ -1607,9 +1677,9 @@ export default function Team() {
                               rel="noopener noreferrer"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -1620,27 +1690,37 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.114 20.452H3.56V9h3.554v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
                                 LinkedIn
                               </span>
                             </a>
                             <a
-                              href="https://github.com/opeyemi"
+                              href="https://www.behance.net"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="card-contact-btn"
                               style={{
-                                borderWidth: '0.5px',
+                                borderWidth: '1.5px',
                                 borderStyle: 'solid',
-                                borderColor: '#7b6f65',
+                                borderColor: '#6b5f55',
                                 backgroundColor: '#f9fdfc',
                                 borderRadius: '8px',
                                 padding: '8px 16px',
@@ -1651,13 +1731,23 @@ export default function Team() {
                                 gap: '8px'
                               }}
                             >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="18"
+                                height="18"
+                                fill="currentColor"
+                                style={{ flexShrink: 0, color: '#6b5f55' }}
+                              >
+                                <path d="M0 4.4h9.5c2.29 0 3.884.6 4.884 1.653.6.653 1 1.47 1 2.5 0 1.25-.6 2.31-1.94 3.06 1.94.6 2.94 2.06 2.94 3.94 0 1.16-.35 2.15-1.06 2.94-1.15 1.35-3 1.94-5.35 1.94H0V4.4Zm3.94 5.94h4.5c1.16 0 2.06-.44 2.06-1.5 0-1-.71-1.44-1.94-1.44H3.94v2.94Zm0 6.44h4.94c1.35 0 2.19-.56 2.19-1.75 0-1.06-.75-1.75-2.19-1.75H3.94v3.5ZM17.65 6.9h6.1V8.5h-6.1V6.9ZM24 15.83h-8.19c.15 1.6 1.06 2.44 2.5 2.44 1.06 0 1.85-.5 2.15-1.31h3.34c-.66 2.34-2.66 3.84-5.5 3.84-3.7 0-6.19-2.6-6.19-6.34 0-3.65 2.4-6.34 6.03-6.34 3.9 0 5.96 2.9 5.86 7.71Zm-8.16-2.34h4.66c-.13-1.31-.94-2.13-2.25-2.13-1.34 0-2.19.7-2.41 2.13Z" />
+                              </svg>
                               <span
                                 className="text"
                                 style={{
                                   fontSize: '16px',
                                   fontFamily: 'Outfit, system-ui, sans-serif',
-                                  fontWeight: '300',
-                                  color: '#7b6f65'
+                                  fontWeight: '400',
+                                  color: '#6b5f55'
                                 }}
                               >
                                 Behance
@@ -2850,17 +2940,14 @@ export default function Team() {
                   }}
                 >
                   <svg
-                    width="21"
-                    height="15"
-                    viewBox="0 0 21 15"
-                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    style={{ flexShrink: 0 }}
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    style={{ flexShrink: 0, color: '#ffffff' }}
                   >
-                    <path
-                      d="M19.5 0H1.5C1.1022 0 0.7206 0.158 0.4393 0.4393 0.158 0.7206 0 1.1022 0 1.5V13.5C0 13.8978 0.158 14.2794 0.4393 14.5607 0.7206 14.842 1.1022 15 1.5 15H19.5C19.8978 15 20.2794 14.842 20.5607 14.5607 20.842 14.2794 21 13.8978 21 13.5V1.5C21 1.1022 20.842 0.7206 20.5607 0.4393 20.2794 0.158 19.8978 0 19.5 0ZM17.85 1.5L10.5 6.585 3.15 1.5H17.85ZM1.5 13.5V2.1825L10.0725 8.115C10.198 8.2021 10.3472 8.2488 10.5 8.2488 10.6528 8.2488 10.802 8.2021 10.9275 8.115L19.5 2.1825V13.5H1.5Z"
-                      fill="#fff"
-                    />
+                    <path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm19.586 2H2.414L12 14.086 21.586 6ZM1 7.414V19h22V7.414l-10.293 9.293a1 1 0 0 1-1.414 0L1 7.414Z" />
                   </svg>
                   <span
                     className="text"
@@ -2902,17 +2989,14 @@ export default function Team() {
                   }}
                 >
                   <svg
-                    width="20.5"
-                    height="20.5"
-                    viewBox="0 0 20.5 20.5"
-                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    style={{ flexShrink: 0 }}
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    style={{ flexShrink: 0, color: '#7b6f65' }}
                   >
-                    <path
-                      d="M2.75 0C2.0207 0 1.3212 0.2897 0.8055 0.8055 0.2897 1.3212 0 2.0207 0 2.75 0 3.4793 0.2897 4.1788 0.8055 4.6945 1.3212 5.2103 2.0207 5.5 2.75 5.5 3.4793 5.5 4.1788 5.2103 4.6945 4.6945 5.2103 4.1788 5.5 3.4793 5.5 2.75 5.5 2.0207 5.2103 1.3212 4.6945 0.8055 4.1788 0.2897 3.4793 0 2.75 0ZM1.5 2.75C1.5 2.4185 1.6317 2.1005 1.8661 1.8661 2.1005 1.6317 2.4185 1.5 2.75 1.5 3.0815 1.5 3.3995 1.6317 3.6339 1.8661 3.8683 2.1005 4 2.4185 4 2.75 4 3.0815 3.8683 3.6339 3.6339 3.3995 3.8683 3.0815 4 2.75 4 2.4185 4 2.1005 3.8683 1.8661 3.6339 1.5 3.0815 1.5 2.75ZM0 6.75C0 6.5511 0.079 6.3603 0.2197 6.2197 0.3603 6.079 0.5511 6 0.75 6H4.75C4.9489 6 5.1397 6.079 5.2803 6.2197 5.421 6.3603 5.5 6.5511 5.5 6.75V19.75C5.5 19.9489 5.421 20.1397 5.2803 20.2803 5.1397 20.421 4.9489 20.5 4.75 20.5H0.75C0.5511 20.5 0.3603 20.421 0.2197 20.2803 0.079 20.1397 0 19.9489 0 19.75V6.75ZM1.5 7.5V19H4V7.5H1.5ZM7 6.75C7 6.5511 7.079 6.3603 7.2197 6.2197 7.3603 6.079 7.5511 6 7.75 6H11.75C11.9489 6 12.1397 6.079 12.2803 6.2197 12.421 6.3603 12.5 6.5511 12.5 6.75V7.184L12.935 6.997C13.6851 6.6766 14.4807 6.4758 15.293 6.402 18.068 6.15 20.5 8.33 20.5 11.13V19.75C20.5 19.9489 20.421 20.1397 20.2803 20.2803 20.1397 20.421 19.9489 20.5 19.75 20.5H15.75C15.5511 20.5 15.3603 20.421 15.2197 20.2803 15.079 20.1397 15 19.9489 15 19.75V12.75C15 12.4185 14.8683 12.1005 14.6339 11.8661 14.3995 11.6317 14.0815 11.5 13.75 11.5 13.4185 11.5 13.1005 11.6317 12.8661 11.8661 12.6317 12.1005 12.5 12.4185 12.5 12.75V19.75C12.5 19.9489 12.421 20.1397 12.2803 20.2803 12.1397 20.421 11.9489 20.5 11.75 20.5H7.75C7.5511 20.5 7.3603 20.421 7.2197 20.2803 7.079 20.1397 7 19.9489 7 19.75V6.75ZM8.5 7.5V19H11V12.75C11 12.0207 11.2897 11.3212 11.8055 10.8055 12.3212 10.2897 13.0207 10 13.75 10 14.4793 10 15.1788 10.2897 15.6945 10.8055 16.2103 11.3212 16.5 12.0207 16.5 12.75V19H19V11.13C19 9.226 17.339 7.722 15.43 7.896 14.7741 7.9555 14.1317 8.1175 13.526 8.376L12.046 9.011C11.9318 9.06 11.8073 9.0799 11.6836 9.0689 11.5598 9.0579 11.4407 9.0163 11.337 8.9479 11.2333 8.8795 11.1482 8.7864 11.0894 8.677 11.0306 8.5676 10.9999 8.4452 11 8.321V7.5H8.5Z"
-                      fill="#7b6f65"
-                    />
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124ZM7.114 20.452H3.56V9h3.554v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" />
                   </svg>
                   <span
                     className="text"

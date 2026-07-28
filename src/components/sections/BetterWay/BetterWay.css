@@ -423,3 +423,125 @@
     width: auto;
   }
 }
+
+/* ─── MOBILE ≤ 768px ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .better-way {
+    padding: 48px 20px;
+    margin-top: 0;
+    row-gap: 40px;
+  }
+
+  .better-way__title {
+    font-size: clamp(22px, 6vw, 32px);
+  }
+
+  .better-way__subtitle {
+    font-size: 15px;
+  }
+
+  .better-way__grid {
+    row-gap: 48px !important;
+  }
+
+  .better-way__row--top {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 28px 16px !important;
+    width: 100% !important;
+  }
+
+  .better-way__row--top .better-way__card:nth-child(2) {
+    grid-column: span 2 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    text-align: center !important;
+  }
+
+  .better-way__row--top .better-way__card:nth-child(1) {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    justify-self: center !important;
+  }
+
+  .better-way__row--top .better-way__card:nth-child(3) {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    justify-self: center !important;
+  }
+
+  .better-way__row--bottom {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 28px 16px !important;
+    width: 100% !important;
+  }
+
+  .better-way__row--bottom .better-way__bottom-col:nth-child(3) {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+  }
+
+  .better-way__row--bottom .better-way__bottom-col:nth-child(1) {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+  }
+
+  .better-way__row--bottom .better-way__bottom-col:nth-child(2) {
+    grid-column: span 2 !important;
+    grid-row: 2 !important;
+    justify-self: center !important;
+  }
+
+  .better-way__card-header {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .better-way__card-labels {
+    width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .better-way__card-label {
+    font-size: 16px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .better-way__card-sub {
+    font-size: 13px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .better-way__bottom-desc {
+    font-size: 13px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .better-way__center-num {
+    font-size: 64px;
+  }
+
+  .better-way__center-title {
+    font-size: clamp(22px, 6vw, 32px);
+    width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .better-way__center-desc {
+    font-size: 15px;
+    width: 100%;
+  }
+
+  .better-way__card-num,
+  .better-way__bottom-num {
+    font-size: 40px !important;
+  }
+}

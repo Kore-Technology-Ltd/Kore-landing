@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from '@/components/sections/Navbar/Navbar'
 import Hero from '@/components/sections/Hero/Hero'
 import Story from '@/components/sections/Story/Story'
@@ -14,6 +14,23 @@ import FAQ from '@/components/sections/FAQ/FAQ'
 import Footer from '@/components/sections/Footer/Footer'
 
 export default function KoreLandingPage() {
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
   useEffect(() => {
     if (window.location.hash) {
       const hashId = window.location.hash.substring(1)
@@ -54,6 +71,28 @@ export default function KoreLandingPage() {
         <FAQ />
       </main>
       <Footer />
+
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="kore-scroll-top"
+          aria-label="Scroll to top"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+        </button>
+      )}
     </div>
   )
 }

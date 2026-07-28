@@ -1,5 +1,6 @@
 import './Waitlist.css'
 import { useState, useEffect, useRef } from 'react'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { createPortal } from 'react-dom'
 import {
   fetchWaitlistStats,
@@ -236,9 +237,12 @@ export default function Waitlist() {
     }
   }
 
+  const reveal = useScrollReveal()
+
   return (
     <section
-      className="waitlist"
+      ref={reveal.ref}
+      className={`waitlist ${reveal.className}`}
       id="section-waitlist"
       aria-label="Join the waitlist"
     >
@@ -505,8 +509,10 @@ export default function Waitlist() {
           </div>
           <div className="waitlist__pill">
             <span className="waitlist__pill-text">
-              {stats && stats.partner ? formatStatNumber(stats.partner) : '2'}{' '}
-              partners
+              {stats && stats.household
+                ? formatStatNumber(stats.household)
+                : '2'}{' '}
+              households
             </span>
           </div>
         </div>

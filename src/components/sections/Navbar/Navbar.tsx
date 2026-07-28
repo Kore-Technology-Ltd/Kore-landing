@@ -1,12 +1,14 @@
 import './Navbar.css'
 import { useState, useEffect, useCallback } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import CloseIcon from '@/assets/icons/CloseIcon'
 import HamburgerIcon from '@/assets/icons/HamburgerIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
 
 export default function Navbar() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const isTeamPage = location.pathname === '/team'
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string>('')
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), [])
@@ -82,73 +84,62 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Mobile sidebar overlay */}
+      {/* Mobile overlay */}
       <div
         className={`kore-mobile-overlay${mobileMenuOpen ? ' is-open' : ''}`}
         onClick={closeMobileMenu}
         aria-hidden="true"
       />
 
-      {/* Mobile sidebar */}
-      <div className={`kore-mobile-sidebar${mobileMenuOpen ? ' is-open' : ''}`}>
-        <div className="kore-mobile-sidebar-header">
-          <div className="kore-mobile-logo-wrapper">
-            <Link to="/">
-              <img src="/images/kore-logo-dark.png" alt="Korè logo" />
-            </Link>
-          </div>
+      {/* Mobile menu card */}
+      <div
+        className={`kore-mobile-menu-card-wrapper${mobileMenuOpen ? ' is-open' : ''}`}
+      >
+        <div className="kore-mobile-menu-card">
           <button
-            className="kore-mobile-close"
-            onClick={closeMobileMenu}
-            aria-label="Close menu"
+            className="kore-mobile-menu-item"
+            onClick={() => handleMobileNavClick('section-waitlist')}
           >
-            <CloseIcon />
+            Join Waitlist
           </button>
-        </div>
-        <nav className="kore-mobile-nav">
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-story')}
           >
             Story
           </button>
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-waste-crisis')}
           >
             Waste Crisis
           </button>
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-why-kore')}
           >
             Why Korè
           </button>
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-how-it-works')}
           >
             How it Works?
           </button>
           <button
-            className="kore-mobile-nav-link"
-            onClick={() => handleMobileNavClick('section-team')}
+            className={`kore-mobile-menu-item${isTeamPage ? ' active' : ''}`}
+            onClick={() => {
+              closeMobileMenu()
+              navigate('/team')
+            }}
           >
             Team
           </button>
           <button
-            className="kore-mobile-nav-link"
+            className="kore-mobile-menu-item"
             onClick={() => handleMobileNavClick('section-faq')}
           >
             FAQ
-          </button>
-        </nav>
-        <div className="kore-mobile-sidebar-cta">
-          <button
-            className="kore-mobile-join-btn"
-            onClick={() => handleMobileNavClick('section-waitlist')}
-          >
-            Join Waitlist
           </button>
         </div>
       </div>
@@ -212,11 +203,11 @@ export default function Navbar() {
               </span>
             </div>
             <div
-              onClick={() => scrollToSection('section-team')}
-              className={`kore-desktop-nav-item${activeSection === 'section-team' ? ' active' : ''}`}
+              onClick={() => navigate('/team')}
+              className={`kore-desktop-nav-item${isTeamPage ? ' active' : ''}`}
             >
               <span
-                className={`text korre-nav-link${activeSection === 'section-team' ? ' is-active' : ''}`}
+                className={`text korre-nav-link${isTeamPage ? ' is-active' : ''}`}
                 data-korre-nav-bound="true"
                 role="link"
                 tabIndex={0}
@@ -265,18 +256,27 @@ export default function Navbar() {
           {/* Mobile hamburger button — shown only on mobile via CSS */}
           <button
             className="kore-hamburger"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Open menu"
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
-            <HamburgerIcon />
+            {mobileMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
           </button>
         </div>
 
         {/* Responsive, distortion-free logo centered vertically with increased height */}
         <div className="kore-navbar-logo">
           <Link to="/">
-            <img alt="Korè logo" src="/images/kore-logo-dark.png" />
+            <img
+              className="logo-dark"
+              alt="Korè logo"
+              src="/images/kore-logo-dark.png"
+            />
+            <img
+              className="logo-light"
+              alt="Korè logo"
+              src="/images/kore-logo-light.png"
+            />
           </Link>
         </div>
       </header>

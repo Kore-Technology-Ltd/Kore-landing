@@ -283,60 +283,26 @@
 /* Responsive Overrides */
 @media (max-width: 1240px) {
   .why-different {
-    padding: 60px 24px;
+    padding: 48px 16px;
+    row-gap: 32px;
   }
 
   .why-different__title {
-    font-size: clamp(32px, 5vw, 48px);
+    font-size: clamp(24px, 6vw, 48px);
   }
 
   .why-different__subtitle {
-    font-size: clamp(18px, 3vw, 24px);
+    font-size: clamp(15px, 2.5vw, 20px);
   }
 
   .why-different__grid {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    row-gap: 40px;
-    align-items: center;
+    width: 1146px !important;
+    height: 536px !important;
   }
+}
 
-  .why-different__card {
-    position: static !important;
-    width: 100%;
-    max-width: 500px;
-    height: auto !important;
-    align-items: center !important;
-  }
-
-  .why-different__card-header {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 12px;
-    transform: none !important;
-  }
-
-  .why-different__icon-container {
-    transform: none !important;
-  }
-
-  .why-different__card-titles {
-    align-items: center !important;
-    transform: none !important;
-  }
-
-  .why-different__card-title,
-  .why-different__card-subtitle,
-  .why-different__card-body {
-    text-align: center !important;
-  }
-
-  .why-different__mockup-wrapper {
-    position: static !important;
-    margin: 20px 0;
-    width: 280px;
-    height: 536px;
+@media (max-width: 768px) {
+  .why-different {
+    margin-top: 0 !important;
   }
 }

@@ -1,10 +1,14 @@
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import './CoreProblem.css'
 
 export default function CoreProblem() {
+  const reveal = useScrollReveal()
+
   return (
     <section
+      ref={reveal.ref}
       id="section-core-problem"
-      className="core-problem"
+      className={`core-problem ${reveal.className}`}
       aria-label="The Core Problem"
     >
       <img

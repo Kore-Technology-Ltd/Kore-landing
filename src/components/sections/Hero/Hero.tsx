@@ -1,16 +1,40 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './Hero.css'
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [animKey, setAnimKey] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const prevSlide = useRef(0)
 
-  // Autoplay logic - switch slide every 5 seconds
+  const goToSlide = (index: number) => {
+    if (index === currentSlide) return
+    prevSlide.current = currentSlide
+    setCurrentSlide(index)
+    setAnimKey((k) => k + 1)
+  }
+
+  // Detect mobile viewports
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Autoplay logic - switch slide every 5 seconds (disabled on mobile)
+  useEffect(() => {
+    if (isMobile) {
+      setCurrentSlide(0)
+      return
+    }
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === 0 ? 1 : 0))
+      goToSlide(currentSlide === 0 ? 1 : 0)
     }, 5000)
     return () => clearInterval(timer)
-  }, [])
+  }, [currentSlide, isMobile])
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id)
@@ -28,8 +52,11 @@ export default function Hero() {
             className="hero-carousel-track"
             style={{ transform: `translateX(-${currentSlide * 50}%)` }}
           >
-            {/* Slide 1: Main Landing Content */}
-            <div className="hero-slide-item">
+            {/* Slide 1 */}
+            <div
+              className={`hero-slide-item${currentSlide === 0 ? ' is-entering' : ''}`}
+              key={currentSlide === 0 ? animKey : undefined}
+            >
               <div className="hero-slide-content">
                 {/* Left Column Content (Text and Buttons) */}
                 <div className="frame-4456">
@@ -67,6 +94,12 @@ export default function Hero() {
                       </div>
                     </button>
                   </div>
+                  <div className="hero-features-mobile-stat-in-card">
+                    <span className="hero-features-mobile-stat-num">38M</span>
+                    <span className="hero-features-mobile-stat-label">
+                      Tonnes wasted annually
+                    </span>
+                  </div>
                 </div>
 
                 {/* Right Column Content (Collage / Mockup SVG) */}
@@ -79,7 +112,10 @@ export default function Hero() {
             </div>
 
             {/* Slide 2: Step Flow Diagram */}
-            <div className="hero-slide-item">
+            <div
+              className={`hero-slide-item hero-slide-item--flow${currentSlide === 1 ? ' is-entering' : ''}`}
+              key={currentSlide === 1 ? animKey : undefined}
+            >
               <div className="hero-slide-content">
                 {/* Left Column Content (Text and Buttons) */}
                 <div className="frame-4456">
@@ -159,18 +195,24 @@ export default function Hero() {
         <div className="hero-carousel-dots">
           <button
             className={`hero-carousel-dot ${currentSlide === 0 ? 'is-active' : ''}`}
-            onClick={() => setCurrentSlide(0)}
+            onClick={() => goToSlide(0)}
             aria-label="Go to Slide 1"
           />
           <button
             className={`hero-carousel-dot ${currentSlide === 1 ? 'is-active' : ''}`}
-            onClick={() => setCurrentSlide(1)}
+            onClick={() => goToSlide(1)}
             aria-label="Go to Slide 2"
           />
         </div>
 
         {/* Bottom Features Bar (Fixed at the bottom of the hero canvas, untouched) */}
         <div className="frame-4669">
+          <div className="hero-features-mobile-stat">
+            <span className="hero-features-mobile-stat-num">38M</span>
+            <span className="hero-features-mobile-stat-label">
+              Tonnes wasted annually
+            </span>
+          </div>
           <div className="frame-4462">
             {/* Feature 1 */}
             <div className="frame-4459">

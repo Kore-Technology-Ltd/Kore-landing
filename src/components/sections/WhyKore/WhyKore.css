@@ -19,12 +19,14 @@
   flex-shrink: 0;
   margin: 0 auto;
   box-sizing: border-box;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  isolation: isolate;
 }
 
 .comparison-grid__bg-svg {
   transform-origin: 0px 0px;
   transform: rotate(90deg) scale(-1, 1);
-  left: 780px;
+  left: 554px;
   top: 748px;
   width: 756px;
   height: 828px;
@@ -51,9 +53,9 @@
   display: flex;
   flex-direction: column;
   row-gap: 0px;
-  align-items: start;
+  align-items: flex-start;
   justify-content: flex-start;
-  width: 771px;
+  width: 545px;
   position: relative;
   flex-shrink: 0;
   z-index: 1;
@@ -63,9 +65,9 @@
   display: flex;
   flex-direction: column;
   row-gap: 0px;
-  align-items: start;
+  align-items: center;
   justify-content: flex-start;
-  width: 217px;
+  width: 330px;
   position: relative;
   flex-shrink: 0;
   z-index: 1;
@@ -75,9 +77,9 @@
   display: flex;
   flex-direction: column;
   row-gap: 0px;
-  align-items: start;
+  align-items: center;
   justify-content: flex-start;
-  width: 217px;
+  width: 330px;
   position: relative;
   flex-shrink: 0;
   z-index: 1;
@@ -85,10 +87,10 @@
 
 /* Features Column Cells */
 .comparison-grid__col--features .comparison-grid__cell--header {
-  border-width: 0.5px 0px;
+  border-width: 1px 0px;
   border-style: solid;
   border-color: rgb(255, 255, 255);
-  border-radius: 30px 0px 0px;
+  border-radius: 20px 0px 0px 0px !important;
   display: flex;
   flex-direction: column;
   row-gap: 0px;
@@ -104,7 +106,7 @@
 
 .comparison-grid__col--features
   .comparison-grid__cell:not(.comparison-grid__cell--header) {
-  border-width: 0.5px 0px 0.5px 0.5px;
+  border-width: 1px 0px 1px 1px;
   border-style: solid;
   border-color: rgb(255, 255, 255);
   display: flex;
@@ -120,9 +122,14 @@
   box-sizing: border-box;
 }
 
+.comparison-grid__col--features .comparison-grid__cell:last-child {
+  border-bottom-left-radius: 20px !important;
+}
+
 /* Traditional Market Column Cells */
-.comparison-grid__col--traditional .comparison-grid__cell {
-  border-width: 0.5px 0px;
+.comparison-grid__col--traditional .comparison-grid__cell,
+.comparison-grid__col--traditional .comparison-grid__cell--header {
+  border-width: 1px 0px;
   border-style: solid;
   border-color: rgb(255, 255, 255);
   display: flex;
@@ -139,10 +146,10 @@
 
 /* Korè Column Cells */
 .comparison-grid__col--kore .comparison-grid__cell--header {
-  border-width: 0.5px 0px;
+  border-width: 1px 0px;
   border-style: solid;
   border-color: rgb(255, 255, 255);
-  border-radius: 0px 30px 0px 0px;
+  border-radius: 0px 20px 0px 0px !important;
   display: flex;
   flex-direction: column;
   row-gap: 0px;
@@ -157,7 +164,7 @@
 
 .comparison-grid__col--kore
   .comparison-grid__cell:not(.comparison-grid__cell--header) {
-  border-width: 0.5px 0.5px 0.5px 0px;
+  border-width: 1px 1px 1px 0px;
   border-style: solid;
   border-color: rgb(255, 255, 255);
   display: flex;
@@ -172,78 +179,86 @@
   box-sizing: border-box;
 }
 
+.comparison-grid__col--kore .comparison-grid__cell:last-child {
+  border-bottom-right-radius: 20px !important;
+}
+
 /* Cell contents */
 .comparison-grid__inner-container {
   display: flex;
   flex-direction: column;
   row-gap: 3px;
-  align-items: center;
-  justify-content: flex-start;
-  width: min-content;
+  align-items: inherit;
+  justify-content: center;
+  width: 100%;
   position: relative;
   flex-shrink: 0;
+  box-sizing: border-box;
+  padding-right: 16px;
 }
 
 /* Text styles */
 .comparison-grid__text {
-  display: inline;
-  text-align: left;
+  display: block;
+  text-align: inherit;
   font-family: Outfit, system-ui, sans-serif;
   font-stretch: 100%;
   position: relative;
   flex-shrink: 0;
+  white-space: normal;
 }
 
 .comparison-grid__text--feature-name {
   font-size: 24px;
   font-weight: 600;
   color: rgb(255, 255, 255);
-  width: max-content;
+  text-align: left;
+  width: 100%;
 }
 
 .comparison-grid__text--traditional-header {
   font-size: 24px;
   font-weight: 600;
   color: rgb(255, 255, 255);
-  width: max-content;
+  text-align: center;
+  width: 100%;
 }
 
 .comparison-grid__text--traditional-val {
   font-size: 20px;
   font-weight: 500;
   color: rgb(255, 255, 255);
-  width: max-content;
+  text-align: center;
+  width: 100%;
 }
 
 .comparison-grid__text--kore-header {
   font-size: 24px;
   font-weight: 600;
   color: rgb(211, 160, 20);
-  width: max-content;
+  text-align: center;
+  width: 100%;
 }
 
 .comparison-grid__text--kore-val {
   font-size: 20px;
   font-weight: 500;
   color: rgb(211, 160, 20);
-  width: max-content;
+  text-align: center;
+  width: 100%;
 }
 
 /* Responsive comparison overrides */
 @media (max-width: 1240px) {
   .comparison-section {
-    width: 100%;
-    padding: 0 24px;
-    box-sizing: border-box;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .comparison-section::-webkit-scrollbar {
-    display: none;
+    width: 100% !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    margin-top: 20px !important;
   }
   .comparison-grid {
-    margin: 40px auto 0 auto;
-    width: 1205px;
+    width: 1205px !important;
+    height: 476px !important;
   }
 }

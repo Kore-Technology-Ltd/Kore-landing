@@ -27,21 +27,18 @@
   height: 65px;
   position: relative;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .waitlist__badge-text {
-  display: inline;
-  text-align: left;
-  line-height: 20px;
+  text-align: center;
   font-size: 20px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   font-weight: 500;
-  font-stretch: 100%;
   color: rgb(211, 160, 20);
-  left: calc(50% - 92.5px);
-  top: calc(50% - 9.5px);
-  width: max-content;
-  position: absolute;
+  margin: 0;
 }
 
 .waitlist__header {
@@ -529,6 +526,15 @@
     gap: 32px;
   }
 
+  .waitlist__badge-wrapper {
+    width: 260px !important;
+    height: 48px !important;
+  }
+
+  .waitlist__badge-text {
+    font-size: 16px !important;
+  }
+
   .waitlist__header {
     width: 100%;
   }
@@ -552,12 +558,17 @@
   }
 
   .waitlist__form-wrapper {
-    position: relative;
-    left: auto;
-    top: auto;
-    translate: none;
-    width: 100%;
-    padding: 0;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    transform: none !important;
+    -webkit-translate: none !important;
+    translate: none !important;
+    width: 100% !important;
+    padding: 0 !important;
   }
 
   .waitlist__row {
@@ -596,5 +607,169 @@
 
   .waitlist__pill {
     width: auto;
+  }
+}
+
+/* ─── MOBILE ≤ 768px ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .waitlist {
+    margin: 0;
+    padding: 48px 16px;
+    gap: 24px;
+  }
+
+  .waitlist__header {
+    width: 100%;
+  }
+
+  .waitlist__title {
+    font-size: clamp(22px, 6vw, 32px);
+    width: 100%;
+    text-align: center;
+  }
+
+  .waitlist__subtitle {
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .waitlist__badge-wrapper {
+    width: 200px !important;
+    height: 40px !important;
+  }
+
+  .waitlist__badge-text {
+    font-size: 13px !important;
+  }
+
+  .waitlist__card {
+    padding: 24px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .waitlist__card-bg {
+    display: block !important;
+    position: absolute !important;
+    width: 200% !important;
+    height: 200% !important;
+    left: -50% !important;
+    top: -50% !important;
+    transform: rotate(-90deg) scale(-1, 1) !important;
+    transform-origin: center center !important;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .waitlist__form-wrapper {
+    z-index: 2 !important;
+    position: relative !important;
+  }
+
+  .waitlist__row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .waitlist__field--half {
+    width: 100%;
+    margin: 0;
+  }
+
+  .waitlist__label {
+    font-size: 15px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .waitlist__input,
+  .waitlist__select-wrapper,
+  .waitlist__select-trigger {
+    height: 48px !important;
+    line-height: 46px !important;
+    font-size: 15px !important;
+    padding: 0 16px !important;
+    border-radius: 8px !important;
+  }
+
+  .waitlist__select-trigger::after {
+    right: 16px !important;
+  }
+
+  .waitlist__submit {
+    height: 48px !important;
+    border-radius: 8px !important;
+  }
+
+  .waitlist__submit-text {
+    font-size: 15px !important;
+  }
+
+  .waitlist__privacy {
+    font-size: 12px !important;
+    line-height: 16px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .waitlist__pills {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    margin: 0 auto !important;
+  }
+
+  .waitlist__pill {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 8px 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .waitlist__pill:last-child {
+    display: flex !important;
+  }
+
+  .waitlist__pill-text {
+    font-size: 13px !important;
+    line-height: 16px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  /* Custom Dropdown Modal Mobile Responsive */
+  .waitlist__dropdown-modal {
+    padding: 16px !important;
+    row-gap: 12px !important;
+    width: calc(100% - 32px) !important;
+    border-radius: 16px !important;
+  }
+
+  .waitlist__dropdown-modal-header {
+    padding-bottom: 12px !important;
+  }
+
+  .waitlist__dropdown-modal-title {
+    font-size: 18px !important;
+  }
+
+  .waitlist__dropdown-modal-close {
+    font-size: 24px !important;
+  }
+
+  .waitlist__dropdown-options {
+    max-height: 240px !important;
+    row-gap: 6px !important;
+  }
+
+  .waitlist__dropdown-option {
+    padding: 10px 16px !important;
+    font-size: 15px !important;
+    border-radius: 8px !important;
   }
 }

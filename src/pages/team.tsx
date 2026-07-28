@@ -842,7 +842,7 @@ export default function Team() {
                             }}
                           >
                             <a
-                              href="mailto:tolui@kore.ng"
+                              href="mailto:tolu@kore.ng"
                               className="card-contact-btn"
                               style={{
                                 borderWidth: '1.5px',
@@ -2537,11 +2537,8 @@ export default function Team() {
                       flexShrink: '0'
                     }}
                   >
-                    Kore Technology Limited was formally incorporated in Lagos,
-                    Nigeria, under CAMA 2020. The Founders' Agreement and
-                    Articles of Association were executed, establishing the
-                    company's dual-class share structure and governance
-                    framework.
+                    Ikore Labs Limited was formally incorporated in Lagos,
+                    Nigeria, under CAMA 2020.
                   </span>
                 </div>
               </div>

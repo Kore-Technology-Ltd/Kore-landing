@@ -1059,7 +1059,7 @@ export default function Team() {
                         </div>
                       </div>
 
-                      {/* Card 2: Samuel Ayomide Adeyemi */}
+                      {/* Card 2: Samuel Ayomide*/}
                       <div
                         className="kore-founder-card kore-founder-card--reverse"
                         style={{
@@ -1086,14 +1086,18 @@ export default function Team() {
                               color: '#7b6f65'
                             }}
                           >
-                            Samuel leads Korè's entire technology stack, from
-                            platform architecture and backend systems to DevOps
-                            infrastructure and product engineering. He built the
-                            core platform using Laravel, TypeScript, and
-                            Supabase, with a focus on performance at scale
-                            across Nigeria's varied network conditions. His
-                            engineering decisions underpin the trust, security,
-                            and reliability that Korè's marketplace is built on.
+                            Samuel is the engineer behind Korè's platform -
+                            architecture, backend, infrastructure, all of it.
+                            Most of Nigeria's agricultural trade still runs on
+                            trust and phone calls; his job is to build the layer
+                            underneath that makes it work at scale without
+                            losing that trust. He thinks in systems: how a
+                            farmer in a low-connectivity area, a trader in
+                            Lagos, and a buyer with a spreadsheet all need the
+                            same platform to feel effortless to each of them -
+                            and he cares less about shipping features fast than
+                            shipping things that don't fall over when someone
+                            needs them most.
                           </span>
                           <div
                             style={{
@@ -1115,11 +1119,14 @@ export default function Team() {
                                 lineHeight: '28px'
                               }}
                             >
-                              "The best technology is invisible, it just works.
-                              My job is to build the infrastructure that makes
-                              every farmer, trader, and buyer on Korè feel like
-                              the platform was designed specifically for them
-                              and enjoy myself doing it."
+                              "I own everything that makes Korè actually run -
+                              the platform architecture, the backend, the
+                              infrastructure decisions, the trade-offs nobody
+                              sees until something breaks. My focus isn't
+                              features, it's the foundation those features stand
+                              on: does it hold up on a bad connection, does it
+                              stay secure, does it earn trust the first time
+                              someone uses it."
                             </span>
                           </div>
                           <div
@@ -1155,15 +1162,16 @@ export default function Team() {
                                 Platform architecture and technical direction
                               </li>
                               <li>Backend and frontend development</li>
+                              <li>Infrastructure and systems reliability</li>
+                              <li>Secure payment integrations</li>
                               <li>
-                                Cloud infrastructure and DevOps (Google Cloud
-                                Run)
+                                Data security and regulatory compliance (NDPA
+                                2023)
                               </li>
                               <li>
-                                Payment gateway integration (Paystack /
-                                Flutterwave)
+                                Turning "it should just work" into engineering
+                                decisions that hold up under real conditions
                               </li>
-                              <li>Data security and NDPA 2023 compliance</li>
                             </ul>
                           </div>
                         </div>
@@ -1209,7 +1217,7 @@ export default function Team() {
                                 color: '#252323'
                               }}
                             >
-                              Samuel Ayomide Adeyemi
+                              Samuel Ayomide
                             </span>
                             <div
                               style={{
@@ -1273,7 +1281,7 @@ export default function Team() {
                                   color: '#7b6f65'
                                 }}
                               >
-                                📍 Ibadan, Nigeria
+                                📍 Everywhere
                               </span>
                             </div>
                             <div
@@ -1297,7 +1305,7 @@ export default function Team() {
                                   color: '#194332'
                                 }}
                               >
-                                | ARCHITECTURE. ENGINEERING. SCALE.
+                                | ARCHITECTURE. RELIABILITY. TRUST.
                               </span>
                             </div>
                           </div>

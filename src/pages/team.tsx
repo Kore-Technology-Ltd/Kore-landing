@@ -1179,24 +1179,23 @@ export default function Team() {
                         {/* Right Column: Photo, Info, Skills, Links */}
                         <div className="kore-founder-left">
                           <div
+                            className="kore-founder-img-wrapper"
                             style={{
                               overflow: 'hidden',
                               borderRadius: '10px',
-                              width: '100%',
-                              height: '525px',
-                              position: 'relative',
-                              flexShrink: '0'
+                              position: 'relative'
                             }}
                           >
                             <img
                               src="/images/samuel.jpg"
-                              alt="Samuel Ayomide Adeyemi"
+                              alt="Samuel Ayomide"
                               style={{
                                 inset: '0',
                                 width: '100%',
                                 height: '100%',
                                 position: 'absolute',
-                                objectFit: 'cover'
+                                objectFit: 'cover',
+                                objectPosition: 'top'
                               }}
                             />
                           </div>

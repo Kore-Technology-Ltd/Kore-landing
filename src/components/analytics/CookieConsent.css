@@ -1,0 +1,452 @@
+/* ============================================================================
+   KORÈ NATIVE COOKIE CONSENT & PREFERENCES DESIGN SYSTEM
+   Designed to seamlessly match Korè's landing page typography, colors & cards.
+   ============================================================================ */
+
+/* 1. Floating Card Banner (Bottom Right / Mobile Bottom Floating) */
+.kore-cookie-card-wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: min(440px, calc(100vw - 32px));
+  z-index: 9999;
+  outline: none;
+  animation: koreCardEntrance 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes koreCardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.kore-cookie-card {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(25, 67, 50, 0.12);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 48px rgba(11, 28, 48, 0.14),
+    0 4px 12px rgba(11, 28, 48, 0.04);
+  padding: 22px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.kore-cookie-card__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #194332 0%, #d3a014 100%);
+}
+
+.kore-cookie-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.kore-cookie-card__icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(211, 160, 20, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kore-cookie-card__title-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kore-cookie-card__badge {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #d3a014;
+}
+
+.kore-cookie-card__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #194332;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.kore-cookie-card__description {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #4b5563;
+  margin: 0 0 18px 0;
+}
+
+.kore-cookie-card__link {
+  color: #194332;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.15s;
+}
+
+.kore-cookie-card__link:hover {
+  color: #d3a014;
+}
+
+.kore-cookie-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* 2. Custom Button System matching Korè landing page */
+.kore-cookie-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.kore-cookie-btn:active {
+  transform: scale(0.98);
+}
+
+.kore-cookie-btn--gold {
+  background-color: #d3a014;
+  color: #ffffff;
+  border-color: #d3a014;
+  box-shadow: 0 2px 8px rgba(211, 160, 20, 0.25);
+}
+
+.kore-cookie-btn--gold:hover {
+  background-color: #b8880f;
+  border-color: #b8880f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(211, 160, 20, 0.35);
+}
+
+.kore-cookie-btn--forest {
+  background-color: #194332;
+  color: #ffffff;
+  border-color: #194332;
+}
+
+.kore-cookie-btn--forest:hover {
+  background-color: #113024;
+  border-color: #113024;
+  transform: translateY(-1px);
+}
+
+.kore-cookie-btn--cream {
+  background-color: #f6f4e5;
+  color: #194332;
+  border: 1px solid rgba(25, 67, 50, 0.15);
+}
+
+.kore-cookie-btn--cream:hover {
+  background-color: #ede9d2;
+  border-color: rgba(25, 67, 50, 0.25);
+}
+
+.kore-cookie-btn--text {
+  background-color: transparent;
+  color: #7b6f65;
+  padding: 6px 12px;
+  font-weight: 500;
+}
+
+.kore-cookie-btn--text:hover {
+  color: #194332;
+  text-decoration: underline;
+}
+
+/* 3. Preferences Modal Backdrop & Dialog */
+.kore-cookie-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background-color: rgba(25, 67, 50, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: koreFadeIn 0.25s ease;
+}
+
+@keyframes koreFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.kore-cookie-modal {
+  background: #ffffff;
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  border-radius: 24px;
+  border: 1px solid rgba(25, 67, 50, 0.12);
+  box-shadow: 0 24px 64px rgba(11, 28, 48, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  outline: none;
+  animation: koreModalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes koreModalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.kore-cookie-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid rgba(25, 67, 50, 0.08);
+}
+
+.kore-cookie-modal__title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kore-cookie-modal__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #194332;
+  margin: 0;
+}
+
+.kore-cookie-modal__close {
+  background: transparent;
+  border: none;
+  color: #7b6f65;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.kore-cookie-modal__close:hover {
+  background: #f6f4e5;
+  color: #194332;
+}
+
+.kore-cookie-modal__body {
+  padding: 20px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.kore-cookie-modal__intro {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  color: #4b5563;
+  line-height: 1.5;
+  margin: 0 0 4px 0;
+}
+
+/* Category Option Card Rows */
+.kore-cookie-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  background: #f9fbf9;
+  border: 1px solid rgba(25, 67, 50, 0.08);
+  border-radius: 14px;
+}
+
+.kore-cookie-row__info {
+  flex: 1;
+}
+
+.kore-cookie-row__title-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.kore-cookie-row__name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #194332;
+}
+
+.kore-cookie-row__status-badge {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #194332;
+  background: rgba(25, 67, 50, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kore-cookie-row__desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12.5px;
+  color: #6b7280;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 4. Korè Gold Toggle Switch Styling */
+.kore-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.kore-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.kore-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #d1d5db;
+  transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 24px;
+}
+
+.kore-slider:before {
+  position: absolute;
+  content: '';
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+input:checked + .kore-slider {
+  background-color: #d3a014;
+}
+
+input:checked + .kore-slider:before {
+  transform: translateX(20px);
+}
+
+.kore-cookie-checkbox--disabled {
+  accent-color: #194332;
+  width: 18px;
+  height: 18px;
+  cursor: not-allowed;
+}
+
+.kore-cookie-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid rgba(25, 67, 50, 0.08);
+  background: #fcfdfc;
+}
+
+.kore-cookie-modal__footer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Mobile Responsiveness (<= 768px) */
+@media (max-width: 768px) {
+  .kore-cookie-card-wrapper {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+
+  .kore-cookie-card {
+    padding: 18px 20px 16px;
+  }
+
+  .kore-cookie-modal {
+    max-height: 95vh;
+    border-radius: 20px;
+  }
+
+  .kore-cookie-modal__footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .kore-cookie-modal__footer-right {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .kore-cookie-btn {
+    width: 100%;
+  }
+}

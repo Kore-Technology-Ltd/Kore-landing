@@ -2,6 +2,7 @@ import './Waitlist.css'
 import { useState, useEffect, useRef } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { createPortal } from 'react-dom'
+import { useAnalytics } from '@/analytics/useAnalytics'
 import {
   fetchWaitlistStats,
   formatStatNumber,
@@ -12,6 +13,11 @@ import {
 } from '@lib/waitlist'
 
 export default function Waitlist() {
+  const { trackWaitlist, trackError } = useAnalytics()
+  const hasStartedFunnelRef = useRef(false)
+  const hasEnteredNameRef = useRef(false)
+  const hasEnteredEmailRef = useRef(false)
+
   const [stats, setStats] = useState<WaitlistStats | null>(() => {
     try {
       const cached = localStorage.getItem('kore_waitlist_stats')

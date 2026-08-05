@@ -1,4 +1,5 @@
-import React, {
+import {
+  type ReactNode,
   createContext,
   useContext,
   useState,
@@ -54,7 +55,7 @@ function AnalyticsHooksActive() {
 }
 
 interface AnalyticsProviderProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export function AnalyticsProvider({ children }: AnalyticsProviderProps) {

@@ -33,14 +33,11 @@ export default function CookieConsentBanner({
       tabIndex={-1}
     >
       <div className="kore-cookie-card">
-        {/* Decorative Top Accent Line */}
-        <div className="kore-cookie-card__accent" />
-
         <div className="kore-cookie-card__header">
           <div className="kore-cookie-card__icon-box">
             <svg
-              width="20"
-              height="20"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +67,7 @@ export default function CookieConsentBanner({
 
         <p className="kore-cookie-card__description">
           Korè uses essential cookies for platform security, and optional
-          analytics to help us measure waitlist performance and improve our
+          analytics to help us measure site performance and improve our
           agricultural marketplace.{' '}
           <a href="/privacy" className="kore-cookie-card__link">
             Learn more

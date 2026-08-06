@@ -65,6 +65,7 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
   const [hasResponded, setHasResponded] = useState<boolean>(() =>
     Boolean(getSavedConsent())
   )
+  const [showBanner, setShowBanner] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   // 1. Initialize Google Consent Mode v2 early (defaults to denied for analytics/ad storage)
@@ -76,7 +77,17 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     }
   }, [])
 
-  // 2. Subscribe to consent state changes
+  // 2. Add 10-second delay before displaying banner to give users time to be hooked
+  useEffect(() => {
+    if (!hasResponded) {
+      const timer = setTimeout(() => {
+        setShowBanner(true)
+      }, 10000)
+      return () => clearTimeout(timer)
+    }
+  }, [hasResponded])
+
+  // 3. Subscribe to consent state changes
   useEffect(() => {
     const unsubscribe = subscribeConsentChange((newPrefs) => {
       setConsent(newPrefs)
@@ -119,7 +130,7 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
     <AnalyticsContext.Provider value={value}>
       <AnalyticsHooksActive />
       {children}
-      {!hasResponded && (
+      {!hasResponded && showBanner && (
         <CookieConsentBanner
           onAcceptAll={acceptAll}
           onRejectNonEssential={rejectNonEssential}

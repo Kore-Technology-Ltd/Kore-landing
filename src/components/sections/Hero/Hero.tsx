@@ -1,11 +1,23 @@
 import { useState, useEffect, useRef } from 'react'
 import './Hero.css'
+import { useAnalytics } from '@/analytics/useAnalytics'
 
 export default function Hero() {
+  const { trackCTA } = useAnalytics()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [animKey, setAnimKey] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const prevSlide = useRef(0)
+
+  const handleHeroCTA = (btnName: string, destId: string) => {
+    trackCTA({
+      button_name: btnName,
+      section: 'hero',
+      position: `slide_${currentSlide + 1}`,
+      destination: `#${destId}`
+    })
+    scrollToSection(destId)
+  }
 
   const goToSlide = (index: number) => {
     if (index === currentSlide) return
@@ -77,7 +89,9 @@ export default function Hero() {
                   <div className="frame-4454">
                     <button
                       className="frame-4544 korre-clickable"
-                      onClick={() => scrollToSection('section-waitlist')}
+                      onClick={() =>
+                        handleHeroCTA('Join Waitlist', 'section-waitlist')
+                      }
                       type="button"
                     >
                       <div className="frame-4451">
@@ -86,7 +100,9 @@ export default function Hero() {
                     </button>
                     <button
                       className="frame-45442 korre-clickable"
-                      onClick={() => scrollToSection('section-story')}
+                      onClick={() =>
+                        handleHeroCTA('See Our Story', 'section-story')
+                      }
                       type="button"
                     >
                       <div className="frame-4451">
@@ -163,7 +179,9 @@ export default function Hero() {
                   <div className="frame-4454">
                     <button
                       className="frame-4544 korre-clickable"
-                      onClick={() => scrollToSection('section-waitlist')}
+                      onClick={() =>
+                        handleHeroCTA('Join Waitlist', 'section-waitlist')
+                      }
                       type="button"
                     >
                       <div className="frame-4451">
@@ -172,7 +190,9 @@ export default function Hero() {
                     </button>
                     <button
                       className="frame-45442 korre-clickable"
-                      onClick={() => scrollToSection('section-story')}
+                      onClick={() =>
+                        handleHeroCTA('See Our Story', 'section-story')
+                      }
                       type="button"
                     >
                       <div className="frame-4451">

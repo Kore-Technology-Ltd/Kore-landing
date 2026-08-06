@@ -4,10 +4,12 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import CloseIcon from '@/assets/icons/CloseIcon'
 import HamburgerIcon from '@/assets/icons/HamburgerIcon'
 import SearchIcon from '@/assets/icons/SearchIcon'
+import { useAnalytics } from '@/analytics/useAnalytics'
 
 export default function Navbar() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { trackCTA } = useAnalytics()
   const isTeamPage = location.pathname === '/team'
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string>('')
@@ -56,14 +58,26 @@ export default function Navbar() {
   }, [])
 
   const handleMobileNavClick = useCallback(
-    (sectionId: string) => {
+    (sectionId: string, label: string) => {
+      trackCTA({
+        button_name: label,
+        section: 'mobile_navigation',
+        destination: `#${sectionId}`
+      })
       closeMobileMenu()
       setTimeout(() => scrollToSection(sectionId), 300)
     },
-    [closeMobileMenu]
+    [closeMobileMenu, trackCTA]
   )
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = (id: string, label?: string) => {
+    if (label) {
+      trackCTA({
+        button_name: label,
+        section: 'desktop_navigation',
+        destination: `#${id}`
+      })
+    }
     const el = document.getElementById(id)
     if (el) {
       const navbar = document.querySelector('.kore-navbar-container')
@@ -98,37 +112,48 @@ export default function Navbar() {
         <div className="kore-mobile-menu-card">
           <button
             className="kore-mobile-menu-item"
-            onClick={() => handleMobileNavClick('section-waitlist')}
+            onClick={() =>
+              handleMobileNavClick('section-waitlist', 'Join Waitlist')
+            }
           >
             Join Waitlist
           </button>
           <button
             className="kore-mobile-menu-item"
-            onClick={() => handleMobileNavClick('section-story')}
+            onClick={() => handleMobileNavClick('section-story', 'Story')}
           >
             Story
           </button>
           <button
             className="kore-mobile-menu-item"
-            onClick={() => handleMobileNavClick('section-waste-crisis')}
+            onClick={() =>
+              handleMobileNavClick('section-waste-crisis', 'Waste Crisis')
+            }
           >
             Waste Crisis
           </button>
           <button
             className="kore-mobile-menu-item"
-            onClick={() => handleMobileNavClick('section-why-kore')}
+            onClick={() => handleMobileNavClick('section-why-kore', 'Why Korè')}
           >
             Why Korè
           </button>
           <button
             className="kore-mobile-menu-item"
-            onClick={() => handleMobileNavClick('section-how-it-works')}
+            onClick={() =>
+              handleMobileNavClick('section-how-it-works', 'How it Works?')
+            }
           >
             How it Works?
           </button>
           <button
             className={`kore-mobile-menu-item${isTeamPage ? ' active' : ''}`}
             onClick={() => {
+              trackCTA({
+                button_name: 'Team',
+                section: 'mobile_navigation',
+                destination: '/team'
+              })
               closeMobileMenu()
               navigate('/team')
             }}
@@ -137,7 +162,7 @@ export default function Navbar() {
           </button>
           <button
             className="kore-mobile-menu-item"
-            onClick={() => handleMobileNavClick('section-faq')}
+            onClick={() => handleMobileNavClick('section-faq', 'FAQ')}
           >
             FAQ
           </button>
@@ -151,7 +176,7 @@ export default function Navbar() {
           {/* Desktop nav links — hidden on mobile via CSS */}
           <nav className="kore-desktop-nav">
             <div
-              onClick={() => scrollToSection('section-story')}
+              onClick={() => scrollToSection('section-story', 'Story')}
               className={`kore-desktop-nav-item${activeSection === 'section-story' ? ' active' : ''}`}
             >
               <span
@@ -164,7 +189,9 @@ export default function Navbar() {
               </span>
             </div>
             <div
-              onClick={() => scrollToSection('section-waste-crisis')}
+              onClick={() =>
+                scrollToSection('section-waste-crisis', 'Waste Crisis')
+              }
               className={`kore-desktop-nav-item${activeSection === 'section-waste-crisis' ? ' active' : ''}`}
             >
               <span
@@ -177,7 +204,7 @@ export default function Navbar() {
               </span>
             </div>
             <div
-              onClick={() => scrollToSection('section-why-kore')}
+              onClick={() => scrollToSection('section-why-kore', 'Why Korè')}
               className={`kore-desktop-nav-item${activeSection === 'section-why-kore' ? ' active' : ''}`}
             >
               <span
@@ -190,7 +217,9 @@ export default function Navbar() {
               </span>
             </div>
             <div
-              onClick={() => scrollToSection('section-how-it-works')}
+              onClick={() =>
+                scrollToSection('section-how-it-works', 'How it Works?')
+              }
               className={`kore-desktop-nav-item${activeSection === 'section-how-it-works' ? ' active' : ''}`}
             >
               <span
@@ -203,7 +232,14 @@ export default function Navbar() {
               </span>
             </div>
             <div
-              onClick={() => navigate('/team')}
+              onClick={() => {
+                trackCTA({
+                  button_name: 'Team',
+                  section: 'desktop_navigation',
+                  destination: '/team'
+                })
+                navigate('/team')
+              }}
               className={`kore-desktop-nav-item${isTeamPage ? ' active' : ''}`}
             >
               <span
@@ -216,7 +252,7 @@ export default function Navbar() {
               </span>
             </div>
             <div
-              onClick={() => scrollToSection('section-faq')}
+              onClick={() => scrollToSection('section-faq', 'FAQ')}
               className={`kore-desktop-nav-item${activeSection === 'section-faq' ? ' active' : ''}`}
             >
               <span
@@ -238,7 +274,9 @@ export default function Navbar() {
               </div>
             </div>
             <div
-              onClick={() => scrollToSection('section-waitlist')}
+              onClick={() =>
+                scrollToSection('section-waitlist', 'Join Waitlist')
+              }
               className="kore-desktop-join-btn"
             >
               <span

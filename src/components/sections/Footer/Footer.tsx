@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import './Footer.css'
 import { Link } from 'react-router-dom'
+import { useAnalyticsContext } from '@/analytics/AnalyticsProvider'
 
 export default function Footer() {
   const [scale, setScale] = useState(1)
   const [isMobile, setIsMobile] = useState(false)
+  const { openSettings } = useAnalyticsContext()
 
   useEffect(() => {
     const handleResize = () => {
@@ -345,6 +347,22 @@ export default function Footer() {
               <Link to="/terms" className="footer__col-link">
                 Terms &amp; Condition
               </Link>
+              <button
+                type="button"
+                onClick={openSettings}
+                className="footer__col-link"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  font: 'inherit',
+                  color: 'inherit',
+                  textAlign: 'left',
+                  cursor: 'pointer'
+                }}
+              >
+                Cookie Settings
+              </button>
               <a href="mailto:info@kore.ng" className="footer__col-link">
                 Contact
               </a>

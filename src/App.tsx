@@ -5,6 +5,8 @@ import Home from '@/pages/Home'
 import Privacy from '@/pages/Privacy.tsx'
 import Terms from '@/pages/Terms.tsx'
 import Team from '@/pages/team.tsx'
+import { AnalyticsProvider } from '@/analytics/AnalyticsProvider'
+import { AnalyticsErrorBoundary } from '@/analytics/ErrorBoundary'
 
 /** Scrolls the window to the top on every navigation. */
 function ScrollToTop() {
@@ -17,43 +19,47 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <Home />
-            </Layout>
-          }
-        />
-        <Route
-          path="/privacy"
-          element={
-            <Layout>
-              <Privacy />
-            </Layout>
-          }
-        />
-        <Route
-          path="/terms"
-          element={
-            <Layout>
-              <Terms />
-            </Layout>
-          }
-        />
-        <Route
-          path="/team"
-          element={
-            <Layout>
-              <Team />
-            </Layout>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <AnalyticsErrorBoundary>
+      <BrowserRouter>
+        <AnalyticsProvider>
+          <ScrollToTop />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <Home />
+                </Layout>
+              }
+            />
+            <Route
+              path="/privacy"
+              element={
+                <Layout>
+                  <Privacy />
+                </Layout>
+              }
+            />
+            <Route
+              path="/terms"
+              element={
+                <Layout>
+                  <Terms />
+                </Layout>
+              }
+            />
+            <Route
+              path="/team"
+              element={
+                <Layout>
+                  <Team />
+                </Layout>
+              }
+            />
+          </Routes>
+        </AnalyticsProvider>
+      </BrowserRouter>
+    </AnalyticsErrorBoundary>
   )
 }
 

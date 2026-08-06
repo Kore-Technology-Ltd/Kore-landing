@@ -2,6 +2,7 @@ import './Waitlist.css'
 import { useState, useEffect, useRef } from 'react'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { createPortal } from 'react-dom'
+import { useAnalytics } from '@/analytics/useAnalytics'
 import {
   fetchWaitlistStats,
   formatStatNumber,
@@ -12,6 +13,11 @@ import {
 } from '@lib/waitlist'
 
 export default function Waitlist() {
+  const { trackWaitlist, trackError } = useAnalytics()
+  const hasStartedFunnelRef = useRef(false)
+  const hasEnteredNameRef = useRef(false)
+  const hasEnteredEmailRef = useRef(false)
+
   const [stats, setStats] = useState<WaitlistStats | null>(() => {
     try {
       const cached = localStorage.getItem('kore_waitlist_stats')
@@ -103,6 +109,22 @@ export default function Waitlist() {
     if (el.id === 'waitlist-phone') el.placeholder = 'e.g. +234 800 000 0000'
     if (el.id === 'waitlist-location') el.placeholder = 'City or region'
     if (el.id === 'waitlist-email') el.placeholder = 'you@example.com'
+
+    // Fire waitlist_started on first field focus
+    if (!hasStartedFunnelRef.current) {
+      hasStartedFunnelRef.current = true
+      trackWaitlist('started', { source: 'waitlist_form' })
+    }
+
+    if (el.id === 'waitlist-name' && !hasEnteredNameRef.current) {
+      hasEnteredNameRef.current = true
+      trackWaitlist('name_entered')
+    }
+
+    if (el.id === 'waitlist-email' && !hasEnteredEmailRef.current) {
+      hasEnteredEmailRef.current = true
+      trackWaitlist('email_entered')
+    }
   }
 
   const handleWaitlistSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -116,6 +138,11 @@ export default function Waitlist() {
     const location = ((formData.get('location') as string) || '').trim()
     const email = ((formData.get('email') as string) || '').trim()
     const role = selectedRole // Get value directly from state
+
+    trackWaitlist('submission_attempt', {
+      button_location: 'section-waitlist',
+      role: role || 'unselected'
+    })
 
     // Clear previous error styles
     const errorFields = [
@@ -181,6 +208,10 @@ export default function Waitlist() {
     }
 
     if (hasError) {
+      trackWaitlist('validation_error', {
+        role: role || 'unselected',
+        error_message: 'Validation failed'
+      })
       ;(window as any).Korre?.notifications?.show(
         'Please fix the highlighted fields.',
         'error'
@@ -201,6 +232,10 @@ export default function Waitlist() {
       })
 
       if (result.success) {
+        trackWaitlist('submission_success', {
+          role: role as string,
+          email: email.toLowerCase()
+        })
         ;(window as any).Korre?.notifications?.show(
           result.message || 'Thanks! Your submission is in.',
           'success'
@@ -220,7 +255,25 @@ export default function Waitlist() {
             if (id === 'waitlist-email') el.placeholder = 'you@example.com'
           }
         })
+        hasStartedFunnelRef.current = false
+        hasEnteredNameRef.current = false
+        hasEnteredEmailRef.current = false
       } else {
+        const isDuplicate =
+          result.message?.toLowerCase().includes('already') ||
+          result.message?.toLowerCase().includes('duplicate')
+        if (isDuplicate) {
+          trackWaitlist('duplicate_email', {
+            role: role as string,
+            email: email.toLowerCase(),
+            error_message: result.message
+          })
+        } else {
+          trackWaitlist('submission_failed', {
+            role: role as string,
+            error_message: result.message
+          })
+        }
         ;(window as any).Korre?.notifications?.show(
           result.message || 'Submission failed. Please try again.',
           'error'
@@ -228,6 +281,15 @@ export default function Waitlist() {
       }
     } catch (err: any) {
       console.error('[Waitlist] Error submitting waitlist:', err)
+      trackWaitlist('server_error', {
+        role: role as string,
+        error_message: err.message
+      })
+      trackError({
+        message: err.message || 'Waitlist submission API exception',
+        stack: err.stack,
+        error_type: 'waitlist_api_error'
+      })
       ;(window as any).Korre?.notifications?.show(
         err.message || 'An error occurred. Please try again.',
         'error'

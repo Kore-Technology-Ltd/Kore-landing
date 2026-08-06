@@ -347,25 +347,23 @@ export default function Footer() {
               <Link to="/terms" className="footer__col-link">
                 Terms &amp; Condition
               </Link>
-              <button
-                type="button"
-                onClick={openSettings}
-                className="footer__col-link"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  font: 'inherit',
-                  color: 'inherit',
-                  textAlign: 'left',
-                  cursor: 'pointer'
-                }}
-              >
-                Cookie Settings
-              </button>
               <a href="mailto:info@kore.ng" className="footer__col-link">
                 Contact
               </a>
+              <span
+                className="footer__col-link"
+                role="button"
+                tabIndex={0}
+                onClick={openSettings}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    openSettings()
+                  }
+                }}
+              >
+                Cookie Settings
+              </span>
             </div>
 
             {/* 2b. Chat with us WhatsApp button (Mobile Only grid child) */}

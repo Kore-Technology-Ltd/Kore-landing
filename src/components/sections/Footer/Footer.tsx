@@ -347,6 +347,9 @@ export default function Footer() {
               <Link to="/terms" className="footer__col-link">
                 Terms &amp; Condition
               </Link>
+              <a href="mailto:info@kore.ng" className="footer__col-link">
+                Contact
+              </a>
               <span
                 className="footer__col-link"
                 role="button"
@@ -361,9 +364,6 @@ export default function Footer() {
               >
                 Cookie Settings
               </span>
-              <a href="mailto:info@kore.ng" className="footer__col-link">
-                Contact
-              </a>
             </div>
 
             {/* 2b. Chat with us WhatsApp button (Mobile Only grid child) */}
